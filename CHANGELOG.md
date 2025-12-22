@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Bundle the package CSS instead of exposing SASS files. CSS now needs to be imported explicitly.
+- Social: Unified social provider preview.
 
 ### Removed
 - Remove the learn more link for link previews.
