@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Remove the learn more link for link previews.
 
 ### Fixed
+- Fix Bluesky preview header styles.
 - Fix distorted image for Tumblr preview.
 - Fix Mastodon preview description overflow.
 - Fix media image URL for Tumblr and Instagram previews.

@@ -1790,11 +1790,14 @@ var card_default2 = BlueskyPostCard;
 
 var BlueskyPostHeader = ({ user }) => {
   const { displayName, address } = user || {};
+  let handle = address || "username.bsky.social";
+  if (!handle.startsWith("@")) {
+    handle = "@" + handle;
+  }
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__post-header", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__post-header-user", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: "bluesky-preview__post-header--displayname", children: displayName || _i18n.__.call(void 0, "Account name", "social-previews") }),
-      "\xA0",
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: "bluesky-preview__post-header--username", children: address || "username.bsky.social" })
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { className: "bluesky-preview__post-header--username", children: handle })
     ] }),
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-header--separator", children: "\xB7" }),
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-header--date", children: _i18n._x.call(void 0, 

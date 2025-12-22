@@ -1790,11 +1790,14 @@ import { __ as __22, _x as _x2 } from "@wordpress/i18n";
 import { jsx as jsx55, jsxs as jsxs40 } from "react/jsx-runtime";
 var BlueskyPostHeader = ({ user }) => {
   const { displayName, address } = user || {};
+  let handle = address || "username.bsky.social";
+  if (!handle.startsWith("@")) {
+    handle = "@" + handle;
+  }
   return /* @__PURE__ */ jsxs40("div", { className: "bluesky-preview__post-header", children: [
     /* @__PURE__ */ jsxs40("div", { className: "bluesky-preview__post-header-user", children: [
       /* @__PURE__ */ jsx55("span", { className: "bluesky-preview__post-header--displayname", children: displayName || __22("Account name", "social-previews") }),
-      "\xA0",
-      /* @__PURE__ */ jsx55("span", { className: "bluesky-preview__post-header--username", children: address || "username.bsky.social" })
+      /* @__PURE__ */ jsx55("span", { className: "bluesky-preview__post-header--username", children: handle })
     ] }),
     /* @__PURE__ */ jsx55("div", { className: "bluesky-preview__post-header--separator", children: "\xB7" }),
     /* @__PURE__ */ jsx55("div", { className: "bluesky-preview__post-header--date", children: _x2(
