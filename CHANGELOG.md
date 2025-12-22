@@ -5,25 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [3.0.0] - 2025-12-22
 ### Added
-- Add Threads and Bluesky preview.
+- Add Threads and Bluesky preview. [#46313]
 
 ### Changed
-- Bundle the package CSS instead of exposing SASS files. CSS now needs to be imported explicitly.
-- Social: Unified social provider preview.
+- Bundle the package CSS instead of exposing SASS files. CSS now needs to be imported explicitly. [#46355]
+- Improved preview for LinkedIn and Tumblr. [#46364]
 
 ### Removed
-- Remove the learn more link for link previews.
+- Remove the learn more link for link previews. [#46313]
 
 ### Fixed
-- Fix Bluesky preview header styles.
-- Fix distorted image for Tumblr preview.
-- Fix Mastodon preview description overflow.
-- Fix media image URL for Tumblr and Instagram previews.
+- Fix Bluesky preview header styles. [#46382]
+- Fix distorted image for Tumblr preview. [#46313]
+- Fix Mastodon preview description overflow. [#46313]
+- Fix media image URL for Tumblr and Instagram previews. [#46313]
 
 ## 2.0.1 - 2024-06-10
 
@@ -90,4 +87,4 @@ This is an alpha version! The changes listed here are not final.
 
 - Initial release after extracting from Calypso.
 
-[3.0.0-alpha]: https://github.com/Automattic/social-previews/compare/v2.0.1...v3.0.0-alpha
+[3.0.0]: https://github.com/Automattic/social-previews/compare/v2.0.1...v3.0.0
