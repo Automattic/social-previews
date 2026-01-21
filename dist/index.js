@@ -254,36 +254,50 @@ var QuoteTweet = ({ tweetUrl }) => {
   ] });
 };
 
-// src/twitter-preview/sidebar.tsx
+// src/avatar-with-fallback.tsx
 
 
-// src/twitter-preview/icons/default-avatar.tsx
-
-var DefaultAvatar = () => {
-  return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, 
+function DefaultAvatar(props) {
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
     "svg",
     {
-      version: "1.0",
       xmlns: "http://www.w3.org/2000/svg",
-      width: "271pt",
-      height: "270pt",
-      viewBox: "0 0 271 270",
-      children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "rect", { width: "100%", height: "100%", fill: "#ccd5de" }),
-        /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "g", { transform: "translate(0,270) scale(0.1,-0.1)", fill: "#647785", stroke: "none", children: [
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "path", { d: "M1251 2089 c-81 -14 -178 -65 -239 -125 -64 -65 -124 -185 -149 -299 -24 -111 -24 -339 -1 -415 38 -121 108 -193 227 -231 83 -27 339 -38 449 -19 139 23 236 91 286 200 59 130 52 395 -15 577 -88 235 -301 354 -558 312z" }),
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "path", { d: "M1197 795 c-358 -68 -643 -357 -721 -732 l-14 -63 890 0 890 0 -7 42 c-11 70 -64 218 -102 288 -121 224 -336 394 -573 454 -92 24 -267 29 -363 11z" })
-        ] })
-      ]
+      viewBox: "0 0 340 340",
+      width: "36",
+      height: "36",
+      "aria-hidden": "true",
+      ...props,
+      children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+        "path",
+        {
+          fill: "#DDD",
+          d: "m169,.5a169,169 0 1,0 2,0zm0,86a76,76 0 1 1-2,0zM57,287q27-35 67-35h92q40,0 67,35a164,164 0 0,1-226,0"
+        }
+      )
     }
   );
-};
+}
+function AvatarWithFallback({
+  src: avatarUrl,
+  alt = "",
+  className,
+  fallback = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar, { className })
+}) {
+  const [imageUrlWithError, setImageUrlWithError] = _react.useState.call(void 0, "");
+  const onError = _react.useCallback.call(void 0, (event) => {
+    setImageUrlWithError(event.target.src);
+  }, []);
+  const showAvatar = !!avatarUrl && // Check if the image URL with error is different from the provided avatar URL
+  // to ensure that a change in avatarUrl resets the error state
+  imageUrlWithError !== avatarUrl;
+  return showAvatar ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { src: avatarUrl, alt, onError, className }) : fallback;
+}
 
 // src/twitter-preview/sidebar.tsx
 
 var Sidebar = ({ profileImage, showThreadConnector }) => {
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "twitter-preview__sidebar", children: [
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "twitter-preview__profile-image", children: profileImage ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { alt: _i18n.__.call(void 0, "Twitter profile image", "social-previews"), src: profileImage }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar, {}) }),
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "twitter-preview__profile-image", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
     showThreadConnector && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "twitter-preview__connector" })
   ] });
 };
@@ -421,29 +435,6 @@ var TwitterPreviews = ({
 // src/linkedin-preview/constants.ts
 var FEED_TEXT_MAX_LENGTH = 550;
 
-// src/linkedin-preview/icons/default-avatar.tsx
-
-var DefaultAvatar2 = () => {
-  return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 128 128", width: "128", height: "128", children: [
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "path", { fill: "#e7e2dc", d: "M0 0h128v128H0z" }),
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "path", { d: "M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z", fill: "#788fa5" }),
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-      "path",
-      {
-        d: "M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z",
-        fill: "#9db3c8"
-      }
-    ),
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-      "path",
-      {
-        d: "M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z",
-        fill: "#56687a"
-      }
-    )
-  ] });
-};
-
 // src/linkedin-preview/post-preview.tsx
 
 function LinkedInPostPreview({
@@ -460,7 +451,7 @@ function LinkedInPostPreview({
   const hasMedia = !!_optionalChain([media, 'optionalAccess', _6 => _6.length]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "linkedin-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "section", { className: `linkedin-preview__container ${hasMedia ? "has-media" : ""}`, children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "linkedin-preview__header", children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "linkedin-preview__header--avatar", children: profileImage ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { src: profileImage, alt: "" }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar2, {}) }),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "linkedin-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "linkedin-preview__header--profile", children: [
         /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "linkedin-preview__header--profile-info", children: [
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "linkedin-preview__header--profile-name", children: name || _i18n.__.call(void 0, "Account Name", "social-previews") }),
@@ -752,7 +743,7 @@ var TumblrPostPreview = ({
   const avatarUrl = _optionalChain([user, 'optionalAccess', _9 => _9.avatarUrl]);
   const mediaItem = _optionalChain([media, 'optionalAccess', _10 => _10[0]]);
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__post", children: [
-    avatarUrl && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { className: "tumblr-preview__avatar", src: avatarUrl, alt: "" }),
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { className: "tumblr-preview__avatar", src: avatarUrl }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__card", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default, { user }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__body", children: [
@@ -929,24 +920,14 @@ var actions_default2 = FacebookPostActions;
 // src/facebook-preview/post/header/index.tsx
 
 
-
-var defaultAvatar = "data:image/png;base64,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";
 var FacebookPostHeader = ({ user, timeElapsed, hideOptions }) => {
-  const [avatarSrc, setAvatarSrc] = _react.useState.call(void 0, _optionalChain([user, 'optionalAccess', _13 => _13.avatarUrl]) || defaultAvatar);
-  const onImageError = _react.useCallback.call(void 0, () => {
-    if (avatarSrc !== defaultAvatar) {
-      setAvatarSrc(defaultAvatar);
-    }
-  }, [avatarSrc]);
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "facebook-preview__post-header", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "facebook-preview__post-header-content", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-        "img",
+        AvatarWithFallback,
         {
           className: "facebook-preview__post-header-avatar",
-          src: avatarSrc,
-          alt: "",
-          onError: onImageError
+          src: _optionalChain([user, 'optionalAccess', _13 => _13.avatarUrl])
         }
       ),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { children: [
@@ -1188,7 +1169,6 @@ var actions_default3 = MastodonPostActions;
 
 // src/mastodon-preview/constants.ts
 var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
-var DEFAULT_AVATAR = "data:image/png;base64,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";
 
 // src/mastodon-preview/helpers.ts
 var TITLE_LENGTH4 = 200;
@@ -1314,7 +1294,7 @@ var MastodonPostHeader = ({ user }) => {
   const { displayName, address, avatarUrl } = user || {};
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__post-header", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__post-header-user", children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { className: "mastodon-preview__post-avatar", src: avatarUrl || DEFAULT_AVATAR, alt: "" }),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { className: "mastodon-preview__post-avatar", src: avatarUrl }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "mastodon-preview__post-header-displayname", children: displayName || // translators: username of a fictional Mastodon User
         _i18n.__.call(void 0, "anonymous-user", "social-previews") }),
@@ -1479,12 +1459,6 @@ function ChevronIcon() {
   ) });
 }
 
-// src/nextdoor-preview/icons/default-avatar.tsx
-
-var DefaultAvatar3 = () => {
-  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__default-avatar", children: "A" });
-};
-
 // src/nextdoor-preview/icons/default-image.tsx
 
 function DefaultImage() {
@@ -1546,7 +1520,7 @@ function NextdoorPostPreview({
   const hasMedia = !!_optionalChain([media, 'optionalAccess', _24 => _24.length]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "section", { className: `nextdoor-preview__container ${hasMedia ? "has-media" : ""}`, children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__content", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__header", children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__header--avatar", children: profileImage ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { src: profileImage, alt: "" }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar3, {}) }),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__header--details", children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__header--name", children: name || _i18n.__.call(void 0, "Account Name", "social-previews") }),
         /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__header--meta", children: [
@@ -1813,29 +1787,7 @@ var header_default4 = BlueskyPostHeader;
 
 var BlueskyPostSidebar = ({ user }) => {
   const { avatarUrl } = user || {};
-  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-sidebar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-sidebar-user", children: avatarUrl ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { className: "bluesky-preview__post-avatar", src: avatarUrl, alt: "" }) : /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, 
-    "svg",
-    {
-      className: "bluesky-preview__post-avatar",
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "none",
-      role: "presentation",
-      children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "circle", { cx: "12", cy: "12", r: "12", fill: "#0070ff" }),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "circle", { cx: "12", cy: "9.5", r: "3.5", fill: "#fff" }),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-          "path",
-          {
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            fill: "#fff",
-            d: "M 12.058 22.784 C 9.422 22.784 7.007 21.836 5.137 20.262 C 5.667 17.988 8.534 16.25 11.99 16.25 C 15.494 16.25 18.391 18.036 18.864 20.357 C 17.01 21.874 14.64 22.784 12.058 22.784 Z"
-          }
-        )
-      ]
-    }
-  ) }) });
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-sidebar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "bluesky-preview__post-sidebar-user", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { className: "bluesky-preview__post-avatar", src: avatarUrl }) }) });
 };
 
 // src/bluesky-preview/post-preview.tsx
@@ -2014,53 +1966,15 @@ var Media2 = ({ media }) => {
 // src/threads-preview/sidebar.tsx
 
 
-// src/threads-preview/icons/default-avatar.tsx
-
-var DefaultAvatar4 = () => {
-  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-    "svg",
-    {
-      width: "36",
-      height: "36",
-      viewBox: "0 0 6.3500001 6.3500001",
-      version: "1.1",
-      xmlns: "http://www.w3.org/2000/svg",
-      children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "g", { children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "g", { children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-          "circle",
-          {
-            fill: "#fff",
-            fillOpacity: "1",
-            stroke: "#dbdbdb",
-            strokeWidth: "0.144331",
-            strokeOpacity: "1",
-            strokeDasharray: "none",
-            cx: "3.175",
-            cy: "3.175",
-            r: "3.1028347"
-          }
-        ),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-          "path",
-          {
-            fill: "#dbdbdb",
-            fillOpacity: "1",
-            stroke: "#dbdbdb",
-            strokeWidth: "0.00924637",
-            strokeOpacity: "1",
-            d: "m 3.175,0.10128581 c -0.2931267,2e-6 -0.5848453,0.0419523 -0.866097,0.1245402 C 2.0276513,0.30840593 1.7596787,0.43063749 1.5130859,0.58911133 1.1424103,0.82733009 0.82733009,1.1424103 0.58911133,1.5130859 0.43063749,1.7596787 0.30840793,2.0276513 0.22582601,2.308903 0.14323609,2.5901547 0.10128781,2.8818733 0.10128581,3.175 c 5.02e-4,0.1391369 0.0101356,0.2782044 0.0294556,0.4159953 0.01723,0.1151309 0.0411535,0.2291443 0.0713135,0.3415812 0.0045,0.0218 0.009469,0.043412 0.0144694,0.065112 0.03449,0.1203489 0.076152,0.2387347 0.12505697,0.3539836 0.0045,0.01235 0.009253,0.0244 0.0139526,0.03669 0.05201,0.1191279 0.111111,0.235155 0.17776693,0.3467489 0.0038,0.0071 0.008066,0.013651 0.0118856,0.020671 0.0694099,0.1145998 0.14620121,0.2246049 0.22996012,0.3291788 0.0022,0.0029 0.004001,0.00589 0.006201,0.00879 0.0861099,0.1069859 0.17942183,0.208301 0.27905277,0.3028239 0.3233817,-0.5511754 0.8330913,-0.701365 1.065568,-0.697115 h 2.0629232 c 0.5904654,-0.0058 0.9954919,0.5335544 1.1032918,0.6945312 0.0993,-0.09444 0.1921923,-0.1954752 0.2780192,-0.3023071 0.0023,-0.0031 0.00442,-0.0062 0.00672,-0.0093 0.08334,-0.1042929 0.1598386,-0.2139114 0.2289266,-0.3281453 0.004,-0.0073 0.00841,-0.014891 0.012402,-0.022221 0.0663,-0.1112249 0.1254962,-0.2265057 0.1772502,-0.3451986 0.0048,-0.01266 0.00934,-0.025004 0.013953,-0.037724 0.04856,-0.1146958 0.090239,-0.2321796 0.1245402,-0.3519165 0.0053,-0.02288 0.010256,-0.046256 0.014986,-0.069246 0.02971,-0.1111369 0.05321,-0.2236822 0.07028,-0.3374471 0.01929,-0.1376588 0.028946,-0.2764746 0.029456,-0.4154785 0,-0.0503 -0.00112,-0.1006562 -0.00362,-0.1508952 -0.0049,-0.1004917 -0.014695,-0.20073 -0.029455,-0.3002469 C 6.2008813,2.6243448 6.1811701,2.5258685 6.1567301,2.4282756 6.1445102,2.3794856 6.1310225,2.330673 6.1164225,2.282548 6.0286626,1.9932503 5.8988742,1.7184607 5.7309163,1.4670939 5.6750164,1.383444 5.6149083,1.3030201 5.5510824,1.2252482 5.5191724,1.1863682 5.4861603,1.1477995 5.4523804,1.1105265 5.3848104,1.0359766 5.3140214,0.96518559 5.2394735,0.89761963 5.1276256,0.79624473 5.008419,0.70295057 4.8829061,0.61908366 4.7573922,0.53522374 4.6255915,0.46089717 4.4891317,0.39635824 c -0.09095,-0.04302 -0.1838061,-0.0813435 -0.278536,-0.11523845 -0.09473,-0.0339 -0.1912764,-0.0634 -0.2888713,-0.0878499 C 3.7752926,0.15658989 3.6265025,0.13054519 3.4762736,0.11575521 3.3761487,0.10585522 3.2756099,0.10128581 3.175,0.10128581 Z m 0,1.44125569 A 1.4106187,1.4106187 0 0 1 4.5857666,2.9533081 1.4106187,1.4106187 0 0 1 3.175,4.3635579 1.4106187,1.4106187 0 0 1 1.7642334,2.9533081 1.4106187,1.4106187 0 0 1 3.175,1.5425415 Z"
-          }
-        )
-      ] }) })
-    }
-  );
-};
-
-// src/threads-preview/sidebar.tsx
-
 var Sidebar2 = ({ profileImage, showThreadConnector }) => {
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "threads-preview__sidebar", children: [
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__profile-image", children: profileImage ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { alt: _i18n.__.call(void 0, "Threads profile image", "social-previews"), src: profileImage }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar4, {}) }),
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__profile-image", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+      AvatarWithFallback,
+      {
+        alt: _i18n.__.call(void 0, "Threads profile image", "social-previews"),
+        src: profileImage
+      }
+    ) }),
     showThreadConnector && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__connector" })
   ] });
 };
@@ -2221,18 +2135,6 @@ var Comment = () => {
   );
 };
 
-// src/instagram-preview/icons/default-avatar.tsx
-
-var DefaultAvatar5 = () => {
-  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 340 340", width: "340", height: "340", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-    "path",
-    {
-      fill: "#DDD",
-      d: "m169,.5a169,169 0 1,0 2,0zm0,86a76,76 0 1 1-2,0zM57,287q27-35 67-35h92q40,0 67,35a164,164 0 0,1-226,0"
-    }
-  ) });
-};
-
 // src/instagram-preview/icons/heart.tsx
 
 var Heart = () => {
@@ -2339,7 +2241,7 @@ function InstagramPostPreview({
   const mediaItem = _optionalChain([media, 'optionalAccess', _33 => _33[0]]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "section", { className: "instagram-preview__container", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__header", children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--avatar", children: profileImage ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { src: profileImage, alt: "" }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultAvatar5, {}) }),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__header--profile", children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--profile-name", children: username }),
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--profile-menu", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Menu, {}) })
