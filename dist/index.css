@@ -3,7 +3,7 @@
   border: 1px solid var(--color-neutral-0);
   font-family: arial, sans-serif;
   padding: 10px 20px;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .search-preview__header {
   display: flex;
@@ -125,13 +125,13 @@
 .twitter-preview__container .twitter-preview__content .twitter-preview__text {
   color: rgb(15, 20, 25);
   white-space: pre-wrap;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .twitter-preview__container .twitter-preview__content .twitter-preview__media {
   border-radius: 15px;
   overflow: hidden;
   display: grid;
-  grid-gap: 2px;
+  gap: 2px;
   grid-template-areas: "a";
   height: 300px;
   margin-top: 12px;
@@ -717,7 +717,7 @@
   color: #050505;
   font-size: 0.9375rem;
   line-height: 1.33;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .facebook-preview__custom-text-post-url {
   display: block;
@@ -743,7 +743,7 @@
   padding: 0.5rem 1rem;
   background-color: #f0f2f5;
   color: #050505;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .facebook-preview__text-wrapper {
   width: 100%;
@@ -1442,13 +1442,13 @@
 }
 .threads-preview__container .threads-preview__content .threads-preview__text {
   white-space: pre-wrap;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .threads-preview__container .threads-preview__content .threads-preview__media {
   border-radius: 15px;
   overflow: hidden;
   display: grid;
-  grid-gap: 2px;
+  gap: 2px;
   grid-template-areas: "a";
   height: 300px;
   margin-top: 12px;
