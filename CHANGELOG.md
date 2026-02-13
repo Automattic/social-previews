@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Removed
+- Remove custom text for Tumblr preview in favor of description.
+
 ### Fixed
 - Compatibility: Clean up deprecated CSS.
 

@@ -132,7 +132,6 @@ type TumblrUser = {
 };
 type TumblrPreviewProps = SocialPreviewBaseProps & {
     user?: TumblrUser;
-    customText?: string;
 };
 
 declare const TumblrLinkPreview: React.FC<TumblrPreviewProps>;

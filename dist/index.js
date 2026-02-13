@@ -737,7 +737,6 @@ var TumblrPostPreview = ({
   image,
   user,
   url,
-  customText,
   media
 }) => {
   const avatarUrl = _optionalChain([user, 'optionalAccess', _9 => _9.avatarUrl]);
@@ -747,8 +746,7 @@ var TumblrPostPreview = ({
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__card", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default, { user }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__body", children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__title", children: tumblrTitle(title) }),
-        customText && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__custom-text", children: customText }),
+        title ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__title", children: tumblrTitle(title) }) : null,
         description && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__description", children: preparePreviewText(tumblrDescription(description), {
           platform: "tumblr"
         }) }),

@@ -737,7 +737,6 @@ var TumblrPostPreview = ({
   image,
   user,
   url,
-  customText,
   media
 }) => {
   const avatarUrl = user?.avatarUrl;
@@ -747,8 +746,7 @@ var TumblrPostPreview = ({
     /* @__PURE__ */ jsxs15("div", { className: "tumblr-preview__card", children: [
       /* @__PURE__ */ jsx22(header_default, { user }),
       /* @__PURE__ */ jsxs15("div", { className: "tumblr-preview__body", children: [
-        /* @__PURE__ */ jsx22("div", { className: "tumblr-preview__title", children: tumblrTitle(title) }),
-        customText && /* @__PURE__ */ jsx22("div", { className: "tumblr-preview__custom-text", children: customText }),
+        title ? /* @__PURE__ */ jsx22("div", { className: "tumblr-preview__title", children: tumblrTitle(title) }) : null,
         description && /* @__PURE__ */ jsx22("div", { className: "tumblr-preview__description", children: preparePreviewText(tumblrDescription(description), {
           platform: "tumblr"
         }) }),
