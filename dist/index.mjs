@@ -1165,6 +1165,10 @@ var MastodonPostActions = () => /* @__PURE__ */ jsxs24("div", { className: "mast
 ] });
 var actions_default3 = MastodonPostActions;
 
+// src/mastodon-preview/post/card/index.tsx
+import { __ as __15 } from "@wordpress/i18n";
+import clsx3 from "clsx";
+
 // src/mastodon-preview/constants.ts
 var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 
@@ -1194,44 +1198,8 @@ var getMastodonAddressDetails = (address) => {
   };
 };
 
-// src/mastodon-preview/post/body/index.tsx
-import { Fragment as Fragment3, jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
-var MastonPostBody = (props) => {
-  const { title, description, customText, url, user, children } = props;
-  const instance = user?.address ? getMastodonAddressDetails(user.address).instance : "";
-  const options = {
-    instance,
-    offset: 0
-  };
-  let bodyTxt;
-  if (customText) {
-    bodyTxt = /* @__PURE__ */ jsx33("p", { children: mastodonBody(customText, options) });
-  } else if (description) {
-    if (title) {
-      const renderedTitle = stripHtmlTags(title);
-      options.offset = renderedTitle.length;
-      bodyTxt = /* @__PURE__ */ jsxs25(Fragment3, { children: [
-        /* @__PURE__ */ jsx33("p", { children: renderedTitle }),
-        /* @__PURE__ */ jsx33("p", { children: mastodonBody(description, options) })
-      ] });
-    } else {
-      bodyTxt = /* @__PURE__ */ jsx33("p", { children: mastodonBody(description, options) });
-    }
-  } else {
-    bodyTxt = /* @__PURE__ */ jsx33("p", { children: mastodonBody(title, options) });
-  }
-  return /* @__PURE__ */ jsxs25("div", { className: "mastodon-preview__body", children: [
-    bodyTxt,
-    /* @__PURE__ */ jsx33("a", { href: url, target: "_blank", rel: "noreferrer noopener", children: mastodonUrl(url.replace(/^https?:\/\//, "")) }),
-    children
-  ] });
-};
-var body_default = MastonPostBody;
-
 // src/mastodon-preview/post/card/index.tsx
-import { __ as __15 } from "@wordpress/i18n";
-import clsx3 from "clsx";
-import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
+import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
 var MastodonPostCard = ({
   siteName,
   title,
@@ -1240,14 +1208,14 @@ var MastodonPostCard = ({
   image,
   customImage
 }) => {
-  return /* @__PURE__ */ jsxs26("div", { className: clsx3("mastodon-preview__card", { "has-image": image }), children: [
-    /* @__PURE__ */ jsx34("div", { className: "mastodon-preview__card-img", children: image || customImage ? /* @__PURE__ */ jsx34(
+  return /* @__PURE__ */ jsxs25("div", { className: clsx3("mastodon-preview__card", { "has-image": image }), children: [
+    /* @__PURE__ */ jsx33("div", { className: "mastodon-preview__card-img", children: image || customImage ? /* @__PURE__ */ jsx33(
       "img",
       {
         src: image || customImage,
         alt: __15("Mastodon preview thumbnail", "social-previews")
       }
-    ) : /* @__PURE__ */ jsx34("div", { className: "mastodon-preview__card-img--fallback", children: /* @__PURE__ */ jsx34(
+    ) : /* @__PURE__ */ jsx33("div", { className: "mastodon-preview__card-img--fallback", children: /* @__PURE__ */ jsx33(
       "svg",
       {
         xmlns: "http://www.w3.org/2000/svg",
@@ -1255,13 +1223,13 @@ var MastodonPostCard = ({
         viewBox: "0 -960 960 960",
         width: "24",
         "aria-hidden": "true",
-        children: /* @__PURE__ */ jsx34("path", { d: "M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520h200L520-800v200Z" })
+        children: /* @__PURE__ */ jsx33("path", { d: "M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520h200L520-800v200Z" })
       }
     ) }) }),
-    /* @__PURE__ */ jsxs26("div", { className: "mastodon-preview__card-text", children: [
-      /* @__PURE__ */ jsx34("span", { className: "mastodon-preview__card-site", children: siteName || baseDomain(url) }),
-      /* @__PURE__ */ jsx34("span", { className: "mastodon-preview__card-title", children: mastodonTitle(title) || getTitleFromDescription(description) }),
-      /* @__PURE__ */ jsx34("span", { className: "mastodon-preview__card-description", children: stripHtmlTags(description) })
+    /* @__PURE__ */ jsxs25("div", { className: "mastodon-preview__card-text", children: [
+      /* @__PURE__ */ jsx33("span", { className: "mastodon-preview__card-site", children: siteName || baseDomain(url) }),
+      /* @__PURE__ */ jsx33("span", { className: "mastodon-preview__card-title", children: mastodonTitle(title) || getTitleFromDescription(description) }),
+      /* @__PURE__ */ jsx33("span", { className: "mastodon-preview__card-description", children: stripHtmlTags(description) })
     ] })
   ] });
 };
@@ -1271,9 +1239,9 @@ var card_default = MastodonPostCard;
 import { __ as __16 } from "@wordpress/i18n";
 
 // src/mastodon-preview/post/icons/index.tsx
-import { jsx as jsx35 } from "react/jsx-runtime";
+import { jsx as jsx34 } from "react/jsx-runtime";
 function GlobeIcon() {
-  return /* @__PURE__ */ jsx35(
+  return /* @__PURE__ */ jsx34(
     "svg",
     {
       xmlns: "http://www.w3.org/2000/svg",
@@ -1281,26 +1249,26 @@ function GlobeIcon() {
       viewBox: "0 -960 960 960",
       width: "15",
       role: "img",
-      children: /* @__PURE__ */ jsx35("path", { d: "M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z" })
+      children: /* @__PURE__ */ jsx34("path", { d: "M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z" })
     }
   );
 }
 
 // src/mastodon-preview/post/header/index.tsx
-import { jsx as jsx36, jsxs as jsxs27 } from "react/jsx-runtime";
+import { jsx as jsx35, jsxs as jsxs26 } from "react/jsx-runtime";
 var MastodonPostHeader = ({ user }) => {
   const { displayName, address, avatarUrl } = user || {};
-  return /* @__PURE__ */ jsxs27("div", { className: "mastodon-preview__post-header", children: [
-    /* @__PURE__ */ jsxs27("div", { className: "mastodon-preview__post-header-user", children: [
-      /* @__PURE__ */ jsx36(AvatarWithFallback, { className: "mastodon-preview__post-avatar", src: avatarUrl }),
-      /* @__PURE__ */ jsxs27("div", { children: [
-        /* @__PURE__ */ jsx36("div", { className: "mastodon-preview__post-header-displayname", children: displayName || // translators: username of a fictional Mastodon User
+  return /* @__PURE__ */ jsxs26("div", { className: "mastodon-preview__post-header", children: [
+    /* @__PURE__ */ jsxs26("div", { className: "mastodon-preview__post-header-user", children: [
+      /* @__PURE__ */ jsx35(AvatarWithFallback, { className: "mastodon-preview__post-avatar", src: avatarUrl }),
+      /* @__PURE__ */ jsxs26("div", { children: [
+        /* @__PURE__ */ jsx35("div", { className: "mastodon-preview__post-header-displayname", children: displayName || // translators: username of a fictional Mastodon User
         __16("anonymous-user", "social-previews") }),
-        /* @__PURE__ */ jsx36("div", { className: "mastodon-preview__post-header-username", children: address?.replace(`@${DEFAULT_MASTODON_INSTANCE}`, "") || "@username" })
+        /* @__PURE__ */ jsx35("div", { className: "mastodon-preview__post-header-username", children: address?.replace(`@${DEFAULT_MASTODON_INSTANCE}`, "") || "@username" })
       ] })
     ] }),
-    /* @__PURE__ */ jsxs27("div", { className: "mastodon-preview__post-header-audience", children: [
-      /* @__PURE__ */ jsx36(GlobeIcon, {}),
+    /* @__PURE__ */ jsxs26("div", { className: "mastodon-preview__post-header-audience", children: [
+      /* @__PURE__ */ jsx35(GlobeIcon, {}),
       formatMastodonDate(/* @__PURE__ */ new Date())
     ] })
   ] });
@@ -1308,19 +1276,54 @@ var MastodonPostHeader = ({ user }) => {
 var header_default3 = MastodonPostHeader;
 
 // src/mastodon-preview/link-preview.tsx
-import { jsx as jsx37, jsxs as jsxs28 } from "react/jsx-runtime";
+import { jsx as jsx36, jsxs as jsxs27 } from "react/jsx-runtime";
 var MastodonLinkPreview = (props) => {
   const { user } = props;
-  return /* @__PURE__ */ jsxs28("div", { className: "mastodon-preview__post", children: [
-    /* @__PURE__ */ jsx37(header_default3, { user }),
-    /* @__PURE__ */ jsx37(body_default, { ...props }),
-    /* @__PURE__ */ jsx37(card_default, { ...props, customImage: "" }),
-    /* @__PURE__ */ jsx37(actions_default3, {})
+  return /* @__PURE__ */ jsxs27("div", { className: "mastodon-preview__post", children: [
+    /* @__PURE__ */ jsx36(header_default3, { user }),
+    /* @__PURE__ */ jsx36(card_default, { ...props, customImage: "" }),
+    /* @__PURE__ */ jsx36(actions_default3, {})
   ] });
 };
 
 // src/mastodon-preview/post-preview.tsx
 import clsx4 from "clsx";
+
+// src/mastodon-preview/post/body/index.tsx
+import { Fragment as Fragment3, jsx as jsx37, jsxs as jsxs28 } from "react/jsx-runtime";
+var MastonPostBody = (props) => {
+  const { title, description, customText, url, user, children } = props;
+  const instance = user?.address ? getMastodonAddressDetails(user.address).instance : "";
+  const options = {
+    instance,
+    offset: 0
+  };
+  let bodyTxt;
+  if (customText) {
+    bodyTxt = /* @__PURE__ */ jsx37("p", { children: mastodonBody(customText, options) });
+  } else if (description) {
+    if (title) {
+      const renderedTitle = stripHtmlTags(title);
+      options.offset = renderedTitle.length;
+      bodyTxt = /* @__PURE__ */ jsxs28(Fragment3, { children: [
+        /* @__PURE__ */ jsx37("p", { children: renderedTitle }),
+        /* @__PURE__ */ jsx37("p", { children: mastodonBody(description, options) })
+      ] });
+    } else {
+      bodyTxt = /* @__PURE__ */ jsx37("p", { children: mastodonBody(description, options) });
+    }
+  } else {
+    bodyTxt = /* @__PURE__ */ jsx37("p", { children: mastodonBody(title, options) });
+  }
+  return /* @__PURE__ */ jsxs28("div", { className: "mastodon-preview__body", children: [
+    bodyTxt,
+    /* @__PURE__ */ jsx37("a", { href: url, target: "_blank", rel: "noreferrer noopener", children: mastodonUrl(url.replace(/^https?:\/\//, "")) }),
+    children
+  ] });
+};
+var body_default = MastonPostBody;
+
+// src/mastodon-preview/post-preview.tsx
 import { jsx as jsx38, jsxs as jsxs29 } from "react/jsx-runtime";
 var MastodonPostPreview = (props) => {
   const { user, media } = props;
@@ -1850,6 +1853,9 @@ var BlueskyPreviews = ({
   ] });
 };
 
+// src/threads-preview/link-preview.tsx
+import { __ as __25 } from "@wordpress/i18n";
+
 // src/threads-preview/card.tsx
 import clsx7 from "clsx";
 
@@ -2012,6 +2018,12 @@ var ThreadsPostPreview = ({
 // src/threads-preview/link-preview.tsx
 import { jsx as jsx64 } from "react/jsx-runtime";
 var ThreadsLinkPreview = (props) => {
+  if (!props.image) {
+    return /* @__PURE__ */ jsx64("p", { className: "social-preview__section-desc", children: __25(
+      "Threads link preview requires an image to be set for the post. Please add an image to see the preview.",
+      "social-previews"
+    ) });
+  }
   return /* @__PURE__ */ jsx64(
     ThreadsPostPreview,
     {
@@ -2023,7 +2035,7 @@ var ThreadsLinkPreview = (props) => {
 };
 
 // src/threads-preview/previews.tsx
-import { __ as __25 } from "@wordpress/i18n";
+import { __ as __26 } from "@wordpress/i18n";
 import { Fragment as Fragment7, jsx as jsx65, jsxs as jsxs46 } from "react/jsx-runtime";
 var ThreadsPreviews = ({
   headingLevel,
@@ -2039,9 +2051,9 @@ var ThreadsPreviews = ({
       /* @__PURE__ */ jsx65(section_heading_default, {
         level: headingLevel,
         // translators: refers to a social post on Threads
-        children: __25("Your post", "social-previews")
+        children: __26("Your post", "social-previews")
       }),
-      /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __25("This is what your social post will look like on Threads:", "social-previews") }),
+      /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __26("This is what your social post will look like on Threads:", "social-previews") }),
       posts.map((post, index) => {
         const isLast = index + 1 === posts.length;
         return /* @__PURE__ */ jsx65(
@@ -2058,15 +2070,15 @@ var ThreadsPreviews = ({
       /* @__PURE__ */ jsx65(section_heading_default, {
         level: headingLevel,
         // translators: refers to a link to a Threads post
-        children: __25("Link preview", "social-previews")
+        children: __26("Link preview", "social-previews")
       }),
       posts[0].image ? /* @__PURE__ */ jsxs46(Fragment7, { children: [
-        /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __25(
+        /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __26(
           "This is what it will look like when someone shares the link to your WordPress post on Threads.",
           "social-previews"
         ) }),
         /* @__PURE__ */ jsx65(ThreadsLinkPreview, { ...posts[0], name: "", profileImage: "" })
-      ] }) : /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __25(
+      ] }) : /* @__PURE__ */ jsx65("p", { className: "social-preview__section-desc", children: __26(
         "Threads link preview requires an image to be set for the post. Please add an image to see the preview.",
         "social-previews"
       ) })
@@ -2075,7 +2087,7 @@ var ThreadsPreviews = ({
 };
 
 // src/instagram-preview/post-preview.tsx
-import { __ as __26 } from "@wordpress/i18n";
+import { __ as __27 } from "@wordpress/i18n";
 
 // src/instagram-preview/constants.tsx
 var FEED_TEXT_MAX_LENGTH3 = 520;
@@ -2270,13 +2282,13 @@ function InstagramPostPreview({
           ] })
         ] }) : null
       ] }),
-      /* @__PURE__ */ jsx71("div", { className: "instagram-preview__content--footer", children: /* @__PURE__ */ jsx71("span", { children: __26("View one comment", "social-previews") }) })
+      /* @__PURE__ */ jsx71("div", { className: "instagram-preview__content--footer", children: /* @__PURE__ */ jsx71("span", { children: __27("View one comment", "social-previews") }) })
     ] })
   ] }) });
 }
 
 // src/instagram-preview/previews.tsx
-import { __ as __27 } from "@wordpress/i18n";
+import { __ as __28 } from "@wordpress/i18n";
 import { jsx as jsx72, jsxs as jsxs50 } from "react/jsx-runtime";
 var InstagramPreviews = ({
   headingLevel,
@@ -2287,9 +2299,9 @@ var InstagramPreviews = ({
     /* @__PURE__ */ jsx72(section_heading_default, {
       level: headingLevel,
       // translators: refers to a social post on Instagram
-      children: __27("Your post", "social-previews")
+      children: __28("Your post", "social-previews")
     }),
-    /* @__PURE__ */ jsx72("p", { className: "social-preview__section-desc", children: __27(
+    /* @__PURE__ */ jsx72("p", { className: "social-preview__section-desc", children: __28(
       "This is what your social post will look like on Instagram:",
       "social-previews"
     ) }),

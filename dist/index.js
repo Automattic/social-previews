@@ -1165,6 +1165,10 @@ var MastodonPostActions = () => /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "d
 ] });
 var actions_default3 = MastodonPostActions;
 
+// src/mastodon-preview/post/card/index.tsx
+
+
+
 // src/mastodon-preview/constants.ts
 var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 
@@ -1194,43 +1198,7 @@ var getMastodonAddressDetails = (address) => {
   };
 };
 
-// src/mastodon-preview/post/body/index.tsx
-
-var MastonPostBody = (props) => {
-  const { title, description, customText, url, user, children } = props;
-  const instance = _optionalChain([user, 'optionalAccess', _19 => _19.address]) ? getMastodonAddressDetails(user.address).instance : "";
-  const options = {
-    instance,
-    offset: 0
-  };
-  let bodyTxt;
-  if (customText) {
-    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(customText, options) });
-  } else if (description) {
-    if (title) {
-      const renderedTitle = stripHtmlTags(title);
-      options.offset = renderedTitle.length;
-      bodyTxt = /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: renderedTitle }),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) })
-      ] });
-    } else {
-      bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) });
-    }
-  } else {
-    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(title, options) });
-  }
-  return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__body", children: [
-    bodyTxt,
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, target: "_blank", rel: "noreferrer noopener", children: mastodonUrl(url.replace(/^https?:\/\//, "")) }),
-    children
-  ] });
-};
-var body_default = MastonPostBody;
-
 // src/mastodon-preview/post/card/index.tsx
-
-
 
 var MastodonPostCard = ({
   siteName,
@@ -1296,7 +1264,7 @@ var MastodonPostHeader = ({ user }) => {
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "mastodon-preview__post-header-displayname", children: displayName || // translators: username of a fictional Mastodon User
         _i18n.__.call(void 0, "anonymous-user", "social-previews") }),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "mastodon-preview__post-header-username", children: _optionalChain([address, 'optionalAccess', _20 => _20.replace, 'call', _21 => _21(`@${DEFAULT_MASTODON_INSTANCE}`, "")]) || "@username" })
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "mastodon-preview__post-header-username", children: _optionalChain([address, 'optionalAccess', _19 => _19.replace, 'call', _20 => _20(`@${DEFAULT_MASTODON_INSTANCE}`, "")]) || "@username" })
       ] })
     ] }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__post-header-audience", children: [
@@ -1313,7 +1281,6 @@ var MastodonLinkPreview = (props) => {
   const { user } = props;
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__post", children: [
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default3, { user }),
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, body_default, { ...props }),
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default, { ...props, customImage: "" }),
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, actions_default3, {})
   ] });
@@ -1321,6 +1288,42 @@ var MastodonLinkPreview = (props) => {
 
 // src/mastodon-preview/post-preview.tsx
 
+
+// src/mastodon-preview/post/body/index.tsx
+
+var MastonPostBody = (props) => {
+  const { title, description, customText, url, user, children } = props;
+  const instance = _optionalChain([user, 'optionalAccess', _21 => _21.address]) ? getMastodonAddressDetails(user.address).instance : "";
+  const options = {
+    instance,
+    offset: 0
+  };
+  let bodyTxt;
+  if (customText) {
+    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(customText, options) });
+  } else if (description) {
+    if (title) {
+      const renderedTitle = stripHtmlTags(title);
+      options.offset = renderedTitle.length;
+      bodyTxt = /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: renderedTitle }),
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) })
+      ] });
+    } else {
+      bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) });
+    }
+  } else {
+    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(title, options) });
+  }
+  return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__body", children: [
+    bodyTxt,
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, target: "_blank", rel: "noreferrer noopener", children: mastodonUrl(url.replace(/^https?:\/\//, "")) }),
+    children
+  ] });
+};
+var body_default = MastonPostBody;
+
+// src/mastodon-preview/post-preview.tsx
 
 var MastodonPostPreview = (props) => {
   const { user, media } = props;
@@ -1850,6 +1853,9 @@ var BlueskyPreviews = ({
   ] });
 };
 
+// src/threads-preview/link-preview.tsx
+
+
 // src/threads-preview/card.tsx
 
 
@@ -2012,6 +2018,12 @@ var ThreadsPostPreview = ({
 // src/threads-preview/link-preview.tsx
 
 var ThreadsLinkPreview = (props) => {
+  if (!props.image) {
+    return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { className: "social-preview__section-desc", children: _i18n.__.call(void 0, 
+      "Threads link preview requires an image to be set for the post. Please add an image to see the preview.",
+      "social-previews"
+    ) });
+  }
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
     ThreadsPostPreview,
     {
