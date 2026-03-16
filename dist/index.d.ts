@@ -63,6 +63,7 @@ type MediaItem = {
 };
 
 type GoogleSearchPreviewProps = Omit<SocialPreviewBaseProps, 'image'> & {
+    siteIcon?: string;
     siteTitle?: string;
 };
 declare const GoogleSearchPreview: React.FC<Partial<GoogleSearchPreviewProps>>;

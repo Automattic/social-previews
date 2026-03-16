@@ -124,6 +124,7 @@ var googleDescription = firstValid(
 );
 var GoogleSearchPreview = ({
   description = "",
+  siteIcon,
   siteTitle,
   title = "",
   url = ""
@@ -136,7 +137,7 @@ var GoogleSearchPreview = ({
           "img",
           {
             className: "search-preview__icon",
-            src: `https://www.google.com/s2/favicons?sz=128&domain_url=${domain}`,
+            src: siteIcon || `https://www.google.com/s2/favicons?sz=128&domain_url=${domain}`,
             alt: ""
           }
         ),
