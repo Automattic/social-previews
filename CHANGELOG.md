@@ -12,8 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Google Search Preview: Add optional siteIcon prop to allow passing a custom favicon URL.
 
+## [3.0.12] - 2026-03-16
 ### Changed
-- Update dependencies.
+- Update dependencies. [#47472]
 
 ## [3.0.11] - 2026-03-09
 ### Changed
@@ -150,7 +151,8 @@ This is an alpha version! The changes listed here are not final.
 
 - Initial release after extracting from Calypso.
 
-[3.1.0-alpha]: https://github.com/Automattic/social-previews/compare/v3.0.11...v3.1.0-alpha
+[3.1.0-alpha]: https://github.com/Automattic/social-previews/compare/v3.0.12...v3.1.0-alpha
+[3.0.12]: https://github.com/Automattic/social-previews/compare/v3.0.11...v3.0.12
 [3.0.11]: https://github.com/Automattic/social-previews/compare/v3.0.10...v3.0.11
 [3.0.10]: https://github.com/Automattic/social-previews/compare/v3.0.9...v3.0.10
 [3.0.9]: https://github.com/Automattic/social-previews/compare/v3.0.8...v3.0.9
