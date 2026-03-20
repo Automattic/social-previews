@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Google Search Preview: Add optional siteIcon prop to allow passing a custom favicon URL.
 
+### Changed
+- Update package dependencies.
+
 ## [3.0.12] - 2026-03-16
 ### Changed
 - Update dependencies. [#47472]
