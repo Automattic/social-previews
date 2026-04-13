@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Fixed
+- Google Search preview: Show a generic globe placeholder when the site has no site icon, instead of a broken image.
+
 ## [3.1.2] - 2026-04-06
 ### Changed
 - Update package dependencies. [#47886]

@@ -101,6 +101,69 @@ function preparePreviewText(text, options) {
   return _element.createInterpolateElement.call(void 0, result, componentMap);
 }
 
+// src/site-icon-with-fallback.tsx
+var _react = require('react');
+
+// src/icons/globe-icon.tsx
+
+function GlobeIcon(props) {
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "svg",
+    {
+      focusable: "false",
+      "aria-hidden": "true",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 24 24",
+      width: "14",
+      height: "14",
+      ...props,
+      children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+        "path",
+        {
+          fill: "currentColor",
+          d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+        }
+      )
+    }
+  );
+}
+
+// src/site-icon-with-fallback.tsx
+
+function DefaultSiteIcon({ className }) {
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+    "span",
+    {
+      className,
+      "aria-hidden": "true",
+      style: {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#e8eaed",
+        color: "#5f6368",
+        borderRadius: "50%"
+      },
+      children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GlobeIcon, { style: { width: "60%", height: "60%" } })
+    }
+  );
+}
+function SiteIconWithFallback({
+  src: siteIconUrl,
+  alt = "",
+  className,
+  fallback = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, DefaultSiteIcon, { className })
+}) {
+  const [imageUrlWithError, setImageUrlWithError] = _react.useState.call(void 0, "");
+  const onError = _react.useCallback.call(void 0, (event) => {
+    setImageUrlWithError(event.target.src);
+  }, []);
+  const showIcon = siteIconUrl && // Check if the image URL with error is different from the provided site icon URL
+  // to ensure that a change in siteIconUrl resets the error state
+  imageUrlWithError !== siteIconUrl;
+  return showIcon ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { src: siteIconUrl, alt, onError, className }) : fallback;
+}
+
 // src/google-search-preview/index.tsx
 
 var URL_LENGTH = 68;
@@ -133,14 +196,7 @@ var GoogleSearchPreview = ({
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "search-preview", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "search-preview__display", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "search-preview__header", children: [
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "search-preview__branding", children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
-          "img",
-          {
-            className: "search-preview__icon",
-            src: siteIcon || `https://www.google.com/s2/favicons?sz=128&domain_url=${domain}`,
-            alt: ""
-          }
-        ),
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, SiteIconWithFallback, { className: "search-preview__icon", src: siteIcon }),
         /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "search-preview__site", children: [
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "search-preview__site--title", children: siteTitle || domain }),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "search-preview__url", children: googleUrl(url) })
@@ -207,7 +263,7 @@ var Header = ({ name, screenName, date }) => {
 
 // src/twitter-preview/media.tsx
 
-var _react = require('react');
+
 
 var Media = ({ media }) => {
   const filteredMedia = media.filter(
@@ -1241,7 +1297,7 @@ var card_default = MastodonPostCard;
 
 // src/mastodon-preview/post/icons/index.tsx
 
-function GlobeIcon() {
+function GlobeIcon2() {
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
     "svg",
     {
@@ -1269,7 +1325,7 @@ var MastodonPostHeader = ({ user }) => {
       ] })
     ] }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__post-header-audience", children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GlobeIcon, {}),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GlobeIcon2, {}),
       formatMastodonDate(/* @__PURE__ */ new Date())
     ] })
   ] });
@@ -1495,7 +1551,7 @@ function DefaultImage() {
 
 // src/nextdoor-preview/icons/globe-icon.tsx
 
-function GlobeIcon2() {
+function GlobeIcon3() {
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "svg", { width: "14", height: "14", fill: "none", viewBox: "0 0 24 24", "aria-hidden": "true", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
     "path",
     {
@@ -1530,7 +1586,7 @@ function NextdoorPostPreview({
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: "\u2022" }),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: formatNextdoorDate(Date.now()) }),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: "\u2022" }),
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GlobeIcon2, {})
+          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, GlobeIcon3, {})
         ] })
       ] })
     ] }),
