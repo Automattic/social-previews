@@ -7,13 +7,15 @@ var baseDomain = (url) => {
   const slashIndex = withoutProtocol.indexOf("/");
   return slashIndex === -1 ? withoutProtocol : withoutProtocol.substring(0, slashIndex);
 };
-var shortEnough = (limit) => (title) => title.length <= limit ? title : false;
+var codepointLength = (text) => Array.from(text).length;
+var codepointSlice = (text, start, end) => Array.from(text).slice(start, end).join("");
+var shortEnough = (limit) => (title) => codepointLength(title) <= limit ? title : false;
 var truncatedAtSpace = (lower, upper) => (fullTitle) => {
   const title = fullTitle.slice(0, upper);
   const lastSpace = title.lastIndexOf(" ");
   return lastSpace > lower && lastSpace < upper ? title.slice(0, lastSpace).concat("\u2026") : false;
 };
-var hardTruncation = (limit) => (title) => title.slice(0, limit).concat("\u2026");
+var hardTruncation = (limit) => (title) => codepointSlice(title, 0, limit).concat("\u2026");
 var firstValid = (...predicates) => (a) => predicates.find((p) => false !== p(a))?.(a);
 var stripHtmlTags = (description, allowedTags = []) => {
   const pattern = new RegExp(`(<([^${allowedTags.join("")}>]+)>)`, "gi");
@@ -70,7 +72,7 @@ function preparePreviewText(text, options) {
   } = options;
   let result = stripHtmlTags(text);
   result = result.replaceAll(/(?:\s*[\n\r]){2,}/g, "\n\n");
-  if (maxChars && result.length > maxChars) {
+  if (maxChars && codepointLength(result) > maxChars) {
     result = hardTruncation(maxChars)(result);
   }
   if (maxLines) {
@@ -536,7 +538,7 @@ function LinkedInPostPreview({
           platform: "linkedin",
           maxChars: FEED_TEXT_MAX_LENGTH
         }) }),
-        hasMedia && url && /* @__PURE__ */ jsxs9(Fragment2, { children: [
+        hasMedia && url && !description.includes(url) && /* @__PURE__ */ jsxs9(Fragment2, { children: [
           " - ",
           /* @__PURE__ */ jsx17("a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
         ] })
@@ -623,6 +625,7 @@ import { __ as __7 } from "@wordpress/i18n";
 // src/tumblr-preview/helpers.ts
 var TITLE_LENGTH2 = 1e3;
 var DESCRIPTION_LENGTH3 = 400;
+var BODY_CHAR_LIMIT = DESCRIPTION_LENGTH3;
 var tumblrTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH2),
   hardTruncation(TITLE_LENGTH2)
@@ -889,7 +892,8 @@ var facebookDescription = (text) => firstValid(
 import { jsx as jsx26, jsxs as jsxs17 } from "react/jsx-runtime";
 var CustomText = ({ text, url, forceUrlDisplay }) => {
   let postLink;
-  if (forceUrlDisplay || hasTag(text, "a")) {
+  const showPostLink = hasTag(text, "a") || forceUrlDisplay && !!url && !text.includes(url);
+  if (showPostLink) {
     postLink = /* @__PURE__ */ jsx26(
       "a",
       {
@@ -1233,6 +1237,7 @@ var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 var TITLE_LENGTH4 = 200;
 var BODY_LENGTH = 500;
 var URL_LENGTH2 = 30;
+var BODY_CHAR_LIMIT2 = BODY_LENGTH - URL_LENGTH2;
 var ADDRESS_PATTERN = /^@([^@]*)@([^@]*)$/i;
 var mastodonTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH4),
@@ -1596,7 +1601,7 @@ function NextdoorPostPreview({
           platform: "nextdoor",
           maxChars: FEED_TEXT_MAX_LENGTH2
         }) }),
-        !hasMedia && url && /* @__PURE__ */ jsxs33(Fragment4, { children: [
+        !hasMedia && url && !description.includes(url) && /* @__PURE__ */ jsxs33(Fragment4, { children: [
           /* @__PURE__ */ jsx49("br", {}),
           /* @__PURE__ */ jsx49("br", {}),
           /* @__PURE__ */ jsx49("a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
@@ -1774,6 +1779,7 @@ var actions_default4 = BlueskyPostActions;
 var TITLE_LENGTH5 = 200;
 var BODY_LENGTH2 = 300;
 var URL_LENGTH3 = 40;
+var BODY_CHAR_LIMIT3 = BODY_LENGTH2 - URL_LENGTH3;
 var blueskyTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH5),
   hardTruncation(TITLE_LENGTH5)
@@ -1790,10 +1796,11 @@ var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH3), hardTruncation(U
 // src/bluesky-preview/post/body/index.tsx
 import { Fragment as Fragment5, jsx as jsx53, jsxs as jsxs36 } from "react/jsx-runtime";
 var BlueskyPostBody = ({ customText, url, children, appendUrl }) => {
+  const showUrl = appendUrl && !!url && !customText?.includes(url);
   return /* @__PURE__ */ jsxs36("div", { className: "bluesky-preview__body", children: [
     customText ? /* @__PURE__ */ jsxs36(Fragment5, { children: [
       /* @__PURE__ */ jsx53("div", { children: blueskyBody(customText) }),
-      appendUrl && url ? /* @__PURE__ */ jsxs36(Fragment5, { children: [
+      showUrl ? /* @__PURE__ */ jsxs36(Fragment5, { children: [
         /* @__PURE__ */ jsx53("br", {}),
         /* @__PURE__ */ jsx53("a", { href: url, target: "_blank", rel: "noreferrer noopener", children: blueskyUrl(url.replace(/^https?:\/\//, "")) })
       ] }) : null
@@ -2332,7 +2339,7 @@ function InstagramPostPreview({
             platform: "instagram",
             maxChars: FEED_TEXT_MAX_LENGTH3
           }),
-          media && url && /* @__PURE__ */ jsxs49(Fragment8, { children: [
+          media && url && !caption.includes(url) && /* @__PURE__ */ jsxs49(Fragment8, { children: [
             /* @__PURE__ */ jsx73("br", {}),
             /* @__PURE__ */ jsx73("br", {}),
             url
@@ -2365,6 +2372,18 @@ var InstagramPreviews = ({
     /* @__PURE__ */ jsx74(InstagramPostPreview, { ...props })
   ] }) });
 };
+
+// src/preview-char-limits.ts
+var PREVIEW_BODY_CHAR_LIMITS = {
+  bluesky: BODY_CHAR_LIMIT3,
+  facebook: CUSTOM_TEXT_LENGTH,
+  "instagram-business": FEED_TEXT_MAX_LENGTH3,
+  linkedin: FEED_TEXT_MAX_LENGTH,
+  mastodon: BODY_CHAR_LIMIT2,
+  nextdoor: FEED_TEXT_MAX_LENGTH2,
+  threads: CAPTION_MAX_CHARS,
+  tumblr: BODY_CHAR_LIMIT
+};
 export {
   AUTO_SHARED_LINK_PREVIEW,
   AUTO_SHARED_SOCIAL_POST_PREVIEW,
@@ -2389,6 +2408,7 @@ export {
   NextdoorPostPreview,
   NextdoorPreviews,
   PORTRAIT_MODE,
+  PREVIEW_BODY_CHAR_LIMITS,
   TYPE_ARTICLE,
   TYPE_WEBSITE,
   ThreadsLinkPreview,

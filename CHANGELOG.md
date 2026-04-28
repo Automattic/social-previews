@@ -12,6 +12,10 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Internal: No longer require automattic/jetpack-changelogger as a per-project dev dependency.
 
+### Fixed
+- Count Unicode codepoints when truncating text so emoji-heavy strings are not over-truncated.
+- Social previews: avoid duplicated URL in Facebook, Bluesky, Instagram, LinkedIn, and Nextdoor previews when the custom text already contains the post URL
+
 ## [3.1.4] - 2026-04-20
 ### Changed
 - Update package dependencies. [#48106]

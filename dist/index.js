@@ -7,13 +7,15 @@ var baseDomain = (url) => {
   const slashIndex = withoutProtocol.indexOf("/");
   return slashIndex === -1 ? withoutProtocol : withoutProtocol.substring(0, slashIndex);
 };
-var shortEnough = (limit) => (title) => title.length <= limit ? title : false;
+var codepointLength = (text) => Array.from(text).length;
+var codepointSlice = (text, start, end) => Array.from(text).slice(start, end).join("");
+var shortEnough = (limit) => (title) => codepointLength(title) <= limit ? title : false;
 var truncatedAtSpace = (lower, upper) => (fullTitle) => {
   const title = fullTitle.slice(0, upper);
   const lastSpace = title.lastIndexOf(" ");
   return lastSpace > lower && lastSpace < upper ? title.slice(0, lastSpace).concat("\u2026") : false;
 };
-var hardTruncation = (limit) => (title) => title.slice(0, limit).concat("\u2026");
+var hardTruncation = (limit) => (title) => codepointSlice(title, 0, limit).concat("\u2026");
 var firstValid = (...predicates) => (a) => _optionalChain([predicates, 'access', _ => _.find, 'call', _2 => _2((p) => false !== p(a)), 'optionalCall', _3 => _3(a)]);
 var stripHtmlTags = (description, allowedTags = []) => {
   const pattern = new RegExp(`(<([^${allowedTags.join("")}>]+)>)`, "gi");
@@ -70,7 +72,7 @@ function preparePreviewText(text, options) {
   } = options;
   let result = stripHtmlTags(text);
   result = result.replaceAll(/(?:\s*[\n\r]){2,}/g, "\n\n");
-  if (maxChars && result.length > maxChars) {
+  if (maxChars && codepointLength(result) > maxChars) {
     result = hardTruncation(maxChars)(result);
   }
   if (maxLines) {
@@ -536,7 +538,7 @@ function LinkedInPostPreview({
           platform: "linkedin",
           maxChars: FEED_TEXT_MAX_LENGTH
         }) }),
-        hasMedia && url && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+        hasMedia && url && !description.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
           " - ",
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
         ] })
@@ -623,6 +625,7 @@ var LinkedInPreviews = ({
 // src/tumblr-preview/helpers.ts
 var TITLE_LENGTH2 = 1e3;
 var DESCRIPTION_LENGTH3 = 400;
+var BODY_CHAR_LIMIT = DESCRIPTION_LENGTH3;
 var tumblrTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH2),
   hardTruncation(TITLE_LENGTH2)
@@ -889,7 +892,8 @@ var facebookDescription = (text) => firstValid(
 
 var CustomText = ({ text, url, forceUrlDisplay }) => {
   let postLink;
-  if (forceUrlDisplay || hasTag(text, "a")) {
+  const showPostLink = hasTag(text, "a") || forceUrlDisplay && !!url && !text.includes(url);
+  if (showPostLink) {
     postLink = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
       "a",
       {
@@ -1233,6 +1237,7 @@ var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 var TITLE_LENGTH4 = 200;
 var BODY_LENGTH = 500;
 var URL_LENGTH2 = 30;
+var BODY_CHAR_LIMIT2 = BODY_LENGTH - URL_LENGTH2;
 var ADDRESS_PATTERN = /^@([^@]*)@([^@]*)$/i;
 var mastodonTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH4),
@@ -1596,7 +1601,7 @@ function NextdoorPostPreview({
           platform: "nextdoor",
           maxChars: FEED_TEXT_MAX_LENGTH2
         }) }),
-        !hasMedia && url && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+        !hasMedia && url && !description.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
@@ -1774,6 +1779,7 @@ var actions_default4 = BlueskyPostActions;
 var TITLE_LENGTH5 = 200;
 var BODY_LENGTH2 = 300;
 var URL_LENGTH3 = 40;
+var BODY_CHAR_LIMIT3 = BODY_LENGTH2 - URL_LENGTH3;
 var blueskyTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH5),
   hardTruncation(TITLE_LENGTH5)
@@ -1790,10 +1796,11 @@ var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH3), hardTruncation(U
 // src/bluesky-preview/post/body/index.tsx
 
 var BlueskyPostBody = ({ customText, url, children, appendUrl }) => {
+  const showUrl = appendUrl && !!url && !_optionalChain([customText, 'optionalAccess', _28 => _28.includes, 'call', _29 => _29(url)]);
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__body", children: [
     customText ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { children: blueskyBody(customText) }),
-      appendUrl && url ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+      showUrl ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, target: "_blank", rel: "noreferrer noopener", children: blueskyUrl(url.replace(/^https?:\/\//, "")) })
       ] }) : null
@@ -1856,7 +1863,7 @@ var BlueskyPostPreview = (props) => {
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, BlueskyPostSidebar, { user }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default4, { user }),
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, body_default2, { ...props, appendUrl: _nullishCoalesce(appendUrl, () => ( Boolean(_optionalChain([media, 'optionalAccess', _28 => _28.length])))), children: _optionalChain([media, 'optionalAccess', _29 => _29.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: _clsx2.default.call(void 0, "bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, body_default2, { ...props, appendUrl: _nullishCoalesce(appendUrl, () => ( Boolean(_optionalChain([media, 'optionalAccess', _30 => _30.length])))), children: _optionalChain([media, 'optionalAccess', _31 => _31.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: _clsx2.default.call(void 0, "bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
         "div",
         {
           className: "bluesky-preview__media-item",
@@ -1864,7 +1871,7 @@ var BlueskyPostPreview = (props) => {
         },
         `bluesky-preview__media-item-${index}`
       )) }) : null }),
-      !_optionalChain([media, 'optionalAccess', _30 => _30.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default2, { ...props }) : null,
+      !_optionalChain([media, 'optionalAccess', _32 => _32.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default2, { ...props }) : null,
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, actions_default4, {})
     ] })
   ] });
@@ -2053,7 +2060,7 @@ var ThreadsPostPreview = ({
   title,
   url
 }) => {
-  const hasMedia = !!_optionalChain([media, 'optionalAccess', _31 => _31.length]);
+  const hasMedia = !!_optionalChain([media, 'optionalAccess', _33 => _33.length]);
   const displayAsCard = url && image && !hasMedia;
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "threads-preview__container", children: [
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Sidebar2, { profileImage, showThreadConnector }),
@@ -2100,7 +2107,7 @@ var ThreadsPreviews = ({
   hidePostPreview,
   posts
 }) => {
-  if (!_optionalChain([posts, 'optionalAccess', _32 => _32.length])) {
+  if (!_optionalChain([posts, 'optionalAccess', _34 => _34.length])) {
     return null;
   }
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "social-preview threads-preview", children: [
@@ -2305,7 +2312,7 @@ function InstagramPostPreview({
   url
 }) {
   const username = name || "username";
-  const mediaItem = _optionalChain([media, 'optionalAccess', _33 => _33[0]]);
+  const mediaItem = _optionalChain([media, 'optionalAccess', _35 => _35[0]]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "section", { className: "instagram-preview__container", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__header", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
@@ -2332,7 +2339,7 @@ function InstagramPostPreview({
             platform: "instagram",
             maxChars: FEED_TEXT_MAX_LENGTH3
           }),
-          media && url && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+          media && url && !caption.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
             /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
             /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
             url
@@ -2364,6 +2371,18 @@ var InstagramPreviews = ({
     ) }),
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, InstagramPostPreview, { ...props })
   ] }) });
+};
+
+// src/preview-char-limits.ts
+var PREVIEW_BODY_CHAR_LIMITS = {
+  bluesky: BODY_CHAR_LIMIT3,
+  facebook: CUSTOM_TEXT_LENGTH,
+  "instagram-business": FEED_TEXT_MAX_LENGTH3,
+  linkedin: FEED_TEXT_MAX_LENGTH,
+  mastodon: BODY_CHAR_LIMIT2,
+  nextdoor: FEED_TEXT_MAX_LENGTH2,
+  threads: CAPTION_MAX_CHARS,
+  tumblr: BODY_CHAR_LIMIT
 };
 
 
@@ -2400,5 +2419,6 @@ var InstagramPreviews = ({
 
 
 
-exports.AUTO_SHARED_LINK_PREVIEW = AUTO_SHARED_LINK_PREVIEW; exports.AUTO_SHARED_SOCIAL_POST_PREVIEW = AUTO_SHARED_SOCIAL_POST_PREVIEW; exports.BlueskyLinkPreview = BlueskyLinkPreview; exports.BlueskyPostPreview = BlueskyPostPreview; exports.BlueskyPreviews = BlueskyPreviews; exports.DEFAULT_LINK_PREVIEW = DEFAULT_LINK_PREVIEW; exports.FacebookLinkPreview = FacebookLinkPreview; exports.FacebookPostPreview = FacebookPostPreview; exports.FacebookPreviews = FacebookPreviews; exports.GoogleSearchPreview = GoogleSearchPreview; exports.InstagramPostPreview = InstagramPostPreview; exports.InstagramPreviews = InstagramPreviews; exports.LANDSCAPE_MODE = LANDSCAPE_MODE; exports.LinkedInLinkPreview = LinkedInLinkPreview; exports.LinkedInPostPreview = LinkedInPostPreview; exports.LinkedInPreviews = LinkedInPreviews; exports.MastodonLinkPreview = MastodonLinkPreview; exports.MastodonPostPreview = MastodonPostPreview; exports.MastodonPreviews = MastodonPreviews; exports.NextdoorLinkPreview = NextdoorLinkPreview; exports.NextdoorPostPreview = NextdoorPostPreview; exports.NextdoorPreviews = NextdoorPreviews; exports.PORTRAIT_MODE = PORTRAIT_MODE; exports.TYPE_ARTICLE = TYPE_ARTICLE; exports.TYPE_WEBSITE = TYPE_WEBSITE; exports.ThreadsLinkPreview = ThreadsLinkPreview; exports.ThreadsPostPreview = ThreadsPostPreview; exports.ThreadsPreviews = ThreadsPreviews; exports.TumblrLinkPreview = TumblrLinkPreview; exports.TumblrPostPreview = TumblrPostPreview; exports.TumblrPreviews = TumblrPreviews; exports.TwitterLinkPreview = TwitterLinkPreview; exports.TwitterPostPreview = TwitterPostPreview; exports.TwitterPreviews = TwitterPreviews;
+
+exports.AUTO_SHARED_LINK_PREVIEW = AUTO_SHARED_LINK_PREVIEW; exports.AUTO_SHARED_SOCIAL_POST_PREVIEW = AUTO_SHARED_SOCIAL_POST_PREVIEW; exports.BlueskyLinkPreview = BlueskyLinkPreview; exports.BlueskyPostPreview = BlueskyPostPreview; exports.BlueskyPreviews = BlueskyPreviews; exports.DEFAULT_LINK_PREVIEW = DEFAULT_LINK_PREVIEW; exports.FacebookLinkPreview = FacebookLinkPreview; exports.FacebookPostPreview = FacebookPostPreview; exports.FacebookPreviews = FacebookPreviews; exports.GoogleSearchPreview = GoogleSearchPreview; exports.InstagramPostPreview = InstagramPostPreview; exports.InstagramPreviews = InstagramPreviews; exports.LANDSCAPE_MODE = LANDSCAPE_MODE; exports.LinkedInLinkPreview = LinkedInLinkPreview; exports.LinkedInPostPreview = LinkedInPostPreview; exports.LinkedInPreviews = LinkedInPreviews; exports.MastodonLinkPreview = MastodonLinkPreview; exports.MastodonPostPreview = MastodonPostPreview; exports.MastodonPreviews = MastodonPreviews; exports.NextdoorLinkPreview = NextdoorLinkPreview; exports.NextdoorPostPreview = NextdoorPostPreview; exports.NextdoorPreviews = NextdoorPreviews; exports.PORTRAIT_MODE = PORTRAIT_MODE; exports.PREVIEW_BODY_CHAR_LIMITS = PREVIEW_BODY_CHAR_LIMITS; exports.TYPE_ARTICLE = TYPE_ARTICLE; exports.TYPE_WEBSITE = TYPE_WEBSITE; exports.ThreadsLinkPreview = ThreadsLinkPreview; exports.ThreadsPostPreview = ThreadsPostPreview; exports.ThreadsPreviews = ThreadsPreviews; exports.TumblrLinkPreview = TumblrLinkPreview; exports.TumblrPostPreview = TumblrPostPreview; exports.TumblrPreviews = TumblrPreviews; exports.TwitterLinkPreview = TwitterLinkPreview; exports.TwitterPostPreview = TwitterPostPreview; exports.TwitterPreviews = TwitterPreviews;
 //# sourceMappingURL=index.js.map
