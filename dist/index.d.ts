@@ -88,8 +88,6 @@ type QuoteTweetProps = {
 };
 type TextProps = {
     text: string;
-    url: string;
-    retainUrl?: boolean;
 };
 type TwitterPreviewProps = SidebarProps$1 & HeaderProps$1 & Partial<QuoteTweetProps & TwitterCardProps & Pick<TextProps, 'text'>>;
 
@@ -277,11 +275,4 @@ declare function InstagramPostPreview({ image, media, name, profileImage, captio
 
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 
-/**
- * Per-network character cap for the visible body text the preview components
- * render. Keyed by the connection service slug used by Publicize. Networks
- * without a preview-side body cap (e.g. `x`) are intentionally omitted.
- */
-declare const PREVIEW_BODY_CHAR_LIMITS: Readonly<Record<string, number>>;
-
-export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, GoogleSearchPreview, type GoogleSearchPreviewProps, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, PREVIEW_BODY_CHAR_LIMITS, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews };
+export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, GoogleSearchPreview, type GoogleSearchPreviewProps, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews };

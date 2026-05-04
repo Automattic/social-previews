@@ -214,7 +214,7 @@ var GoogleSearchPreview = ({
 // src/twitter-preview/card.tsx
 var _clsx = require('clsx'); var _clsx2 = _interopRequireDefault(_clsx);
 
-var DESCRIPTION_LENGTH2 = 200;
+var DESCRIPTION_LENGTH2 = 280;
 var twitterDescription = firstValid(
   shortEnough(DESCRIPTION_LENGTH2),
   hardTruncation(DESCRIPTION_LENGTH2)
@@ -363,12 +363,11 @@ var Sidebar = ({ profileImage, showThreadConnector }) => {
 
 // src/twitter-preview/text.tsx
 
-var Text = ({ text, url, retainUrl }) => {
+var Text = ({ text }) => {
   if (!text) {
     return null;
   }
-  const tweetText = url && !retainUrl && text.endsWith(url) ? text.substring(0, text.lastIndexOf(url)) : text;
-  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "twitter-preview__text", children: preparePreviewText(tweetText, { platform: "twitter" }) });
+  return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "twitter-preview__text", children: preparePreviewText(text, { platform: "twitter" }) });
 };
 
 // src/twitter-preview/post-preview.tsx
@@ -394,7 +393,7 @@ var TwitterPostPreview = ({
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "twitter-preview__main", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Header, { name, screenName, date }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "twitter-preview__content", children: [
-        text ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Text, { text, url: url || "", retainUrl: hasMedia }) : null,
+        text ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Text, { text }) : null,
         hasMedia ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Media, { media }) : null,
         tweetUrl ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, QuoteTweet, { tweetUrl }) : null,
         !hasMedia && url && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
@@ -491,8 +490,49 @@ var TwitterPreviews = ({
 // src/linkedin-preview/post-preview.tsx
 
 
+// src/shared/expandable-text/index.tsx
+
+
+
+
+var EXPAND_THRESHOLD_CHARS = 400;
+function codepointLength2(text) {
+  return Array.from(text).length;
+}
+function truncateAtWordBoundary(text, limit) {
+  const codepoints = Array.from(text);
+  if (codepoints.length <= limit) {
+    return text;
+  }
+  const slice = codepoints.slice(0, limit).join("");
+  const lastSpace = slice.lastIndexOf(" ");
+  const cut = lastSpace > limit - 80 ? lastSpace : slice.length;
+  return slice.slice(0, cut);
+}
+function ExpandableText(props) {
+  const { text, children } = props;
+  const [expanded, toggle] = _react.useReducer.call(void 0, (state) => !state, false);
+  const stripped = stripHtmlTags(text);
+  if (codepointLength2(stripped) <= EXPAND_THRESHOLD_CHARS) {
+    return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, _jsxruntime.Fragment, { children: children(text) });
+  }
+  if (expanded) {
+    return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+      children(text),
+      " ",
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, _components.Button, { variant: "link", className: "social-previews__expand-toggle", onClick: toggle, children: _i18n.__.call(void 0, "See less", "social-previews") })
+    ] });
+  }
+  const truncated = truncateAtWordBoundary(stripped, EXPAND_THRESHOLD_CHARS);
+  return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
+    children(truncated),
+    "\u2026 ",
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, _components.Button, { variant: "link", className: "social-previews__expand-toggle", onClick: toggle, children: _i18n.__.call(void 0, "See more", "social-previews") })
+  ] });
+}
+
 // src/linkedin-preview/constants.ts
-var FEED_TEXT_MAX_LENGTH = 550;
+var FEED_TEXT_MAX_LENGTH = 3e3;
 
 // src/linkedin-preview/post-preview.tsx
 
@@ -534,10 +574,10 @@ function LinkedInPostPreview({
     ] }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "linkedin-preview__content", children: [
       description ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "linkedin-preview__caption", children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: preparePreviewText(description, {
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
           platform: "linkedin",
           maxChars: FEED_TEXT_MAX_LENGTH
-        }) }),
+        }) }) }),
         hasMedia && url && !description.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
           " - ",
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
@@ -624,8 +664,7 @@ var LinkedInPreviews = ({
 
 // src/tumblr-preview/helpers.ts
 var TITLE_LENGTH2 = 1e3;
-var DESCRIPTION_LENGTH3 = 400;
-var BODY_CHAR_LIMIT = DESCRIPTION_LENGTH3;
+var DESCRIPTION_LENGTH3 = 4096;
 var tumblrTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH2),
   hardTruncation(TITLE_LENGTH2)
@@ -807,9 +846,9 @@ var TumblrPostPreview = ({
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default, { user }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "tumblr-preview__body", children: [
         title ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__title", children: tumblrTitle(title) }) : null,
-        description && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__description", children: preparePreviewText(tumblrDescription(description), {
+        description && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__description", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => preparePreviewText(tumblrDescription(visibleText), {
           platform: "tumblr"
-        }) }),
+        }) }) }),
         mediaItem ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "tumblr-preview__media-item", children: mediaItem.type.startsWith("video/") ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "video", { controls: true, className: "tumblr-preview__media--video", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { className: "tumblr-preview__image", src: mediaItem.url, alt: "" }) }) : image && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
           "img",
           {
@@ -878,7 +917,7 @@ var PORTRAIT_MODE = "portrait";
 // src/facebook-preview/helpers.ts
 var TITLE_LENGTH3 = 110;
 var DESCRIPTION_LENGTH4 = 200;
-var CUSTOM_TEXT_LENGTH = 440;
+var CUSTOM_TEXT_LENGTH = 63206;
 var facebookTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH3),
   hardTruncation(TITLE_LENGTH3)
@@ -906,10 +945,10 @@ var CustomText = ({ text, url, forceUrlDisplay }) => {
     );
   }
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "p", { className: "facebook-preview__custom-text", children: [
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: preparePreviewText(text, {
+    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text, children: (visibleText) => preparePreviewText(visibleText, {
       platform: "facebook",
       maxChars: CUSTOM_TEXT_LENGTH
-    }) }),
+    }) }) }),
     postLink
   ] });
 };
@@ -1237,7 +1276,7 @@ var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 var TITLE_LENGTH4 = 200;
 var BODY_LENGTH = 500;
 var URL_LENGTH2 = 30;
-var BODY_CHAR_LIMIT2 = BODY_LENGTH - URL_LENGTH2;
+var BODY_CHAR_LIMIT = BODY_LENGTH - URL_LENGTH2;
 var ADDRESS_PATTERN = /^@([^@]*)@([^@]*)$/i;
 var mastodonTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH4),
@@ -1362,17 +1401,17 @@ var MastonPostBody = (props) => {
   };
   let bodyTxt;
   if (customText) {
-    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(customText, options) });
+    bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: customText, children: (visibleText) => mastodonBody(visibleText, options) }) });
   } else if (description) {
     if (title) {
       const renderedTitle = stripHtmlTags(title);
       options.offset = renderedTitle.length;
       bodyTxt = /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: renderedTitle }),
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) })
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => mastodonBody(visibleText, options) }) })
       ] });
     } else {
-      bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(description, options) });
+      bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => mastodonBody(visibleText, options) }) });
     }
   } else {
     bodyTxt = /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "p", { children: mastodonBody(title, options) });
@@ -1443,7 +1482,7 @@ var MastodonPreviews = ({
 
 
 // src/nextdoor-preview/constants.ts
-var FEED_TEXT_MAX_LENGTH2 = 500;
+var FEED_TEXT_MAX_LENGTH2 = 65e3;
 
 // src/nextdoor-preview/footer-actions.tsx
 
@@ -1597,10 +1636,10 @@ function NextdoorPostPreview({
     ] }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__body", children: [
       description ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__caption", children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: preparePreviewText(description, {
+        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
           platform: "nextdoor",
           maxChars: FEED_TEXT_MAX_LENGTH2
-        }) }),
+        }) }) }),
         !hasMedia && url && !description.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
           /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
@@ -1779,16 +1818,16 @@ var actions_default4 = BlueskyPostActions;
 var TITLE_LENGTH5 = 200;
 var BODY_LENGTH2 = 300;
 var URL_LENGTH3 = 40;
-var BODY_CHAR_LIMIT3 = BODY_LENGTH2 - URL_LENGTH3;
+var BODY_CHAR_LIMIT2 = BODY_LENGTH2 - URL_LENGTH3;
 var blueskyTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH5),
   hardTruncation(TITLE_LENGTH5)
 )(stripHtmlTags(text)) || "";
 var blueskyBody = (text, options = {}) => {
-  const { offset = 0 } = options;
+  const { offset = 0, reserveUrlSpace = true } = options;
   return preparePreviewText(text, {
     platform: "bluesky",
-    maxChars: BODY_LENGTH2 - URL_LENGTH3 - offset
+    maxChars: BODY_LENGTH2 - (reserveUrlSpace ? URL_LENGTH3 : 0) - offset
   });
 };
 var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH3), hardTruncation(URL_LENGTH3))(stripHtmlTags(text)) || "";
@@ -1799,7 +1838,7 @@ var BlueskyPostBody = ({ customText, url, children, appendUrl }) => {
   const showUrl = appendUrl && !!url && !_optionalChain([customText, 'optionalAccess', _28 => _28.includes, 'call', _29 => _29(url)]);
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__body", children: [
     customText ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { children: blueskyBody(customText) }),
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { children: blueskyBody(customText, { reserveUrlSpace: showUrl }) }),
       showUrl ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, target: "_blank", rel: "noreferrer noopener", children: blueskyUrl(url.replace(/^https?:\/\//, "")) })
@@ -2067,10 +2106,10 @@ var ThreadsPostPreview = ({
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "threads-preview__main", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Header2, { name, date }),
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "threads-preview__content", children: [
-        caption ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__text", children: preparePreviewText(caption, {
+        caption ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__text", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
           platform: "threads",
           maxChars: CAPTION_MAX_CHARS
-        }) }) : null,
+        }) }) }) : null,
         hasMedia ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Media2, { media }) : null,
         displayAsCard ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Card2, { image, title: title || "", url }) : null
       ] }),
@@ -2154,7 +2193,7 @@ var ThreadsPreviews = ({
 
 
 // src/instagram-preview/constants.tsx
-var FEED_TEXT_MAX_LENGTH3 = 520;
+var FEED_TEXT_MAX_LENGTH3 = 2200;
 
 // src/instagram-preview/icons/bookmark.tsx
 
@@ -2335,10 +2374,10 @@ function InstagramPostPreview({
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__content--name", children: username }),
         "\xA0",
         caption ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__content--text", children: [
-          preparePreviewText(caption, {
+          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
             platform: "instagram",
             maxChars: FEED_TEXT_MAX_LENGTH3
-          }),
+          }) }),
           media && url && !caption.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
             /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
             /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
@@ -2373,17 +2412,6 @@ var InstagramPreviews = ({
   ] }) });
 };
 
-// src/preview-char-limits.ts
-var PREVIEW_BODY_CHAR_LIMITS = {
-  bluesky: BODY_CHAR_LIMIT3,
-  facebook: CUSTOM_TEXT_LENGTH,
-  "instagram-business": FEED_TEXT_MAX_LENGTH3,
-  linkedin: FEED_TEXT_MAX_LENGTH,
-  mastodon: BODY_CHAR_LIMIT2,
-  nextdoor: FEED_TEXT_MAX_LENGTH2,
-  threads: CAPTION_MAX_CHARS,
-  tumblr: BODY_CHAR_LIMIT
-};
 
 
 
@@ -2418,7 +2446,5 @@ var PREVIEW_BODY_CHAR_LIMITS = {
 
 
 
-
-
-exports.AUTO_SHARED_LINK_PREVIEW = AUTO_SHARED_LINK_PREVIEW; exports.AUTO_SHARED_SOCIAL_POST_PREVIEW = AUTO_SHARED_SOCIAL_POST_PREVIEW; exports.BlueskyLinkPreview = BlueskyLinkPreview; exports.BlueskyPostPreview = BlueskyPostPreview; exports.BlueskyPreviews = BlueskyPreviews; exports.DEFAULT_LINK_PREVIEW = DEFAULT_LINK_PREVIEW; exports.FacebookLinkPreview = FacebookLinkPreview; exports.FacebookPostPreview = FacebookPostPreview; exports.FacebookPreviews = FacebookPreviews; exports.GoogleSearchPreview = GoogleSearchPreview; exports.InstagramPostPreview = InstagramPostPreview; exports.InstagramPreviews = InstagramPreviews; exports.LANDSCAPE_MODE = LANDSCAPE_MODE; exports.LinkedInLinkPreview = LinkedInLinkPreview; exports.LinkedInPostPreview = LinkedInPostPreview; exports.LinkedInPreviews = LinkedInPreviews; exports.MastodonLinkPreview = MastodonLinkPreview; exports.MastodonPostPreview = MastodonPostPreview; exports.MastodonPreviews = MastodonPreviews; exports.NextdoorLinkPreview = NextdoorLinkPreview; exports.NextdoorPostPreview = NextdoorPostPreview; exports.NextdoorPreviews = NextdoorPreviews; exports.PORTRAIT_MODE = PORTRAIT_MODE; exports.PREVIEW_BODY_CHAR_LIMITS = PREVIEW_BODY_CHAR_LIMITS; exports.TYPE_ARTICLE = TYPE_ARTICLE; exports.TYPE_WEBSITE = TYPE_WEBSITE; exports.ThreadsLinkPreview = ThreadsLinkPreview; exports.ThreadsPostPreview = ThreadsPostPreview; exports.ThreadsPreviews = ThreadsPreviews; exports.TumblrLinkPreview = TumblrLinkPreview; exports.TumblrPostPreview = TumblrPostPreview; exports.TumblrPreviews = TumblrPreviews; exports.TwitterLinkPreview = TwitterLinkPreview; exports.TwitterPostPreview = TwitterPostPreview; exports.TwitterPreviews = TwitterPreviews;
+exports.AUTO_SHARED_LINK_PREVIEW = AUTO_SHARED_LINK_PREVIEW; exports.AUTO_SHARED_SOCIAL_POST_PREVIEW = AUTO_SHARED_SOCIAL_POST_PREVIEW; exports.BlueskyLinkPreview = BlueskyLinkPreview; exports.BlueskyPostPreview = BlueskyPostPreview; exports.BlueskyPreviews = BlueskyPreviews; exports.DEFAULT_LINK_PREVIEW = DEFAULT_LINK_PREVIEW; exports.FacebookLinkPreview = FacebookLinkPreview; exports.FacebookPostPreview = FacebookPostPreview; exports.FacebookPreviews = FacebookPreviews; exports.GoogleSearchPreview = GoogleSearchPreview; exports.InstagramPostPreview = InstagramPostPreview; exports.InstagramPreviews = InstagramPreviews; exports.LANDSCAPE_MODE = LANDSCAPE_MODE; exports.LinkedInLinkPreview = LinkedInLinkPreview; exports.LinkedInPostPreview = LinkedInPostPreview; exports.LinkedInPreviews = LinkedInPreviews; exports.MastodonLinkPreview = MastodonLinkPreview; exports.MastodonPostPreview = MastodonPostPreview; exports.MastodonPreviews = MastodonPreviews; exports.NextdoorLinkPreview = NextdoorLinkPreview; exports.NextdoorPostPreview = NextdoorPostPreview; exports.NextdoorPreviews = NextdoorPreviews; exports.PORTRAIT_MODE = PORTRAIT_MODE; exports.TYPE_ARTICLE = TYPE_ARTICLE; exports.TYPE_WEBSITE = TYPE_WEBSITE; exports.ThreadsLinkPreview = ThreadsLinkPreview; exports.ThreadsPostPreview = ThreadsPostPreview; exports.ThreadsPreviews = ThreadsPreviews; exports.TumblrLinkPreview = TumblrLinkPreview; exports.TumblrPostPreview = TumblrPostPreview; exports.TumblrPreviews = TumblrPreviews; exports.TwitterLinkPreview = TwitterLinkPreview; exports.TwitterPostPreview = TwitterPostPreview; exports.TwitterPreviews = TwitterPreviews;
 //# sourceMappingURL=index.js.map

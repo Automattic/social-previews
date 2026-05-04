@@ -5,11 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.1.5-alpha] - unreleased
+## [3.2.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
+- Align per-network preview body char limits with each platform's actual limit, add a "See more" toggle for captions over 400 chars, and stop hiding URLs that the user embedded in custom message templates on Bluesky and X.
 - Internal: No longer require automattic/jetpack-changelogger as a per-project dev dependency.
 
 ### Fixed
@@ -181,7 +182,7 @@ This is an alpha version! The changes listed here are not final.
 
 - Initial release after extracting from Calypso.
 
-[3.1.5-alpha]: https://github.com/Automattic/social-previews/compare/v3.1.4...v3.1.5-alpha
+[3.2.0-alpha]: https://github.com/Automattic/social-previews/compare/v3.1.4...v3.2.0-alpha
 [3.1.4]: https://github.com/Automattic/social-previews/compare/v3.1.3...v3.1.4
 [3.1.3]: https://github.com/Automattic/social-previews/compare/v3.1.2...v3.1.3
 [3.1.2]: https://github.com/Automattic/social-previews/compare/v3.1.1...v3.1.2
