@@ -1275,8 +1275,6 @@ var DEFAULT_MASTODON_INSTANCE = "mastodon.social";
 // src/mastodon-preview/helpers.ts
 var TITLE_LENGTH4 = 200;
 var BODY_LENGTH = 500;
-var URL_LENGTH2 = 30;
-var BODY_CHAR_LIMIT = BODY_LENGTH - URL_LENGTH2;
 var ADDRESS_PATTERN = /^@([^@]*)@([^@]*)$/i;
 var mastodonTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH4),
@@ -1286,11 +1284,10 @@ var mastodonBody = (text, options) => {
   const { instance, offset } = options;
   return preparePreviewText(text, {
     platform: "mastodon",
-    maxChars: BODY_LENGTH - URL_LENGTH2 - offset,
+    maxChars: BODY_LENGTH - offset,
     hashtagDomain: instance
   });
 };
-var mastodonUrl = (text) => firstValid(shortEnough(URL_LENGTH2), hardTruncation(URL_LENGTH2))(stripHtmlTags(text)) || "";
 var getMastodonAddressDetails = (address) => {
   const matches = address.match(ADDRESS_PATTERN);
   return {
@@ -1393,7 +1390,7 @@ var MastodonLinkPreview = (props) => {
 // src/mastodon-preview/post/body/index.tsx
 
 var MastonPostBody = (props) => {
-  const { title, description, customText, url, user, children } = props;
+  const { title, description, customText, user, children } = props;
   const instance = _optionalChain([user, 'optionalAccess', _21 => _21.address]) ? getMastodonAddressDetails(user.address).instance : "";
   const options = {
     instance,
@@ -1418,7 +1415,6 @@ var MastonPostBody = (props) => {
   }
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "mastodon-preview__body", children: [
     bodyTxt,
-    /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, target: "_blank", rel: "noreferrer noopener", children: mastodonUrl(url.replace(/^https?:\/\//, "")) }),
     children
   ] });
 };
@@ -1817,8 +1813,8 @@ var actions_default4 = BlueskyPostActions;
 // src/bluesky-preview/helpers.ts
 var TITLE_LENGTH5 = 200;
 var BODY_LENGTH2 = 300;
-var URL_LENGTH3 = 40;
-var BODY_CHAR_LIMIT2 = BODY_LENGTH2 - URL_LENGTH3;
+var URL_LENGTH2 = 40;
+var BODY_CHAR_LIMIT = BODY_LENGTH2 - URL_LENGTH2;
 var blueskyTitle = (text) => firstValid(
   shortEnough(TITLE_LENGTH5),
   hardTruncation(TITLE_LENGTH5)
@@ -1827,10 +1823,10 @@ var blueskyBody = (text, options = {}) => {
   const { offset = 0, reserveUrlSpace = true } = options;
   return preparePreviewText(text, {
     platform: "bluesky",
-    maxChars: BODY_LENGTH2 - (reserveUrlSpace ? URL_LENGTH3 : 0) - offset
+    maxChars: BODY_LENGTH2 - (reserveUrlSpace ? URL_LENGTH2 : 0) - offset
   });
 };
-var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH3), hardTruncation(URL_LENGTH3))(stripHtmlTags(text)) || "";
+var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH2), hardTruncation(URL_LENGTH2))(stripHtmlTags(text)) || "";
 
 // src/bluesky-preview/post/body/index.tsx
 
