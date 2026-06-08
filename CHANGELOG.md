@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Update dependencies.
+- Update package dependencies.
 
 ### Fixed
 - Fix Mastodon share preview showing the post URL twice when the custom message already includes it.
