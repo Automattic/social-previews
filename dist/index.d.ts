@@ -1,5 +1,28 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
+/**
+ * An editor hyperlink: the visible anchor text and the URL it points to.
+ */
+type Hyperlink = {
+    text: string;
+    href: string;
+    /**
+     * Zero-based index of this anchor among identical occurrences of `text` in
+     * the content, so repeated texts link the right duplicate. Defaults to 0.
+     */
+    occurrence?: number;
+};
+/**
+ * Extracts `(text, href)` pairs from `<a href="…">text</a>` in HTML, skipping
+ * autolinks (text already equals the URL) and non-http(s) hrefs. Mirrors the
+ * backend `ExtractorUtils::get_anchor_links_from_html` so the preview links the
+ * same anchors the published share will.
+ *
+ * @param html - Raw post content HTML.
+ * @return The editor hyperlinks found, in document order.
+ */
+declare function parseHyperlinks(html: string): Hyperlink[];
+
 declare const HEADING_LEVELS: readonly [2, 3, 4, 5, 6];
 type SectionHeadingProps = {
     className?: string;
@@ -12,6 +35,11 @@ interface SocialPreviewBaseProps {
      * The URL of the post/page to preview.
      */
     url: string;
+    /**
+     * Editor hyperlinks rendered over the matching body text on the networks
+     * that support inline links (Bluesky, Tumblr). Other networks ignore this.
+     */
+    hyperlinks?: Hyperlink[];
     /**
      * The title of the post/page to preview.
      */
@@ -275,4 +303,4 @@ declare function InstagramPostPreview({ image, media, name, profileImage, captio
 
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 
-export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, GoogleSearchPreview, type GoogleSearchPreviewProps, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews };
+export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, GoogleSearchPreview, type GoogleSearchPreviewProps, type Hyperlink, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews, parseHyperlinks };

@@ -50,6 +50,43 @@ var formatMastodonDate = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   year: "numeric"
 }).format;
+var collapseWhitespace = (text) => text.replace(/\s+/g, " ").trim();
+var countOccurrences = (haystack, needle) => {
+  let count = 0;
+  for (let pos = haystack.indexOf(needle); pos !== -1; pos = haystack.indexOf(needle, pos + 1)) {
+    count++;
+  }
+  return count;
+};
+var nthIndexOf = (haystack, needle, n) => {
+  let pos = haystack.indexOf(needle);
+  while (pos !== -1 && n > 0) {
+    n--;
+    pos = haystack.indexOf(needle, pos + 1);
+  }
+  return pos;
+};
+function parseHyperlinks(html) {
+  if (!html) {
+    return [];
+  }
+  const doc = document.implementation.createHTMLDocument("");
+  doc.body.innerHTML = html;
+  const links = [];
+  for (const anchor of Array.from(doc.body.querySelectorAll("a[href]"))) {
+    const href = anchor.getAttribute("href") ?? "";
+    const text = collapseWhitespace(anchor.textContent ?? "");
+    if (!/^https?:\/\//i.test(href) || "" === text || text === href) {
+      continue;
+    }
+    const range = doc.createRange();
+    range.selectNodeContents(doc.body);
+    range.setEndBefore(anchor);
+    const occurrence = countOccurrences(collapseWhitespace(range.toString()), text);
+    links.push({ text, href, occurrence });
+  }
+  return links;
+}
 var hashtagUrlMap = {
   twitter: "https://twitter.com/hashtag/%1$s",
   facebook: "https://www.facebook.com/hashtag/%1$s",
@@ -68,7 +105,8 @@ function preparePreviewText(text, options) {
     maxLines,
     hyperlinkHashtags = true,
     // Instagram doesn't support hyperlink URLs at the moment.
-    hyperlinkUrls = "instagram" !== platform
+    hyperlinkUrls = "instagram" !== platform,
+    hyperlinks
   } = options;
   let result = stripHtmlTags(text);
   result = result.replaceAll(/(?:\s*[\n\r]){2,}/g, "\n\n");
@@ -97,6 +135,31 @@ function preparePreviewText(text, options) {
       componentMap[`Hashtag${index}`] = /* @__PURE__ */ jsx("a", { href: url, rel: "noopener noreferrer", target: "_blank", children: `#${hashtag}` });
       result = result.replace(fullMatch, `${whitespace}<Hashtag${index} />`);
     });
+  }
+  if (hyperlinks?.length) {
+    const matches = [];
+    hyperlinks.forEach(({ text: anchorText, href, occurrence = 0 }, index) => {
+      if (!anchorText) {
+        return;
+      }
+      const pos = nthIndexOf(result, anchorText, occurrence);
+      if (pos === -1) {
+        return;
+      }
+      const overlaps = matches.some(
+        (match) => pos < match.pos + match.text.length && match.pos < pos + anchorText.length
+      );
+      if (!overlaps) {
+        matches.push({ pos, text: anchorText, href, index });
+      }
+    });
+    matches.sort((a, b) => b.pos - a.pos);
+    for (const { pos, text: anchorText, href, index } of matches) {
+      const token = `Hyperlink${index}`;
+      componentMap[token] = /* @__PURE__ */ jsx("a", { href, rel: "noopener noreferrer", target: "_blank" });
+      const wrapped = `<${token}>${anchorText}</${token}>`;
+      result = result.slice(0, pos) + wrapped + result.slice(pos + anchorText.length);
+    }
   }
   result = result.replace(/\n/g, "<br />");
   componentMap.br = /* @__PURE__ */ jsx("br", {});
@@ -836,7 +899,8 @@ var TumblrPostPreview = ({
   image,
   user,
   url,
-  media
+  media,
+  hyperlinks
 }) => {
   const avatarUrl = user?.avatarUrl;
   const mediaItem = media?.[0];
@@ -847,7 +911,8 @@ var TumblrPostPreview = ({
       /* @__PURE__ */ jsxs16("div", { className: "tumblr-preview__body", children: [
         title ? /* @__PURE__ */ jsx25("div", { className: "tumblr-preview__title", children: tumblrTitle(title) }) : null,
         description && /* @__PURE__ */ jsx25("div", { className: "tumblr-preview__description", children: /* @__PURE__ */ jsx25(ExpandableText, { text: description, children: (visibleText) => preparePreviewText(tumblrDescription(visibleText), {
-          platform: "tumblr"
+          platform: "tumblr",
+          hyperlinks
         }) }) }),
         mediaItem ? /* @__PURE__ */ jsx25("div", { className: "tumblr-preview__media-item", children: mediaItem.type.startsWith("video/") ? /* @__PURE__ */ jsx25("video", { controls: true, className: "tumblr-preview__media--video", children: /* @__PURE__ */ jsx25("source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ jsx25("img", { className: "tumblr-preview__image", src: mediaItem.url, alt: "" }) }) : image && /* @__PURE__ */ jsx25(
           "img",
@@ -1820,21 +1885,28 @@ var blueskyTitle = (text) => firstValid(
   hardTruncation(TITLE_LENGTH5)
 )(stripHtmlTags(text)) || "";
 var blueskyBody = (text, options = {}) => {
-  const { offset = 0, reserveUrlSpace = true } = options;
+  const { offset = 0, reserveUrlSpace = true, hyperlinks } = options;
   return preparePreviewText(text, {
     platform: "bluesky",
-    maxChars: BODY_LENGTH2 - (reserveUrlSpace ? URL_LENGTH2 : 0) - offset
+    maxChars: BODY_LENGTH2 - (reserveUrlSpace ? URL_LENGTH2 : 0) - offset,
+    hyperlinks
   });
 };
 var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH2), hardTruncation(URL_LENGTH2))(stripHtmlTags(text)) || "";
 
 // src/bluesky-preview/post/body/index.tsx
 import { Fragment as Fragment6, jsx as jsx54, jsxs as jsxs37 } from "react/jsx-runtime";
-var BlueskyPostBody = ({ customText, url, children, appendUrl }) => {
+var BlueskyPostBody = ({
+  customText,
+  url,
+  children,
+  appendUrl,
+  hyperlinks
+}) => {
   const showUrl = appendUrl && !!url && !customText?.includes(url);
   return /* @__PURE__ */ jsxs37("div", { className: "bluesky-preview__body", children: [
     customText ? /* @__PURE__ */ jsxs37(Fragment6, { children: [
-      /* @__PURE__ */ jsx54("div", { children: blueskyBody(customText, { reserveUrlSpace: showUrl }) }),
+      /* @__PURE__ */ jsx54("div", { children: blueskyBody(customText, { reserveUrlSpace: showUrl, hyperlinks }) }),
       showUrl ? /* @__PURE__ */ jsxs37(Fragment6, { children: [
         /* @__PURE__ */ jsx54("br", {}),
         /* @__PURE__ */ jsx54("a", { href: url, target: "_blank", rel: "noreferrer noopener", children: blueskyUrl(url.replace(/^https?:\/\//, "")) })
@@ -2441,6 +2513,7 @@ export {
   TumblrPreviews,
   TwitterLinkPreview,
   TwitterPostPreview,
-  TwitterPreviews
+  TwitterPreviews,
+  parseHyperlinks
 };
 //# sourceMappingURL=index.mjs.map

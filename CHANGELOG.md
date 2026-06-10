@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Fixed
+- Render editor hyperlinks as clickable links in Bluesky and Tumblr previews
+
 ## [3.2.4] - 2026-06-08
 ### Changed
 - Update dependencies. [#49354]
