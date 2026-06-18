@@ -1316,7 +1316,7 @@ var FacebookPostPreview = ({
   return /* @__PURE__ */ jsxs23("div", { className: "facebook-preview__post", children: [
     /* @__PURE__ */ jsx34(header_default2, { user }),
     /* @__PURE__ */ jsxs23("div", { className: "facebook-preview__content", children: [
-      customText && /* @__PURE__ */ jsx34(custom_text_default, { text: customText, url, forceUrlDisplay: true }),
+      customText && /* @__PURE__ */ jsx34(custom_text_default, { text: customText, url }),
       /* @__PURE__ */ jsx34("div", { className: "facebook-preview__body", children: media ? /* @__PURE__ */ jsx34("div", { className: `facebook-preview__media ${modeClass}`, children: media.map((mediaItem, index) => /* @__PURE__ */ jsx34(
         "div",
         {
@@ -1601,7 +1601,7 @@ var MastodonPostPreview = (props) => {
       },
       `mastodon-preview__media-item-${index}`
     )) }) : null }),
-    !media?.length ? /* @__PURE__ */ jsx42(card_default, { ...props }) : null,
+    !media?.length && props.customText?.includes(props.url) ? /* @__PURE__ */ jsx42(card_default, { ...props }) : null,
     /* @__PURE__ */ jsx42(actions_default3, {})
   ] });
 };
@@ -1771,7 +1771,7 @@ function GlobeIcon3() {
 }
 
 // src/nextdoor-preview/post-preview.tsx
-import { Fragment as Fragment5, jsx as jsx51, jsxs as jsxs34 } from "react/jsx-runtime";
+import { jsx as jsx51, jsxs as jsxs34 } from "react/jsx-runtime";
 function NextdoorPostPreview({
   image,
   imageFocalPoint,
@@ -1799,17 +1799,10 @@ function NextdoorPostPreview({
       ] })
     ] }),
     /* @__PURE__ */ jsxs34("div", { className: "nextdoor-preview__body", children: [
-      description ? /* @__PURE__ */ jsxs34("div", { className: "nextdoor-preview__caption", children: [
-        /* @__PURE__ */ jsx51("span", { children: /* @__PURE__ */ jsx51(ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
-          platform: "nextdoor",
-          maxChars: FEED_TEXT_MAX_LENGTH2
-        }) }) }),
-        !hasMedia && url && !description.includes(url) && /* @__PURE__ */ jsxs34(Fragment5, { children: [
-          /* @__PURE__ */ jsx51("br", {}),
-          /* @__PURE__ */ jsx51("br", {}),
-          /* @__PURE__ */ jsx51("a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
-        ] })
-      ] }) : null,
+      description ? /* @__PURE__ */ jsx51("div", { className: "nextdoor-preview__caption", children: /* @__PURE__ */ jsx51("span", { children: /* @__PURE__ */ jsx51(ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
+        platform: "nextdoor",
+        maxChars: FEED_TEXT_MAX_LENGTH2
+      }) }) }) }) : null,
       hasMedia ? /* @__PURE__ */ jsx51("div", { className: "nextdoor-preview__media", children: media.map((mediaItem, index) => {
         return /* @__PURE__ */ jsx51(
           "div",
@@ -2006,7 +1999,7 @@ var blueskyBody = (text, options = {}) => {
 var blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH2), hardTruncation(URL_LENGTH2))(stripHtmlTags(text)) || "";
 
 // src/bluesky-preview/post/body/index.tsx
-import { Fragment as Fragment6, jsx as jsx55, jsxs as jsxs37 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx55, jsxs as jsxs37 } from "react/jsx-runtime";
 var BlueskyPostBody = ({
   customText,
   url,
@@ -2016,9 +2009,9 @@ var BlueskyPostBody = ({
 }) => {
   const showUrl = appendUrl && !!url && !customText?.includes(url);
   return /* @__PURE__ */ jsxs37("div", { className: "bluesky-preview__body", children: [
-    customText ? /* @__PURE__ */ jsxs37(Fragment6, { children: [
+    customText ? /* @__PURE__ */ jsxs37(Fragment5, { children: [
       /* @__PURE__ */ jsx55("div", { children: blueskyBody(customText, { reserveUrlSpace: showUrl, hyperlinks }) }),
-      showUrl ? /* @__PURE__ */ jsxs37(Fragment6, { children: [
+      showUrl ? /* @__PURE__ */ jsxs37(Fragment5, { children: [
         /* @__PURE__ */ jsx55("br", {}),
         /* @__PURE__ */ jsx55("a", { href: url, target: "_blank", rel: "noreferrer noopener", children: blueskyUrl(url.replace(/^https?:\/\//, "")) })
       ] }) : null
@@ -2082,12 +2075,12 @@ var BlueskyPostSidebar = ({ user }) => {
 // src/bluesky-preview/post-preview.tsx
 import { jsx as jsx59, jsxs as jsxs40 } from "react/jsx-runtime";
 var BlueskyPostPreview = (props) => {
-  const { user, media, appendUrl } = props;
+  const { user, media } = props;
   return /* @__PURE__ */ jsxs40("div", { className: "bluesky-preview__post", children: [
     /* @__PURE__ */ jsx59(BlueskyPostSidebar, { user }),
     /* @__PURE__ */ jsxs40("div", { children: [
       /* @__PURE__ */ jsx59(header_default4, { user }),
-      /* @__PURE__ */ jsx59(body_default2, { ...props, appendUrl: appendUrl ?? Boolean(media?.length), children: media?.length ? /* @__PURE__ */ jsx59("div", { className: clsx6("bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ jsx59(
+      /* @__PURE__ */ jsx59(body_default2, { ...props, children: media?.length ? /* @__PURE__ */ jsx59("div", { className: clsx6("bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ jsx59(
         "div",
         {
           className: "bluesky-preview__media-item",
@@ -2235,7 +2228,7 @@ var Header2 = ({ name, date }) => {
 
 // src/threads-preview/media.tsx
 import clsx8 from "clsx";
-import { Fragment as Fragment7 } from "react";
+import { Fragment as Fragment6 } from "react";
 import { jsx as jsx65 } from "react/jsx-runtime";
 var Media2 = ({ media }) => {
   const filteredMedia = media.filter(
@@ -2260,7 +2253,7 @@ var Media2 = ({ media }) => {
     "threads-preview__media",
     "threads-preview__media-children-" + filteredMedia.length
   ]);
-  return /* @__PURE__ */ jsx65("div", { className: mediaClasses, children: filteredMedia.map((mediaItem, index) => /* @__PURE__ */ jsx65(Fragment7, { children: isVideo ? /* @__PURE__ */ jsx65("video", { controls: true, children: /* @__PURE__ */ jsx65("source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ jsx65("img", { alt: mediaItem.alt || "", src: mediaItem.url }) }, `threads-preview__media-item-${index}`)) });
+  return /* @__PURE__ */ jsx65("div", { className: mediaClasses, children: filteredMedia.map((mediaItem, index) => /* @__PURE__ */ jsx65(Fragment6, { children: isVideo ? /* @__PURE__ */ jsx65("video", { controls: true, children: /* @__PURE__ */ jsx65("source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ jsx65("img", { alt: mediaItem.alt || "", src: mediaItem.url }) }, `threads-preview__media-item-${index}`)) });
 };
 
 // src/threads-preview/sidebar.tsx
@@ -2341,7 +2334,7 @@ var ThreadsLinkPreview = (props) => {
 
 // src/threads-preview/previews.tsx
 import { __ as __27 } from "@wordpress/i18n";
-import { Fragment as Fragment8, jsx as jsx69, jsxs as jsxs47 } from "react/jsx-runtime";
+import { Fragment as Fragment7, jsx as jsx69, jsxs as jsxs47 } from "react/jsx-runtime";
 var ThreadsPreviews = ({
   headingLevel,
   hideLinkPreview,
@@ -2377,7 +2370,7 @@ var ThreadsPreviews = ({
         // translators: refers to a link to a Threads post
         children: __27("Link preview", "social-previews")
       }),
-      posts[0].image ? /* @__PURE__ */ jsxs47(Fragment8, { children: [
+      posts[0].image ? /* @__PURE__ */ jsxs47(Fragment7, { children: [
         /* @__PURE__ */ jsx69("p", { className: "social-preview__section-desc", children: __27(
           "This is what it will look like when someone shares the link to your WordPress post on Threads.",
           "social-previews"
@@ -2543,15 +2536,14 @@ var Share = () => {
 };
 
 // src/instagram-preview/post-preview.tsx
-import { Fragment as Fragment9, jsx as jsx75, jsxs as jsxs50 } from "react/jsx-runtime";
+import { jsx as jsx75, jsxs as jsxs50 } from "react/jsx-runtime";
 function InstagramPostPreview({
   image,
   imageFocalPoint,
   media,
   name,
   profileImage,
-  caption,
-  url
+  caption
 }) {
   const username = name || "username";
   const mediaItem = media?.[0];
@@ -2584,17 +2576,10 @@ function InstagramPostPreview({
       /* @__PURE__ */ jsxs50("div", { className: "instagram-preview__content--body", children: [
         /* @__PURE__ */ jsx75("div", { className: "instagram-preview__content--name", children: username }),
         "\xA0",
-        caption ? /* @__PURE__ */ jsxs50("div", { className: "instagram-preview__content--text", children: [
-          /* @__PURE__ */ jsx75(ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
-            platform: "instagram",
-            maxChars: FEED_TEXT_MAX_LENGTH3
-          }) }),
-          media && url && !caption.includes(url) && /* @__PURE__ */ jsxs50(Fragment9, { children: [
-            /* @__PURE__ */ jsx75("br", {}),
-            /* @__PURE__ */ jsx75("br", {}),
-            url
-          ] })
-        ] }) : null
+        caption ? /* @__PURE__ */ jsx75("div", { className: "instagram-preview__content--text", children: /* @__PURE__ */ jsx75(ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
+          platform: "instagram",
+          maxChars: FEED_TEXT_MAX_LENGTH3
+        }) }) }) : null
       ] }),
       /* @__PURE__ */ jsx75("div", { className: "instagram-preview__content--footer", children: /* @__PURE__ */ jsx75("span", { children: __28("View one comment", "social-previews") }) })
     ] })

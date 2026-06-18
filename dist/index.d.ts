@@ -313,7 +313,7 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
  *
  * @return  The Instagram post preview component.
  */
-declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption, url, }: InstagramPreviewProps): react_jsx_runtime.JSX.Element;
+declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption, }: InstagramPreviewProps): react_jsx_runtime.JSX.Element;
 
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 

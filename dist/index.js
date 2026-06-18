@@ -1316,7 +1316,7 @@ var FacebookPostPreview = ({
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "facebook-preview__post", children: [
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default2, { user }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "facebook-preview__content", children: [
-      customText && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, custom_text_default, { text: customText, url, forceUrlDisplay: true }),
+      customText && /* @__PURE__ */ _jsxruntime.jsx.call(void 0, custom_text_default, { text: customText, url }),
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "facebook-preview__body", children: media ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: `facebook-preview__media ${modeClass}`, children: media.map((mediaItem, index) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
         "div",
         {
@@ -1601,7 +1601,7 @@ var MastodonPostPreview = (props) => {
       },
       `mastodon-preview__media-item-${index}`
     )) }) : null }),
-    !_optionalChain([media, 'optionalAccess', _25 => _25.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default, { ...props }) : null,
+    !_optionalChain([media, 'optionalAccess', _25 => _25.length]) && _optionalChain([props, 'access', _26 => _26.customText, 'optionalAccess', _27 => _27.includes, 'call', _28 => _28(props.url)]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default, { ...props }) : null,
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, actions_default3, {})
   ] });
 };
@@ -1783,7 +1783,7 @@ function NextdoorPostPreview({
   title,
   url
 }) {
-  const hasMedia = !!_optionalChain([media, 'optionalAccess', _26 => _26.length]);
+  const hasMedia = !!_optionalChain([media, 'optionalAccess', _29 => _29.length]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "section", { className: `nextdoor-preview__container ${hasMedia ? "has-media" : ""}`, children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__content", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__header", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
@@ -1799,23 +1799,16 @@ function NextdoorPostPreview({
       ] })
     ] }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__body", children: [
-      description ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "nextdoor-preview__caption", children: [
-        /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
-          platform: "nextdoor",
-          maxChars: FEED_TEXT_MAX_LENGTH2
-        }) }) }),
-        !hasMedia && url && !description.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "a", { href: url, rel: "nofollow noopener noreferrer", target: "_blank", children: url })
-        ] })
-      ] }) : null,
+      description ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__caption", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: description, children: (visibleText) => preparePreviewText(visibleText, {
+        platform: "nextdoor",
+        maxChars: FEED_TEXT_MAX_LENGTH2
+      }) }) }) }) : null,
       hasMedia ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "nextdoor-preview__media", children: media.map((mediaItem, index) => {
         return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
           "div",
           {
             className: "nextdoor-preview__media-item",
-            children: _optionalChain([mediaItem, 'optionalAccess', _27 => _27.type, 'optionalAccess', _28 => _28.startsWith, 'call', _29 => _29("video/")]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "video", { controls: true, children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { alt: mediaItem.alt || "", src: mediaItem.url })
+            children: _optionalChain([mediaItem, 'optionalAccess', _30 => _30.type, 'optionalAccess', _31 => _31.startsWith, 'call', _32 => _32("video/")]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "video", { controls: true, children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "source", { src: mediaItem.url, type: mediaItem.type }) }) : /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "img", { alt: mediaItem.alt || "", src: mediaItem.url })
           },
           `nextdoor-preview__media-item-${index}`
         );
@@ -2014,7 +2007,7 @@ var BlueskyPostBody = ({
   appendUrl,
   hyperlinks
 }) => {
-  const showUrl = appendUrl && !!url && !_optionalChain([customText, 'optionalAccess', _30 => _30.includes, 'call', _31 => _31(url)]);
+  const showUrl = appendUrl && !!url && !_optionalChain([customText, 'optionalAccess', _33 => _33.includes, 'call', _34 => _34(url)]);
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__body", children: [
     customText ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { children: blueskyBody(customText, { reserveUrlSpace: showUrl, hyperlinks }) }),
@@ -2082,12 +2075,12 @@ var BlueskyPostSidebar = ({ user }) => {
 // src/bluesky-preview/post-preview.tsx
 
 var BlueskyPostPreview = (props) => {
-  const { user, media, appendUrl } = props;
+  const { user, media } = props;
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "bluesky-preview__post", children: [
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, BlueskyPostSidebar, { user }),
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, header_default4, { user }),
-      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, body_default2, { ...props, appendUrl: _nullishCoalesce(appendUrl, () => ( Boolean(_optionalChain([media, 'optionalAccess', _32 => _32.length])))), children: _optionalChain([media, 'optionalAccess', _33 => _33.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: _clsx2.default.call(void 0, "bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
+      /* @__PURE__ */ _jsxruntime.jsx.call(void 0, body_default2, { ...props, children: _optionalChain([media, 'optionalAccess', _35 => _35.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: _clsx2.default.call(void 0, "bluesky-preview__media", { "as-grid": media.length > 1 }), children: media.map((mediaItem, index) => /* @__PURE__ */ _jsxruntime.jsx.call(void 0, 
         "div",
         {
           className: "bluesky-preview__media-item",
@@ -2095,7 +2088,7 @@ var BlueskyPostPreview = (props) => {
         },
         `bluesky-preview__media-item-${index}`
       )) }) : null }),
-      !_optionalChain([media, 'optionalAccess', _34 => _34.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default2, { ...props }) : null,
+      !_optionalChain([media, 'optionalAccess', _36 => _36.length]) ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, card_default2, { ...props }) : null,
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, actions_default4, {})
     ] })
   ] });
@@ -2293,7 +2286,7 @@ var ThreadsPostPreview = ({
   title,
   url
 }) => {
-  const hasMedia = !!_optionalChain([media, 'optionalAccess', _35 => _35.length]);
+  const hasMedia = !!_optionalChain([media, 'optionalAccess', _37 => _37.length]);
   const displayAsCard = url && image && !hasMedia;
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "threads-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "threads-preview__container", children: [
     /* @__PURE__ */ _jsxruntime.jsx.call(void 0, Sidebar2, { profileImage, showThreadConnector }),
@@ -2348,7 +2341,7 @@ var ThreadsPreviews = ({
   hidePostPreview,
   posts
 }) => {
-  if (!_optionalChain([posts, 'optionalAccess', _36 => _36.length])) {
+  if (!_optionalChain([posts, 'optionalAccess', _38 => _38.length])) {
     return null;
   }
   return /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "social-preview threads-preview", children: [
@@ -2550,11 +2543,10 @@ function InstagramPostPreview({
   media,
   name,
   profileImage,
-  caption,
-  url
+  caption
 }) {
   const username = name || "username";
-  const mediaItem = _optionalChain([media, 'optionalAccess', _37 => _37[0]]);
+  const mediaItem = _optionalChain([media, 'optionalAccess', _39 => _39[0]]);
   return /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__wrapper", children: /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "section", { className: "instagram-preview__container", children: [
     /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__header", children: [
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__header--avatar", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, AvatarWithFallback, { src: profileImage }) }),
@@ -2584,17 +2576,10 @@ function InstagramPostPreview({
       /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__content--body", children: [
         /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__content--name", children: username }),
         "\xA0",
-        caption ? /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, "div", { className: "instagram-preview__content--text", children: [
-          /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
-            platform: "instagram",
-            maxChars: FEED_TEXT_MAX_LENGTH3
-          }) }),
-          media && url && !caption.includes(url) && /* @__PURE__ */ _jsxruntime.jsxs.call(void 0, _jsxruntime.Fragment, { children: [
-            /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
-            /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "br", {}),
-            url
-          ] })
-        ] }) : null
+        caption ? /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__content--text", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, ExpandableText, { text: caption, children: (visibleText) => preparePreviewText(visibleText, {
+          platform: "instagram",
+          maxChars: FEED_TEXT_MAX_LENGTH3
+        }) }) }) : null
       ] }),
       /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "div", { className: "instagram-preview__content--footer", children: /* @__PURE__ */ _jsxruntime.jsx.call(void 0, "span", { children: _i18n.__.call(void 0, "View one comment", "social-previews") }) })
     ] })

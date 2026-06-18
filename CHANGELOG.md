@@ -15,6 +15,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Fixed
+- Use the caption/custom text as the source of truth for Bluesky, Facebook, Instagram, Mastodon and Nextdoor previews instead of appending the post URL.
+
 ## [3.2.5] - 2026-06-15
 ### Changed
 - Update package dependencies. [#49273]
