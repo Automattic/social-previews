@@ -53,6 +53,12 @@ interface SocialPreviewBaseProps {
      */
     image?: string;
     /**
+     * The focal point of the link-preview image (`image`/`customImage`), both
+     * axes 0-1. When set, the preview crops around this point via
+     * `object-position`. Omitted → centered, matching today's behavior.
+     */
+    imageFocalPoint?: FocalPoint;
+    /**
      * The array of media items to use in the preview.
      */
     media?: Array<MediaItem>;
@@ -75,6 +81,14 @@ interface SocialPreviewsBaseProps {
      */
     hideLinkPreview?: boolean;
 }
+/**
+ * A focal point on an image. Both axes are 0-1, where `{ x: 0, y: 0 }` is the
+ * top-left corner and `{ x: 1, y: 1 }` is the bottom-right.
+ */
+type FocalPoint = {
+    x: number;
+    y: number;
+};
 type MediaItem = {
     /**
      * The alt text for the image.
@@ -149,7 +163,7 @@ declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): react_jsx
  *
  * @return The LinkedIn post preview component.
  */
-declare function LinkedInPostPreview({ articleReadTime, image, jobTitle, name, profileImage, description, media, title, url, }: LinkedInPreviewProps): react_jsx_runtime.JSX.Element;
+declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url, }: LinkedInPreviewProps): react_jsx_runtime.JSX.Element;
 
 declare const LinkedInPreviews: React.FC<LinkedInPreviewsProps>;
 
@@ -242,7 +256,7 @@ declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): react_jsx
  * @param {NextdoorPreviewProps} props - The preview properties.
  * @return The Nextdoor post preview component.
  */
-declare function NextdoorPostPreview({ image, name, profileImage, description, neighborhood, media, title, url, }: NextdoorPreviewProps): react_jsx_runtime.JSX.Element;
+declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url, }: NextdoorPreviewProps): react_jsx_runtime.JSX.Element;
 
 declare const NextdoorPreviews: React.FC<NextdoorPreviewsProps>;
 
@@ -285,7 +299,7 @@ declare const ThreadsPostPreview: React.FC<ThreadsPreviewProps>;
 
 declare const ThreadsPreviews: React.FC<ThreadsPreviewsProps>;
 
-type InstagramPreviewProps = Pick<SocialPreviewBaseProps, 'image' | 'media' | 'url'> & {
+type InstagramPreviewProps = Pick<SocialPreviewBaseProps, 'image' | 'imageFocalPoint' | 'media' | 'url'> & {
     name: string;
     profileImage: string;
     caption?: string;
@@ -299,8 +313,8 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
  *
  * @return  The Instagram post preview component.
  */
-declare function InstagramPostPreview({ image, media, name, profileImage, caption, url, }: InstagramPreviewProps): react_jsx_runtime.JSX.Element;
+declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption, url, }: InstagramPreviewProps): react_jsx_runtime.JSX.Element;
 
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 
-export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, GoogleSearchPreview, type GoogleSearchPreviewProps, type Hyperlink, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews, parseHyperlinks };
+export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, type BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, type FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, type FacebookPreviewsProps, type FocalPoint, GoogleSearchPreview, type GoogleSearchPreviewProps, type Hyperlink, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, type LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, type MastodonPreviewsProps, type MediaItem, NextdoorLinkPreview, type NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, type SocialPreviewBaseProps, type SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, type TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews, parseHyperlinks };
