@@ -1,35 +1,50 @@
-/* src/google-search-preview/style.scss */
+/*
+ * CSS values in this file are specific and
+ * designed to match the CSS on external sites,
+ * such as Google and Facebook. Therefore there
+ * will be exceptions to our CSS guidelines here
+ * but please do not "update" this file to
+ * conform.
+ *
+ * @blame: dmsnell
+*/
 .search-preview__display {
   border: 1px solid var(--color-neutral-0);
   font-family: arial, sans-serif;
   padding: 10px 20px;
   overflow-wrap: break-word;
 }
+
 .search-preview__header {
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
 }
+
 .search-preview__menu {
   height: 18px;
   width: 18px;
   color: #4d5156;
   position: relative;
 }
+
 .search-preview__branding {
   display: flex;
   gap: 0.75rem;
   align-items: center;
 }
+
 .search-preview__site--title {
   color: #202124;
   font-size: 14px;
   line-height: 20px;
 }
+
 .search-preview__icon {
   width: 1.75rem;
   height: 1.75rem;
 }
+
 .search-preview__title {
   color: #1a0dab;
   font-size: 20px;
@@ -42,12 +57,14 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
 .search-preview__url {
   color: #4d5156;
   font-size: 12px;
   line-height: 1.3;
   max-width: 616px;
 }
+
 .search-preview__description {
   color: #4d5156;
   font-size: 14px;
@@ -55,11 +72,18 @@
   line-height: 1.5;
   max-width: 616px;
 }
-
-/* src/twitter-preview/style.scss */
+/*
+ * CSS values in this file are specific and
+ * designed to match the CSS on Twitter. Therefore there
+ * will be exceptions to our CSS guidelines here
+ * but please do not "update" this file to conform.
+ *
+ * @blame: pento
+ */
 .twitter-preview {
   padding: 20px;
 }
+
 .twitter-preview__wrapper {
   background-color: #fff;
   max-width: clamp(200px, 100%, 635px);
@@ -68,6 +92,7 @@
   border-radius: 4px;
   padding-inline-end: 1rem;
 }
+
 .twitter-preview__section.social-preview__section {
   width: clamp(200px, 100%, 635px);
 }
@@ -75,6 +100,7 @@
 .twitter-preview__section.social-preview__section .social-preview__section-desc {
   padding-inline-start: 17px;
 }
+
 .twitter-preview__container {
   display: grid;
   grid-template-columns: 65px auto;
@@ -128,7 +154,7 @@
   overflow-wrap: break-word;
 }
 .twitter-preview__container .twitter-preview__content .twitter-preview__media {
-  border-radius: 15px;
+  border-radius: 15px; /* stylelint-disable-line scales/radii */
   overflow: hidden;
   display: grid;
   gap: 2px;
@@ -184,7 +210,7 @@
   margin-bottom: 12px;
   overflow: hidden;
   border: 1px solid #e1e8ed;
-  border-radius: 12px;
+  border-radius: 12px; /* stylelint-disable-line scales/radii */
 }
 .twitter-preview__container .twitter-preview__content .twitter-preview__card .twitter-preview__card-summary {
   display: grid;
@@ -215,11 +241,7 @@
 .twitter-preview__container .twitter-preview__content .twitter-preview__card .twitter-preview__card-body {
   padding: 0.75em;
   text-decoration: none;
-  font-family:
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: var(--studio-black);
   text-align: left;
   overflow: hidden;
@@ -260,16 +282,12 @@
   height: 16px;
   width: 16px;
 }
-
-/* src/shared/expandable-text/style.scss */
 .social-previews__expand-toggle.components-button.is-link {
   height: auto;
   padding: 0;
   font: inherit;
   vertical-align: baseline;
 }
-
-/* src/linkedin-preview/style.scss */
 .linkedin-preview__wrapper {
   margin-inline: auto;
   max-width: clamp(200px, 100%, 555px);
@@ -338,8 +356,7 @@
   line-height: 20px;
   font-weight: 400;
 }
-.linkedin-preview__content article,
-.linkedin-preview__media {
+.linkedin-preview__content article, .linkedin-preview__media {
   margin-top: 0.5rem;
   background-color: #eef3f8;
   display: flex;
@@ -373,8 +390,7 @@
   object-fit: cover;
   width: 100%;
 }
-
-/* src/tumblr-preview/post/icons/styles.scss */
+/* stylelint-disable-next-line scales/radii */
 .tumblr-preview__post-icon {
   display: flex;
   align-items: center;
@@ -382,40 +398,47 @@
 .tumblr-preview__post-icon svg {
   fill: rgba(0, 0, 0, 0.65);
 }
+
 .tumblr-preview__post-icon-blaze {
   width: 23px;
   height: 20px;
 }
+
 .tumblr-preview__post-icon-delete {
   width: 17px;
   height: 21px;
 }
+
 .tumblr-preview__post-icon-edit {
   width: 21px;
   height: 21px;
 }
+
 .tumblr-preview__post-icon-share {
   width: 24px;
   height: 24px;
 }
+
 .tumblr-preview__post-icon-reply {
   width: 21px;
   height: 21px;
 }
+
 .tumblr-preview__post-icon-reblog {
   width: 21px;
   height: 21px;
 }
+
 .tumblr-preview__post-icon-like {
   width: 23px;
   height: 21px;
 }
+
 .tumblr-preview__post-icon-ellipsis {
   width: 18px;
   height: 4px;
 }
-
-/* src/tumblr-preview/post/actions/styles.scss */
+/* stylelint-disable-next-line scales/radii */
 .tumblr-preview__post-actions {
   margin-top: 0.25rem;
   padding: 0 1.25rem;
@@ -424,6 +447,7 @@
   font-weight: 700;
   line-height: 1.5;
 }
+
 .tumblr-preview__post-manage-actions,
 .tumblr-preview__post-social-actions {
   display: flex;
@@ -446,15 +470,16 @@
   justify-content: center;
   align-items: center;
 }
+
 .tumblr-preview__post-social-actions {
   border-top: solid 1px rgba(194, 123, 123, 0.15);
 }
+
 .tumblr-preview__post-actions-blaze {
   display: flex;
   align-items: center;
 }
-
-/* src/tumblr-preview/post/header/styles.scss */
+/* stylelint-disable-next-line scales/radii */
 .tumblr-preview__post-header {
   display: flex;
   justify-content: space-between;
@@ -462,21 +487,23 @@
   margin: 1rem 0;
   padding: 0 1.25rem;
 }
+
 .tumblr-preview__post-header-username {
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.5;
 }
-
-/* src/tumblr-preview/styles.scss */
+/* stylelint-disable-next-line scales/radii */
 .tumblr-preview__section.social-preview__section {
   width: clamp(200px, 100%, 604px + 1.25rem);
 }
+
 .tumblr-preview__post {
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
 }
+
 .tumblr-preview__avatar {
   width: 64px;
   height: 64px;
@@ -487,60 +514,64 @@
     display: none;
   }
 }
+
 .tumblr-preview__card {
   overflow-y: hidden;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.05);
   color: #000;
-  font-family:
-    "Favorit",
-    "Helvetica Neue",
-    "HelveticaNeue",
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: "Favorit", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
 }
 .tumblr-preview__card :any-link {
   color: inherit;
   text-decoration: underline;
 }
+
 .tumblr-preview__custom-text {
   margin: 0 0 1rem 0;
   padding: 0 1.25rem;
 }
+
 .tumblr-preview__title {
   margin: 0 0 1rem 0;
   padding: 0 1.25rem;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 1.625rem;
   font-weight: 400;
   line-height: 1.3;
 }
+
 .tumblr-preview__description {
   margin: 0 0 1rem 0;
   padding: 0 1.25rem;
   font-size: 1rem;
   line-height: 1.5;
 }
+
 .tumblr-preview__image {
   display: block;
   margin: 0 0 1rem;
   width: 100%;
 }
+
 .tumblr-preview__url {
   display: inline-block;
   margin: 0 0 1rem 0;
   padding: 0 1.25rem;
 }
+
 .tumblr-preview__site-name {
   color: rgba(0, 0, 0, 0.65);
   font-size: 0.75rem;
   text-transform: uppercase;
 }
+
 .tumblr-preview__window {
   margin: 0 1.25rem 1.25rem;
 }
+
 .tumblr-preview__window-top {
   position: relative;
   border-top-left-radius: 6px;
@@ -554,6 +585,7 @@
   border-top-right-radius: inherit;
   object-fit: cover;
 }
+
 .tumblr-preview__window-bottom {
   display: flex;
   flex-direction: column;
@@ -571,6 +603,7 @@
   margin: 0;
   padding: 0;
 }
+
 .tumblr-preview__overlay {
   position: absolute;
   top: 0;
@@ -590,42 +623,44 @@
   margin: 0;
   padding: 0;
 }
-
-/* src/facebook-preview/post/icons/styles.scss */
 .facebook-preview__post-icon {
   display: inline-block;
-  background-image: url(data:image/png;base64,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);
+  /* stylelint-disable-next-line function-url-quotes */
+  background-image: url("data:image/png;base64,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");
   background-repeat: no-repeat;
   background-size: 73px 18px;
   filter: invert(40%);
 }
+
 .facebook-preview__post-icon-like {
   width: 18px;
   height: 18px;
   background-position: 0 0;
 }
+
 .facebook-preview__post-icon-comment {
   width: 18px;
   height: 18px;
   background-position: -18px 0;
 }
+
 .facebook-preview__post-icon-share {
   width: 18px;
   height: 18px;
   background-position: -36px 0;
 }
+
 .facebook-preview__post-icon-info {
   width: 7px;
   height: 14px;
   background-position: -54px 0;
 }
+
 .facebook-preview__post-icon-public {
   width: 12px;
   height: 12px;
   background-position: -61px 0;
 }
-
-/* src/facebook-preview/post/actions/styles.scss */
 .facebook-preview__post-actions {
   display: flex;
   align-items: center;
@@ -636,6 +671,7 @@
   padding: 0;
   color: #65676b;
   list-style-type: none;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.33;
@@ -646,8 +682,6 @@
   gap: 0.5rem;
   margin: 0;
 }
-
-/* src/facebook-preview/post/header/styles.scss */
 .facebook-preview__post-header {
   display: flex;
   justify-content: space-between;
@@ -657,48 +691,51 @@
   padding: 0.75rem 1rem 0.5rem;
   min-height: 60px;
 }
+
 .facebook-preview__post-header-content {
   display: flex;
   gap: 0.5rem;
 }
+
 .facebook-preview__post-header-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   border: solid 1px #e5e5e5;
 }
+
 .facebook-preview__post-header-name {
   color: #050505;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.33;
 }
+
 .facebook-preview__post-header-share {
   display: flex;
   align-items: center;
   color: #65676b;
 }
+
 .facebook-preview__post-header-time {
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.8125rem;
   line-height: 1.23;
 }
+
 .facebook-preview__post-header-dot {
   width: 0.625rem;
   text-align: center;
 }
+
 .facebook-preview__post-header-more {
   width: 1.25rem;
   height: 0.25rem;
   margin: 0 0.625rem 0 0;
-  background-image:
-    radial-gradient(
-      circle at 0.125rem 0.125rem,
-      #65676b 2px,
-      transparent 0);
+  background-image: radial-gradient(circle at 0.125rem 0.125rem, #65676b 2px, transparent 0);
   background-size: 0.5rem 0.25rem;
 }
-
-/* src/facebook-preview/style.scss */
 .facebook-preview__post {
   overflow-y: hidden;
   max-width: clamp(508px, 100%, 680px);
@@ -708,29 +745,28 @@
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.05);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    ".SFNSText-Regular",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif;
 }
 .facebook-preview__post :any-link {
   color: #216fdb;
   text-decoration: none;
 }
+
 .facebook-preview__custom-text {
   margin: 0;
   padding: 0 1rem 1rem;
   color: #050505;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.33;
   overflow-wrap: break-word;
 }
+
 .facebook-preview__custom-text-post-url {
   display: block;
   margin-top: 0.5rem;
 }
+
 .facebook-preview__body {
   display: flex;
   flex-direction: column;
@@ -743,6 +779,7 @@
 .facebook-preview__body.is-portrait {
   flex-direction: row;
 }
+
 .facebook-preview__text {
   position: relative;
   display: flex;
@@ -753,24 +790,31 @@
   color: #050505;
   overflow-wrap: break-word;
 }
+
 .facebook-preview__text-wrapper {
   width: 100%;
 }
+
 .facebook-preview__url {
   margin-bottom: 0.25rem;
   color: #65676b;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.8125rem;
   line-height: 1;
   text-transform: uppercase;
 }
+
 .facebook-preview__title {
   margin: 0.25rem 0 0.125rem;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9444rem;
   font-weight: 600;
   line-height: 1.18;
 }
+
 .facebook-preview__description {
   color: #65676b;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.33;
 }
@@ -779,6 +823,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .facebook-preview__image img,
 .facebook-preview__image video,
 .facebook-preview__custom-image img,
@@ -789,6 +834,7 @@
   object-fit: cover;
   width: 100%;
 }
+
 .facebook-preview__image.is-empty {
   width: 140px;
   height: 140px;
@@ -802,6 +848,7 @@
   width: 100%;
   aspect-ratio: 1.91;
 }
+
 .facebook-preview__custom-image,
 .facebook-preview__media-item {
   display: flex;
@@ -819,6 +866,7 @@
   width: 100%;
   aspect-ratio: 1.78;
 }
+
 .facebook-preview__info {
   position: absolute;
   right: 15px;
@@ -835,6 +883,7 @@
 .facebook-preview__info i {
   filter: invert(8%);
 }
+
 .facebook-preview__window {
   margin: 0 0.75rem;
   border-radius: 16px;
@@ -850,8 +899,6 @@
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
-
-/* src/mastodon-preview/post/actions/styles.scss */
 .mastodon-preview__post-actions {
   margin-top: 1rem;
   display: flex;
@@ -866,13 +913,12 @@
 .mastodon-preview__post-actions svg {
   fill: currentColor;
 }
+
 .mastodon-preview__post-icon-text {
   color: #525a71;
   font-size: 0.75rem;
   font-weight: 500;
 }
-
-/* src/mastodon-preview/post/card/styles.scss */
 .mastodon-preview__card {
   display: flex;
   margin-top: 1rem;
@@ -888,6 +934,7 @@
 .mastodon-preview__card.has-image .mastodon-preview__card-img {
   width: 100%;
 }
+
 .mastodon-preview__card-img {
   min-height: 60px;
 }
@@ -908,6 +955,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .mastodon-preview__card-text {
   display: flex;
   flex-direction: column;
@@ -915,16 +963,20 @@
   padding: 1rem;
   overflow: hidden;
 }
+
 .mastodon-preview__card-title {
   color: #282c37;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 1.187rem;
   font-weight: 700;
   line-height: 1.4;
 }
+
 .mastodon-preview__card-site {
   font-size: 0.875rem;
   display: block;
 }
+
 .mastodon-preview__card-description {
   font-size: 0.875rem;
   overflow: hidden;
@@ -933,42 +985,44 @@
   -webkit-line-clamp: 1;
   display: -webkit-box;
 }
-
-/* src/mastodon-preview/post/header/styles.scss */
 .mastodon-preview__post-header {
   display: flex;
   justify-content: space-between;
   align-items: start;
   margin-bottom: 0.625rem;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.47;
 }
+
 .mastodon-preview__post-avatar {
   width: 46px;
   height: 46px;
   border-radius: 4px;
 }
+
 .mastodon-preview__post-header-user {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
+
 .mastodon-preview__post-header-displayname {
   color: #000;
   font-weight: 700;
 }
+
 .mastodon-preview__post-header-audience {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
-
-/* src/mastodon-preview/styles.scss */
 .mastodon-preview__section {
   max-width: 100%;
   width: 578px;
   margin-inline: auto;
 }
+
 .mastodon-preview__post {
   width: 100%;
   overflow-y: hidden;
@@ -978,6 +1032,7 @@
   border: 1px solid #c0cdd9;
   color: #444b5d;
   font-family: "mastodon-font-sans-serif", sans-serif;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.47;
 }
@@ -985,6 +1040,7 @@
   color: #3a3bff;
   text-decoration: none;
 }
+
 .mastodon-preview__img {
   display: block;
   width: 100%;
@@ -993,6 +1049,7 @@
   aspect-ratio: 16/9;
   object-fit: cover;
 }
+
 .mastodon-preview__media {
   margin-top: 8px;
   min-height: 64px;
@@ -1016,8 +1073,6 @@
   width: 100%;
   object-fit: cover;
 }
-
-/* src/mastodon-preview/post/body/styles.scss */
 .mastodon-preview__body {
   margin-bottom: 1rem;
   color: #000;
@@ -1025,8 +1080,6 @@
 .mastodon-preview__body > p {
   margin-bottom: 1.25rem;
 }
-
-/* src/nextdoor-preview/style.scss */
 .nextdoor-preview__wrapper {
   max-width: clamp(200px, 100%, 600px);
 }
@@ -1197,8 +1250,6 @@
   align-items: center;
   justify-content: center;
 }
-
-/* src/bluesky-preview/post/actions/styles.scss */
 .bluesky-preview__post-actions {
   margin-top: 0.5rem;
   display: flex;
@@ -1215,8 +1266,6 @@
 .bluesky-preview__post-actions svg {
   fill: currentColor;
 }
-
-/* src/bluesky-preview/post/body/styles.scss */
 .bluesky-preview__body {
   margin-bottom: 1rem;
   color: #000;
@@ -1224,8 +1273,6 @@
 .bluesky-preview__body > p {
   margin-bottom: 1.25rem;
 }
-
-/* src/bluesky-preview/post/card/styles.scss */
 .bluesky-preview__card {
   display: flex;
   flex-direction: column;
@@ -1235,10 +1282,12 @@
   overflow: hidden;
   color: #000;
 }
+
 .bluesky-preview__card-image img {
   width: 100%;
   object-fit: cover;
 }
+
 .bluesky-preview__card-text {
   border-bottom-width: 1px;
   border-left-width: 1px;
@@ -1249,6 +1298,7 @@
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
 }
+
 .bluesky-preview__card-title {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -1260,6 +1310,7 @@
   font-weight: 700;
   letter-spacing: 0.25px;
 }
+
 .bluesky-preview__card-site {
   font-size: 14px;
   overflow: hidden;
@@ -1271,6 +1322,7 @@
   margin-bottom: 2px;
   margin-top: 2px;
 }
+
 .bluesky-preview__card-description {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1282,8 +1334,6 @@
   margin-top: 4px;
   overflow: hidden;
 }
-
-/* src/bluesky-preview/post/header/styles.scss */
 .bluesky-preview__post-header {
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -1291,6 +1341,7 @@
   gap: 0.5rem;
   max-width: max-content;
   margin-bottom: 0.625rem;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.47;
 }
@@ -1300,8 +1351,7 @@
   align-items: center;
   gap: 0.5rem;
 }
-.bluesky-preview__post-header--displayname,
-.bluesky-preview__post-header--username {
+.bluesky-preview__post-header--displayname, .bluesky-preview__post-header--username {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1315,28 +1365,23 @@
   color: rgb(11, 15, 20);
   min-width: 3ch;
 }
-.bluesky-preview__post-header--username,
-.bluesky-preview__post-header--separator,
-.bluesky-preview__post-header--date {
+.bluesky-preview__post-header--username, .bluesky-preview__post-header--separator, .bluesky-preview__post-header--date {
   font-size: 15px;
   letter-spacing: 0.25px;
   font-weight: 400;
   color: rgb(66, 87, 108);
 }
-
-/* src/bluesky-preview/post/sidebar/styles.scss */
 .bluesky-preview__post-avatar {
   width: 52px;
   height: 52px;
   border-radius: 50%;
 }
-
-/* src/bluesky-preview/styles.scss */
 .bluesky-preview__section {
   max-width: 100%;
   width: 600px;
   margin-inline: auto;
 }
+
 .bluesky-preview__post {
   display: flex;
   flex-direction: row;
@@ -1351,6 +1396,7 @@
   border-radius: 8px;
   color: #444b5d;
   font-family: "bluesky-font-sans-serif", sans-serif;
+  /* stylelint-disable-next-line scales/font-sizes */
   font-size: 0.9375rem;
   line-height: 1.47;
 }
@@ -1358,6 +1404,7 @@
   color: #3a3bff;
   text-decoration: none;
 }
+
 .bluesky-preview__media {
   margin-top: 8px;
   min-height: 64px;
@@ -1381,11 +1428,11 @@
   width: 100%;
   object-fit: cover;
 }
-
-/* src/threads-preview/style.scss */
+/* stylelint-disable scales/radii */
 .threads-preview {
   padding: 20px;
 }
+
 .threads-preview__wrapper {
   background-color: #fff;
   max-width: clamp(200px, 100%, 635px);
@@ -1394,6 +1441,7 @@
   border-radius: 4px;
   padding-inline-end: 1rem;
 }
+
 .threads-preview__section.social-preview__section {
   width: clamp(200px, 100%, 635px);
 }
@@ -1401,6 +1449,7 @@
 .threads-preview__section.social-preview__section .social-preview__section-desc {
   padding-inline-start: 17px;
 }
+
 .threads-preview__container {
   display: grid;
   grid-template-columns: 50px auto;
@@ -1508,11 +1557,7 @@
 .threads-preview__container .threads-preview__content .threads-preview__card .threads-preview__card-body {
   padding: 0.75em;
   text-decoration: none;
-  font-family:
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: var(--studio-black);
   text-align: left;
   overflow: hidden;
@@ -1541,14 +1586,10 @@
   width: 19px;
   fill: rgb(66, 66, 66);
 }
-.threads-preview__container .threads-preview__icon--like svg,
-.threads-preview__container .threads-preview__icon--reply svg,
-.threads-preview__container .threads-preview__icon--share svg {
+.threads-preview__container .threads-preview__icon--like svg, .threads-preview__container .threads-preview__icon--reply svg, .threads-preview__container .threads-preview__icon--share svg {
   fill: transparent;
   stroke: rgb(66, 66, 66);
 }
-
-/* src/instagram-preview/style.scss */
 .instagram-preview__wrapper {
   padding: 20px;
   background-color: #fff;
@@ -1593,8 +1634,7 @@
 .instagram-preview__media {
   display: flex;
 }
-.instagram-preview__media--image,
-.instagram-preview__media--video {
+.instagram-preview__media--image, .instagram-preview__media--video {
   width: 100%;
   object-fit: cover;
 }
@@ -1631,4 +1671,3 @@
   font-weight: 400;
   color: rgb(115, 115, 115);
 }
-/*# sourceMappingURL=index.css.map */
