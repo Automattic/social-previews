@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
+- Comment: Replace Calypso `--color-neutral-0` with WPDS `--wpds-color-stroke-surface-neutral` in Google search preview styles.
 - Update dependencies.
 
 ## [3.3.4] - 2026-07-06
