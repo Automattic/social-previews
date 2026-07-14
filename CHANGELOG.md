@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Comment: Replace Calypso `--color-neutral-0` with WPDS `--wpds-color-stroke-surface-neutral` in Google search preview styles.
+- Comment: Replace legacy `--studio-black` with `#000` in Threads and Twitter link preview card styles.
 - Update dependencies.
 
 ## [3.3.4] - 2026-07-06
