@@ -165,19 +165,27 @@ function preparePreviewText(text, options) {
 		if (lines.length > maxLines) result = lines.slice(0, maxLines).join("\n");
 	}
 	const componentMap = {};
+	const replacements = [];
+	const overlapsReplacement = (start, end) => replacements.some((replacement) => start < replacement.end && replacement.start < end);
 	if (hyperlinkUrls)
  /**
 	* BEFORE:
 	* result = 'Check out this cool site: https://wordpress.org and this one: https://wordpress.com'
 	*/
-	(result.match(/(https?:\/\/\S+)/g) || []).forEach((url, index) => {
+	[...result.matchAll(/https?:\/\/\S+/g)].forEach((match, index) => {
+		const url = match[0];
+		const start = match.index ?? 0;
 		componentMap[`Link${index}`] = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
 			href: url,
 			rel: "noopener noreferrer",
 			target: "_blank",
 			children: url
 		});
-		result = result.replace(url, `<Link${index} />`);
+		replacements.push({
+			start,
+			end: start + url.length,
+			value: `<Link${index} />`
+		});
 	});
 	if (hyperlinkHashtags && hashtagUrlMap[platform]) {
 		/**
@@ -185,14 +193,18 @@ function preparePreviewText(text, options) {
 		* For example, we don't want to match the hash in the URL.
 		* Thus we need to match the whitespace character before the hashtag or the beginning of the string.
 		*/
-		const hashtags = result.matchAll(/(^|\s)#(\w+)/g);
+		const hashtags = [...result.matchAll(/(^|\s)#(\w+)/g)];
 		const hashtagUrl = hashtagUrlMap[platform];
 		/**
 		* BEFORE:
 		* result = `#breaking text with a #hashtag on the #web
 		* with a url https://github.com/Automattic/wp-calypso#security that has a hash in it`
 		*/
-		[...hashtags].forEach(([fullMatch, whitespace, hashtag], index) => {
+		hashtags.forEach((match, index) => {
+			const [, whitespace, hashtag] = match;
+			const start = (match.index ?? 0) + whitespace.length;
+			const end = start + hashtag.length + 1;
+			if (overlapsReplacement(start, end)) return;
 			const url = (0, _wordpress_i18n.sprintf)(hashtagUrl, hashtag, options.hashtagDomain);
 			componentMap[`Hashtag${index}`] = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
 				href: url,
@@ -200,34 +212,33 @@ function preparePreviewText(text, options) {
 				target: "_blank",
 				children: `#${hashtag}`
 			});
-			result = result.replace(fullMatch, `${whitespace}<Hashtag${index} />`);
-		});
-	}
-	if (hyperlinks?.length) {
-		const matches = [];
-		hyperlinks.forEach(({ text: anchorText, href, occurrence = 0 }, index) => {
-			if (!anchorText) return;
-			const pos = nthIndexOf(result, anchorText, occurrence);
-			if (pos === -1) return;
-			if (!matches.some((match) => pos < match.pos + match.text.length && match.pos < pos + anchorText.length)) matches.push({
-				pos,
-				text: anchorText,
-				href,
-				index
+			replacements.push({
+				start,
+				end,
+				value: `<Hashtag${index} />`
 			});
 		});
-		matches.sort((a, b) => b.pos - a.pos);
-		for (const { pos, text: anchorText, href, index } of matches) {
-			const token = `Hyperlink${index}`;
-			componentMap[token] = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
-				href,
-				rel: "noopener noreferrer",
-				target: "_blank"
-			});
-			const wrapped = `<${token}>${anchorText}</${token}>`;
-			result = result.slice(0, pos) + wrapped + result.slice(pos + anchorText.length);
-		}
 	}
+	if (hyperlinks?.length) hyperlinks.forEach(({ text: anchorText, href, occurrence = 0 }, index) => {
+		if (!anchorText) return;
+		const pos = nthIndexOf(result, anchorText, occurrence);
+		if (pos === -1) return;
+		const end = pos + anchorText.length;
+		if (overlapsReplacement(pos, end)) return;
+		const token = `Hyperlink${index}`;
+		componentMap[token] = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
+			href,
+			rel: "noopener noreferrer",
+			target: "_blank"
+		});
+		replacements.push({
+			start: pos,
+			end,
+			value: `<${token}>${anchorText}</${token}>`
+		});
+	});
+	replacements.sort((a, b) => b.start - a.start);
+	for (const { start, end, value } of replacements) result = result.slice(0, start) + value + result.slice(end);
 	/**
 	* BEFORE:
 	* result = 'This is a text\nwith a newline\nin it'
