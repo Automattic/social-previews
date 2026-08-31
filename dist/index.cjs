@@ -16,7 +16,7 @@ var __copyProps = (to, from, except, desc) => {
 	}
 	return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule || !__hasOwnProp.call(mod, "default") ? __defProp(target, "default", {
 	value: mod,
 	enumerable: true
 }) : target, mod));
@@ -340,8 +340,8 @@ const googleUrl = (url) => {
 	const breadcrumb = protocol + url.replace(protocol, "").split("/").join(" › ");
 	return firstValid(shortEnough(URL_LENGTH$1), hardTruncation(URL_LENGTH$1))(breadcrumb);
 };
-const googleTitle = firstValid(shortEnough(TITLE_LENGTH$5), truncatedAtSpace(TITLE_LENGTH$5 - 40, 73), hardTruncation(TITLE_LENGTH$5));
-const googleDescription = firstValid(shortEnough(DESCRIPTION_LENGTH$3), truncatedAtSpace(DESCRIPTION_LENGTH$3 - 80, 170), hardTruncation(DESCRIPTION_LENGTH$3));
+const googleTitle = firstValid(shortEnough(TITLE_LENGTH$5), truncatedAtSpace(23, 73), hardTruncation(TITLE_LENGTH$5));
+const googleDescription = firstValid(shortEnough(DESCRIPTION_LENGTH$3), truncatedAtSpace(80, 170), hardTruncation(DESCRIPTION_LENGTH$3));
 const GoogleSearchPreview = ({ description = "", siteIcon, siteTitle, title = "", url = "" }) => {
 	const domain = baseDomain(url);
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -483,10 +483,11 @@ const MediaImage = ({ focalPoint, style, onLoad, ...props }) => {
 const DESCRIPTION_LENGTH$2 = 280;
 const twitterDescription = firstValid(shortEnough(DESCRIPTION_LENGTH$2), hardTruncation(DESCRIPTION_LENGTH$2));
 const Card$1 = ({ description, image, imageFocalPoint, title, cardType, url }) => {
+	const cardClassNames = (0, clsx.default)(`twitter-preview__card-${cardType}`, { "twitter-preview__card-has-image": !!image });
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 		className: "twitter-preview__card",
 		children: /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-			className: (0, clsx.default)(`twitter-preview__card-${cardType}`, { "twitter-preview__card-has-image": !!image }),
+			className: cardClassNames,
 			children: [image && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(MediaImage, {
 				className: "twitter-preview__card-image",
 				src: image,
@@ -589,8 +590,9 @@ const Media$1 = ({ media }) => {
 	}).slice(0, 4);
 	if (0 === filteredMedia.length) return null;
 	const isVideo = filteredMedia[0].type.startsWith("video/");
+	const mediaClasses = (0, clsx.default)(["twitter-preview__media", "twitter-preview__media-children-" + filteredMedia.length]);
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
-		className: (0, clsx.default)(["twitter-preview__media", "twitter-preview__media-children-" + filteredMedia.length]),
+		className: mediaClasses,
 		children: filteredMedia.map((mediaItem, index) => /* @__PURE__ */ (0, react_jsx_runtime.jsx)(react.Fragment, { children: isVideo ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)("video", {
 			controls: true,
 			children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("source", {
@@ -737,7 +739,8 @@ const HEADING_LEVELS = [
 	6
 ];
 const SectionHeading = ({ className, level, children }) => {
-	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)(`h${level && HEADING_LEVELS.includes(level) ? level : 3}`, {
+	const Tag = `h${level && HEADING_LEVELS.includes(level) ? level : 3}`;
+	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)(Tag, {
 		className: `social-preview__section-heading ${className ?? ""}`,
 		children
 	});
@@ -836,8 +839,9 @@ function ExpandableText(props) {
 			children: (0, _wordpress_i18n.__)("See less", "social-previews")
 		})
 	] });
+	const truncated = truncateAtWordBoundary(stripped, 400);
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [
-		children(truncateAtWordBoundary(stripped, 400)),
+		children(truncated),
 		"… ",
 		/* @__PURE__ */ (0, react_jsx_runtime.jsx)(_wordpress_components.Button, {
 			variant: "link",
@@ -1087,12 +1091,10 @@ const TumblrPostIcon = ({ name }) => {
 				children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M14.658 0c-1.625 0-3.21.767-4.463 2.156-.06.064-.127.138-.197.225-.074-.085-.137-.159-.196-.225C8.547.766 6.966 0 5.35 0 4.215 0 3.114.387 2.162 1.117c-2.773 2.13-2.611 5.89-1.017 8.5 2.158 3.535 6.556 7.18 7.416 7.875A2.3 2.3 0 0 0 9.998 18c.519 0 1.028-.18 1.436-.508.859-.695 5.257-4.34 7.416-7.875 1.595-2.616 1.765-6.376-1-8.5C16.895.387 15.792 0 14.657 0h.001zm0 2.124c.645 0 1.298.208 1.916.683 1.903 1.461 1.457 4.099.484 5.695-1.973 3.23-6.16 6.7-6.94 7.331a.191.191 0 0 1-.241 0c-.779-.631-4.966-4.101-6.94-7.332-.972-1.595-1.4-4.233.5-5.694.619-.475 1.27-.683 1.911-.683 1.064 0 2.095.574 2.898 1.461.495.549 1.658 2.082 1.753 2.203.095-.12 1.259-1.654 1.752-2.203.8-.887 1.842-1.461 2.908-1.461h-.001z" })
 			});
 			break;
-		case "ellipsis":
-			svg = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
-				viewBox: "0 0 17.5 3.9",
-				children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M17.5 1.9c0 1.1-.9 1.9-1.9 1.9-1.1 0-1.9-.9-1.9-1.9S14.5 0 15.6 0c1 0 1.9.9 1.9 1.9m-6.8 0c0 1.1-.9 1.9-1.9 1.9-1.1.1-2-.8-2-1.9 0-1 .9-1.9 2-1.9s1.9.9 1.9 1.9m-6.8 0c0 1.1-.9 2-2 2-1 0-1.9-.9-1.9-2S.9 0 1.9 0c1.1 0 2 .9 2 1.9" })
-			});
-			break;
+		case "ellipsis": svg = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
+			viewBox: "0 0 17.5 3.9",
+			children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M17.5 1.9c0 1.1-.9 1.9-1.9 1.9-1.1 0-1.9-.9-1.9-1.9S14.5 0 15.6 0c1 0 1.9.9 1.9 1.9m-6.8 0c0 1.1-.9 1.9-1.9 1.9-1.1.1-2-.8-2-1.9 0-1 .9-1.9 2-1.9s1.9.9 1.9 1.9m-6.8 0c0 1.1-.9 2-2 2-1 0-1.9-.9-1.9-2S.9 0 1.9 0c1.1 0 2 .9 2 1.9" })
+		});
 	}
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 		className: `tumblr-preview__post-icon tumblr-preview__post-icon-${name}`,
@@ -1777,18 +1779,19 @@ const MastonPostBody = (props) => {
 		text: customText,
 		children: (visibleText) => mastodonBody(visibleText, options)
 	}) });
-	else if (description) if (title) {
-		const renderedTitle = stripHtmlTags(title);
-		options.offset = renderedTitle.length;
-		bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: renderedTitle }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(ExpandableText, {
+	else if (description) {
+		if (title) {
+			const renderedTitle = stripHtmlTags(title);
+			options.offset = renderedTitle.length;
+			bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: renderedTitle }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(ExpandableText, {
+				text: description,
+				children: (visibleText) => mastodonBody(visibleText, options)
+			}) })] });
+		} else bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(ExpandableText, {
 			text: description,
 			children: (visibleText) => mastodonBody(visibleText, options)
-		}) })] });
-	} else bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(ExpandableText, {
-		text: description,
-		children: (visibleText) => mastodonBody(visibleText, options)
-	}) });
-	else bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: mastodonBody(title, options) });
+		}) });
+	} else bodyTxt = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: mastodonBody(title, options) });
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "mastodon-preview__body",
 		children: [bodyTxt, children]
@@ -2443,10 +2446,11 @@ const threadsTitle = (text) => firstValid(shortEnough(TITLE_LENGTH), hardTruncat
 //#endregion
 //#region src/threads-preview/card.tsx
 const Card = ({ image, imageFocalPoint, title, url }) => {
+	const cardClassNames = (0, clsx.default)({ "threads-preview__card-has-image": !!image });
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 		className: "threads-preview__card",
 		children: /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-			className: (0, clsx.default)({ "threads-preview__card-has-image": !!image }),
+			className: cardClassNames,
 			children: [image && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(MediaImage, {
 				className: "threads-preview__card-image",
 				src: image,
@@ -2548,8 +2552,9 @@ const Media = ({ media }) => {
 	}).slice(0, 4);
 	if (0 === filteredMedia.length) return null;
 	const isVideo = filteredMedia[0].type.startsWith("video/");
+	const mediaClasses = (0, clsx.default)(["threads-preview__media", "threads-preview__media-children-" + filteredMedia.length]);
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
-		className: (0, clsx.default)(["threads-preview__media", "threads-preview__media-children-" + filteredMedia.length]),
+		className: mediaClasses,
 		children: filteredMedia.map((mediaItem, index) => /* @__PURE__ */ (0, react_jsx_runtime.jsx)(react.Fragment, { children: isVideo ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)("video", {
 			controls: true,
 			children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("source", {

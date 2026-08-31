@@ -172,18 +172,7 @@ declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("r
  *
  * @return The LinkedIn post preview component.
  */
-declare function LinkedInPostPreview({
-  articleReadTime,
-  image,
-  imageFocalPoint,
-  jobTitle,
-  name,
-  profileImage,
-  description,
-  media,
-  title,
-  url
-}: LinkedInPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url }: LinkedInPreviewProps): import("react/jsx-runtime").JSX.Element;
 //#endregion
 //#region src/linkedin-preview/previews.d.ts
 declare const LinkedInPreviews: React.FC<LinkedInPreviewsProps>;
@@ -293,17 +282,7 @@ declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("r
  * @param {NextdoorPreviewProps} props - The preview properties.
  * @return The Nextdoor post preview component.
  */
-declare function NextdoorPostPreview({
-  image,
-  imageFocalPoint,
-  name,
-  profileImage,
-  description,
-  neighborhood,
-  media,
-  title,
-  url
-}: NextdoorPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url }: NextdoorPreviewProps): import("react/jsx-runtime").JSX.Element;
 //#endregion
 //#region src/nextdoor-preview/previews.d.ts
 declare const NextdoorPreviews: React.FC<NextdoorPreviewsProps>;
@@ -371,14 +350,7 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
  *
  * @return  The Instagram post preview component.
  */
-declare function InstagramPostPreview({
-  image,
-  imageFocalPoint,
-  media,
-  name,
-  profileImage,
-  caption
-}: InstagramPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react/jsx-runtime").JSX.Element;
 //#endregion
 //#region src/instagram-preview/previews.d.ts
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
