@@ -162,7 +162,7 @@ type LinkedInLinkPreviewProps = Omit<LinkedInPreviewProps, keyof OptionalProps$1
  * @param {LinkedInLinkPreviewProps} props - The props for the LinkedIn link preview.
  * @return The LinkedIn link preview component.
  */
-declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/linkedin-preview/post-preview.d.ts
 /**
@@ -172,7 +172,7 @@ declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("r
  *
  * @return The LinkedIn post preview component.
  */
-declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url }: LinkedInPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url }: LinkedInPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/linkedin-preview/previews.d.ts
 declare const LinkedInPreviews: React.FC<LinkedInPreviewsProps>;
@@ -273,7 +273,7 @@ type NextdoorLinkPreviewProps = Omit<NextdoorPreviewProps, keyof OptionalProps> 
  *
  * @return The Nextdoor link preview component.
  */
-declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/nextdoor-preview/post-preview.d.ts
 /**
@@ -282,7 +282,7 @@ declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("r
  * @param {NextdoorPreviewProps} props - The preview properties.
  * @return The Nextdoor post preview component.
  */
-declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url }: NextdoorPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url }: NextdoorPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/nextdoor-preview/previews.d.ts
 declare const NextdoorPreviews: React.FC<NextdoorPreviewsProps>;
@@ -350,7 +350,7 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
  *
  * @return  The Instagram post preview component.
  */
-declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react/jsx-runtime").JSX.Element;
+declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/instagram-preview/previews.d.ts
 declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
