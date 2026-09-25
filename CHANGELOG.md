@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Changed
+- Use logical CSS properties so layouts mirror in right-to-left languages.
+
 ## [3.3.12] - 2026-09-21
 ### Changed
 - Update package dependencies. [#52187]
