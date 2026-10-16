@@ -20,7 +20,7 @@ type Hyperlink = {
  * @param html - Raw post content HTML.
  * @return The editor hyperlinks found, in document order.
  */
-declare function parseHyperlinks(html: string): Hyperlink[];
+export declare function parseHyperlinks(html: string): Hyperlink[];
 //#endregion
 //#region src/shared/section-heading/index.d.ts
 declare const HEADING_LEVELS: readonly [2, 3, 4, 5, 6];
@@ -31,7 +31,7 @@ type SectionHeadingProps = {
 };
 //#endregion
 //#region src/types.d.ts
-interface SocialPreviewBaseProps {
+export interface SocialPreviewBaseProps {
   /**
    * The URL of the post/page to preview.
    */
@@ -68,7 +68,7 @@ interface SocialPreviewBaseProps {
    */
   caption?: string;
 }
-interface SocialPreviewsBaseProps {
+export interface SocialPreviewsBaseProps {
   /**
    * The heading level to use for the preview section title
    */
@@ -86,11 +86,11 @@ interface SocialPreviewsBaseProps {
  * A focal point on an image. Both axes are 0-1, where `{ x: 0, y: 0 }` is the
  * top-left corner and `{ x: 1, y: 1 }` is the bottom-right.
  */
-type FocalPoint = {
+export type FocalPoint = {
   x: number;
   y: number;
 };
-type MediaItem = {
+export type MediaItem = {
   /**
    * The alt text for the image.
    */
@@ -106,11 +106,11 @@ type MediaItem = {
 };
 //#endregion
 //#region src/google-search-preview/index.d.ts
-type GoogleSearchPreviewProps = Omit<SocialPreviewBaseProps, 'image'> & {
+export type GoogleSearchPreviewProps = Omit<SocialPreviewBaseProps, 'image'> & {
   siteIcon?: string;
   siteTitle?: string;
 };
-declare const GoogleSearchPreview: React.FC<Partial<GoogleSearchPreviewProps>>;
+export declare const GoogleSearchPreview: React.FC<Partial<GoogleSearchPreviewProps>>;
 //#endregion
 //#region src/twitter-preview/types.d.ts
 type TwitterPreviewsProps = SocialPreviewsBaseProps & {
@@ -137,13 +137,13 @@ type TextProps = {
 type TwitterPreviewProps = SidebarProps$1 & HeaderProps$1 & Partial<QuoteTweetProps & TwitterCardProps & Pick<TextProps, 'text'>>;
 //#endregion
 //#region src/twitter-preview/link-preview.d.ts
-declare const TwitterLinkPreview: React.FC<TwitterPreviewProps>;
+export declare const TwitterLinkPreview: React.FC<TwitterPreviewProps>;
 //#endregion
 //#region src/twitter-preview/post-preview.d.ts
-declare const TwitterPostPreview: React.FC<TwitterPreviewProps>;
+export declare const TwitterPostPreview: React.FC<TwitterPreviewProps>;
 //#endregion
 //#region src/twitter-preview/previews.d.ts
-declare const TwitterPreviews: React.FC<TwitterPreviewsProps>;
+export declare const TwitterPreviews: React.FC<TwitterPreviewsProps>;
 //#endregion
 //#region src/linkedin-preview/types.d.ts
 type LinkedInPreviewProps = SocialPreviewBaseProps & {
@@ -156,13 +156,13 @@ type LinkedInPreviewsProps = LinkedInPreviewProps & SocialPreviewsBaseProps;
 //#endregion
 //#region src/linkedin-preview/link-preview.d.ts
 type OptionalProps$1 = Partial<Pick<LinkedInPreviewProps, 'name' | 'profileImage'>>;
-type LinkedInLinkPreviewProps = Omit<LinkedInPreviewProps, keyof OptionalProps$1> & OptionalProps$1;
+export type LinkedInLinkPreviewProps = Omit<LinkedInPreviewProps, keyof OptionalProps$1> & OptionalProps$1;
 /**
  * LinkedIn Link Preview Component
  * @param {LinkedInLinkPreviewProps} props - The props for the LinkedIn link preview.
  * @return The LinkedIn link preview component.
  */
-declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("react").JSX.Element;
+export declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/linkedin-preview/post-preview.d.ts
 /**
@@ -172,10 +172,10 @@ declare function LinkedInLinkPreview(props: LinkedInLinkPreviewProps): import("r
  *
  * @return The LinkedIn post preview component.
  */
-declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url }: LinkedInPreviewProps): import("react").JSX.Element;
+export declare function LinkedInPostPreview({ articleReadTime, image, imageFocalPoint, jobTitle, name, profileImage, description, media, title, url }: LinkedInPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/linkedin-preview/previews.d.ts
-declare const LinkedInPreviews: React.FC<LinkedInPreviewsProps>;
+export declare const LinkedInPreviews: React.FC<LinkedInPreviewsProps>;
 //#endregion
 //#region src/tumblr-preview/types.d.ts
 type TumblrUser = {
@@ -187,23 +187,23 @@ type TumblrPreviewProps = SocialPreviewBaseProps & {
 };
 //#endregion
 //#region src/tumblr-preview/link-preview.d.ts
-declare const TumblrLinkPreview: React.FC<TumblrPreviewProps>;
+export declare const TumblrLinkPreview: React.FC<TumblrPreviewProps>;
 //#endregion
 //#region src/tumblr-preview/post-preview.d.ts
-declare const TumblrPostPreview: React.FC<TumblrPreviewProps>;
+export declare const TumblrPostPreview: React.FC<TumblrPreviewProps>;
 //#endregion
 //#region src/tumblr-preview/previews.d.ts
-type TumblrPreviewsProps = TumblrPreviewProps & SocialPreviewsBaseProps;
-declare const TumblrPreviews: React.FC<TumblrPreviewsProps>;
+export type TumblrPreviewsProps = TumblrPreviewProps & SocialPreviewsBaseProps;
+export declare const TumblrPreviews: React.FC<TumblrPreviewsProps>;
 //#endregion
 //#region src/constants.d.ts
-declare const AUTO_SHARED_SOCIAL_POST_PREVIEW = "AUTO_SHARED_SOCIAL_POST_PREVIEW";
-declare const AUTO_SHARED_LINK_PREVIEW = "AUTO_SHARED_LINK_PREVIEW";
-declare const DEFAULT_LINK_PREVIEW = "DEFAULT_LINK_PREVIEW";
-declare const TYPE_WEBSITE = "website";
-declare const TYPE_ARTICLE = "article";
-declare const LANDSCAPE_MODE = "landscape";
-declare const PORTRAIT_MODE = "portrait";
+export declare const AUTO_SHARED_SOCIAL_POST_PREVIEW = "AUTO_SHARED_SOCIAL_POST_PREVIEW";
+export declare const AUTO_SHARED_LINK_PREVIEW = "AUTO_SHARED_LINK_PREVIEW";
+export declare const DEFAULT_LINK_PREVIEW = "DEFAULT_LINK_PREVIEW";
+export declare const TYPE_WEBSITE = "website";
+export declare const TYPE_ARTICLE = "article";
+export declare const LANDSCAPE_MODE = "landscape";
+export declare const PORTRAIT_MODE = "portrait";
 //#endregion
 //#region src/facebook-preview/types.d.ts
 type ImageMode = typeof LANDSCAPE_MODE | typeof PORTRAIT_MODE;
@@ -220,17 +220,17 @@ type FacebookPreviewProps = SocialPreviewBaseProps & {
 };
 //#endregion
 //#region src/facebook-preview/previews.d.ts
-type FacebookPreviewsProps = FacebookPreviewProps & SocialPreviewsBaseProps;
-declare const FacebookPreviews: React.FC<FacebookPreviewsProps>;
+export type FacebookPreviewsProps = FacebookPreviewProps & SocialPreviewsBaseProps;
+export declare const FacebookPreviews: React.FC<FacebookPreviewsProps>;
 //#endregion
 //#region src/facebook-preview/link-preview.d.ts
-type FacebookLinkPreviewProps = FacebookPreviewProps & {
+export type FacebookLinkPreviewProps = FacebookPreviewProps & {
   compactDescription?: boolean;
 };
-declare const FacebookLinkPreview: React.FC<FacebookLinkPreviewProps>;
+export declare const FacebookLinkPreview: React.FC<FacebookLinkPreviewProps>;
 //#endregion
 //#region src/facebook-preview/post-preview.d.ts
-declare const FacebookPostPreview: React.FC<FacebookPreviewProps>;
+export declare const FacebookPostPreview: React.FC<FacebookPreviewProps>;
 //#endregion
 //#region src/mastodon-preview/types.d.ts
 type MastodonUser = {
@@ -246,14 +246,14 @@ type MastodonPreviewProps = SocialPreviewBaseProps & {
 };
 //#endregion
 //#region src/mastodon-preview/link-preview.d.ts
-declare const MastodonLinkPreview: React.FC<MastodonPreviewProps>;
+export declare const MastodonLinkPreview: React.FC<MastodonPreviewProps>;
 //#endregion
 //#region src/mastodon-preview/post-preview.d.ts
-declare const MastodonPostPreview: React.FC<MastodonPreviewProps>;
+export declare const MastodonPostPreview: React.FC<MastodonPreviewProps>;
 //#endregion
 //#region src/mastodon-preview/previews.d.ts
-type MastodonPreviewsProps = MastodonPreviewProps & SocialPreviewsBaseProps;
-declare const MastodonPreviews: React.FC<MastodonPreviewsProps>;
+export type MastodonPreviewsProps = MastodonPreviewProps & SocialPreviewsBaseProps;
+export declare const MastodonPreviews: React.FC<MastodonPreviewsProps>;
 //#endregion
 //#region src/nextdoor-preview/types.d.ts
 type NextdoorPreviewProps = SocialPreviewBaseProps & {
@@ -265,7 +265,7 @@ type NextdoorPreviewsProps = NextdoorPreviewProps & SocialPreviewsBaseProps;
 //#endregion
 //#region src/nextdoor-preview/link-preview.d.ts
 type OptionalProps = Partial<Pick<NextdoorPreviewProps, 'name' | 'profileImage'>>;
-type NextdoorLinkPreviewProps = Omit<NextdoorPreviewProps, keyof OptionalProps> & OptionalProps;
+export type NextdoorLinkPreviewProps = Omit<NextdoorPreviewProps, keyof OptionalProps> & OptionalProps;
 /**
  * Nextdoor Link Preview Component
  *
@@ -273,7 +273,7 @@ type NextdoorLinkPreviewProps = Omit<NextdoorPreviewProps, keyof OptionalProps> 
  *
  * @return The Nextdoor link preview component.
  */
-declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("react").JSX.Element;
+export declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/nextdoor-preview/post-preview.d.ts
 /**
@@ -282,10 +282,10 @@ declare function NextdoorLinkPreview(props: NextdoorLinkPreviewProps): import("r
  * @param {NextdoorPreviewProps} props - The preview properties.
  * @return The Nextdoor post preview component.
  */
-declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url }: NextdoorPreviewProps): import("react").JSX.Element;
+export declare function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, description, neighborhood, media, title, url }: NextdoorPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/nextdoor-preview/previews.d.ts
-declare const NextdoorPreviews: React.FC<NextdoorPreviewsProps>;
+export declare const NextdoorPreviews: React.FC<NextdoorPreviewsProps>;
 //#endregion
 //#region src/bluesky-preview/types.d.ts
 type BlueskyUser = {
@@ -301,14 +301,14 @@ type BlueskyPreviewProps = SocialPreviewBaseProps & {
 };
 //#endregion
 //#region src/bluesky-preview/link-preview.d.ts
-declare const BlueskyLinkPreview: React.FC<BlueskyPreviewProps>;
+export declare const BlueskyLinkPreview: React.FC<BlueskyPreviewProps>;
 //#endregion
 //#region src/bluesky-preview/post-preview.d.ts
-declare const BlueskyPostPreview: React.FC<BlueskyPreviewProps>;
+export declare const BlueskyPostPreview: React.FC<BlueskyPreviewProps>;
 //#endregion
 //#region src/bluesky-preview/previews.d.ts
-type BlueskyPreviewsProps = BlueskyPreviewProps & SocialPreviewsBaseProps;
-declare const BlueskyPreviews: React.FC<BlueskyPreviewsProps>;
+export type BlueskyPreviewsProps = BlueskyPreviewProps & SocialPreviewsBaseProps;
+export declare const BlueskyPreviews: React.FC<BlueskyPreviewsProps>;
 //#endregion
 //#region src/threads-preview/types.d.ts
 type ThreadsPreviewsProps = SocialPreviewsBaseProps & {
@@ -326,13 +326,13 @@ type HeaderProps = {
 type ThreadsPreviewProps = SidebarProps & HeaderProps & Partial<ThreadsCardProps>;
 //#endregion
 //#region src/threads-preview/link-preview.d.ts
-declare const ThreadsLinkPreview: React.FC<ThreadsPreviewProps>;
+export declare const ThreadsLinkPreview: React.FC<ThreadsPreviewProps>;
 //#endregion
 //#region src/threads-preview/post-preview.d.ts
-declare const ThreadsPostPreview: React.FC<ThreadsPreviewProps>;
+export declare const ThreadsPostPreview: React.FC<ThreadsPreviewProps>;
 //#endregion
 //#region src/threads-preview/previews.d.ts
-declare const ThreadsPreviews: React.FC<ThreadsPreviewsProps>;
+export declare const ThreadsPreviews: React.FC<ThreadsPreviewsProps>;
 //#endregion
 //#region src/instagram-preview/types.d.ts
 type InstagramPreviewProps = Pick<SocialPreviewBaseProps, 'image' | 'imageFocalPoint' | 'media' | 'url'> & {
@@ -350,10 +350,10 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
  *
  * @return  The Instagram post preview component.
  */
-declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react").JSX.Element;
+export declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react").JSX.Element;
 //#endregion
 //#region src/instagram-preview/previews.d.ts
-declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
+export declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 //#endregion
-export { AUTO_SHARED_LINK_PREVIEW, AUTO_SHARED_SOCIAL_POST_PREVIEW, BlueskyLinkPreview, BlueskyPostPreview, BlueskyPreviews, BlueskyPreviewsProps, DEFAULT_LINK_PREVIEW, FacebookLinkPreview, FacebookLinkPreviewProps, FacebookPostPreview, FacebookPreviews, FacebookPreviewsProps, FocalPoint, GoogleSearchPreview, GoogleSearchPreviewProps, type Hyperlink, InstagramPostPreview, InstagramPreviews, LANDSCAPE_MODE, LinkedInLinkPreview, LinkedInLinkPreviewProps, LinkedInPostPreview, LinkedInPreviews, MastodonLinkPreview, MastodonPostPreview, MastodonPreviews, MastodonPreviewsProps, MediaItem, NextdoorLinkPreview, NextdoorLinkPreviewProps, NextdoorPostPreview, NextdoorPreviews, PORTRAIT_MODE, SocialPreviewBaseProps, SocialPreviewsBaseProps, TYPE_ARTICLE, TYPE_WEBSITE, ThreadsLinkPreview, ThreadsPostPreview, ThreadsPreviews, TumblrLinkPreview, TumblrPostPreview, TumblrPreviews, TumblrPreviewsProps, TwitterLinkPreview, TwitterPostPreview, TwitterPreviews, parseHyperlinks };
+export type { Hyperlink };
 //# sourceMappingURL=index.d.cts.map
