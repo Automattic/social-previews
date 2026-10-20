@@ -18,7 +18,6 @@
 	"prefer-stable": true,
 	"extra": {
 		"autorelease": true,
-		"autotagger": true,
 		"npmjs-autopublish": true,
 		"textdomain": "social-previews",
 		"changelogger": {
