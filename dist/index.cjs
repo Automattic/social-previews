@@ -1,5 +1,5 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-//#region \0rolldown/runtime.js
+// \0rolldown/runtime.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -20,7 +20,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 	value: mod,
 	enumerable: true
 }) : target, mod));
-//#endregion
 let _wordpress_element = require("@wordpress/element");
 let _wordpress_i18n = require("@wordpress/i18n");
 let react_jsx_runtime = require("react/jsx-runtime");
@@ -28,7 +27,7 @@ let react = require("react");
 let clsx = require("clsx");
 clsx = __toESM(clsx);
 let _wordpress_components = require("@wordpress/components");
-//#region src/helpers.tsx
+// src/helpers.tsx
 const baseDomain = (url) => {
 	const withoutProtocol = url.replace(/^[^/]+:\/\//, "");
 	const slashIndex = withoutProtocol.indexOf("/");
@@ -252,8 +251,7 @@ function preparePreviewText(text, options) {
 	*/
 	return (0, _wordpress_element.createInterpolateElement)(result, componentMap);
 }
-//#endregion
-//#region src/icons/globe-icon.tsx
+// src/icons/globe-icon.tsx
 /**
 * Globe Icon Component.
 *
@@ -281,8 +279,7 @@ function GlobeIcon$2(props) {
 		})
 	});
 }
-//#endregion
-//#region src/site-icon-with-fallback.tsx
+// src/site-icon-with-fallback.tsx
 /**
 * Renders a default site icon: a neutral grey circle with a globe glyph,
 * matching what Google's search results show for sites without a favicon.
@@ -330,8 +327,7 @@ function SiteIconWithFallback({ src: siteIconUrl, alt = "", className, fallback 
 		className
 	}) : fallback;
 }
-//#endregion
-//#region src/google-search-preview/index.tsx
+// src/google-search-preview/index.tsx
 const URL_LENGTH$1 = 68;
 const TITLE_LENGTH$5 = 63;
 const DESCRIPTION_LENGTH$3 = 160;
@@ -388,8 +384,7 @@ const GoogleSearchPreview = ({ description = "", siteIcon, siteTitle, title = ""
 		})
 	});
 };
-//#endregion
-//#region src/shared/media-image/index.tsx
+// src/shared/media-image/index.tsx
 /**
 * MediaImage
 *
@@ -478,8 +473,7 @@ const MediaImage = ({ focalPoint, style, onLoad, ...props }) => {
 		} : void 0
 	});
 };
-//#endregion
-//#region src/twitter-preview/card.tsx
+// src/twitter-preview/card.tsx
 const DESCRIPTION_LENGTH$2 = 280;
 const twitterDescription = firstValid(shortEnough(DESCRIPTION_LENGTH$2), hardTruncation(DESCRIPTION_LENGTH$2));
 const Card$1 = ({ description, image, imageFocalPoint, title, cardType, url }) => {
@@ -513,8 +507,7 @@ const Card$1 = ({ description, image, imageFocalPoint, title, cardType, url }) =
 		})
 	});
 };
-//#endregion
-//#region src/twitter-preview/footer.tsx
+// src/twitter-preview/footer.tsx
 const Footer$1 = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "twitter-preview__footer",
@@ -557,8 +550,7 @@ const Footer$1 = () => {
 		]
 	});
 };
-//#endregion
-//#region src/twitter-preview/header.tsx
+// src/twitter-preview/header.tsx
 const Header$1 = ({ name, screenName, date }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "twitter-preview__header",
@@ -579,8 +571,7 @@ const Header$1 = ({ name, screenName, date }) => {
 		]
 	});
 };
-//#endregion
-//#region src/twitter-preview/media.tsx
+// src/twitter-preview/media.tsx
 const Media$1 = ({ media }) => {
 	const filteredMedia = media.filter((mediaItem) => mediaItem.type.startsWith("image/") || mediaItem.type.startsWith("video/")).filter((mediaItem, idx, array) => {
 		if (0 === idx) return true;
@@ -605,8 +596,7 @@ const Media$1 = ({ media }) => {
 		}) }, `twitter-preview__media-item-${index}`))
 	});
 };
-//#endregion
-//#region src/twitter-preview/quote-tweet.tsx
+// src/twitter-preview/quote-tweet.tsx
 const QuoteTweet = ({ tweetUrl }) => {
 	if (!tweetUrl) return null;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -618,8 +608,7 @@ const QuoteTweet = ({ tweetUrl }) => {
 		}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", { className: "twitter-preview__quote-tweet-overlay" })]
 	});
 };
-//#endregion
-//#region src/avatar-with-fallback.tsx
+// src/avatar-with-fallback.tsx
 /**
 * Renders a default avatar SVG.
 *
@@ -659,8 +648,7 @@ function AvatarWithFallback({ src: avatarUrl, alt = "", className, fallback = /*
 		className
 	}) : fallback;
 }
-//#endregion
-//#region src/twitter-preview/sidebar.tsx
+// src/twitter-preview/sidebar.tsx
 const Sidebar$1 = ({ profileImage, showThreadConnector }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "twitter-preview__sidebar",
@@ -670,8 +658,7 @@ const Sidebar$1 = ({ profileImage, showThreadConnector }) => {
 		}), showThreadConnector && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", { className: "twitter-preview__connector" })]
 	});
 };
-//#endregion
-//#region src/twitter-preview/text.tsx
+// src/twitter-preview/text.tsx
 const Text = ({ text }) => {
 	if (!text) return null;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -679,8 +666,7 @@ const Text = ({ text }) => {
 		children: preparePreviewText(text, { platform: "twitter" })
 	});
 };
-//#endregion
-//#region src/twitter-preview/post-preview.tsx
+// src/twitter-preview/post-preview.tsx
 const TwitterPostPreview = ({ date, description, image, imageFocalPoint, media, name, profileImage, screenName, showThreadConnector, text, title, tweetUrl, cardType, url }) => {
 	const hasMedia = !!media?.length;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -720,8 +706,7 @@ const TwitterPostPreview = ({ date, description, image, imageFocalPoint, media, 
 		})
 	});
 };
-//#endregion
-//#region src/twitter-preview/link-preview.tsx
+// src/twitter-preview/link-preview.tsx
 const TwitterLinkPreview = (props) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)(TwitterPostPreview, {
 		...props,
@@ -729,8 +714,7 @@ const TwitterLinkPreview = (props) => {
 		media: void 0
 	});
 };
-//#endregion
-//#region src/shared/section-heading/index.tsx
+// src/shared/section-heading/index.tsx
 const HEADING_LEVELS = [
 	2,
 	3,
@@ -745,8 +729,7 @@ const SectionHeading = ({ className, level, children }) => {
 		children
 	});
 };
-//#endregion
-//#region src/twitter-preview/previews.tsx
+// src/twitter-preview/previews.tsx
 const TwitterPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, tweets }) => {
 	if (!tweets?.length) return null;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -851,11 +834,9 @@ function ExpandableText(props) {
 		})
 	] });
 }
-//#endregion
-//#region src/linkedin-preview/constants.ts
+// src/linkedin-preview/constants.ts
 const FEED_TEXT_MAX_LENGTH$2 = 3e3;
-//#endregion
-//#region src/linkedin-preview/post-preview.tsx
+// src/linkedin-preview/post-preview.tsx
 /**
 * LinkedIn Post Preview Component
 *
@@ -969,8 +950,7 @@ function LinkedInPostPreview({ articleReadTime = 5, image, imageFocalPoint, jobT
 		})
 	});
 }
-//#endregion
-//#region src/linkedin-preview/link-preview.tsx
+// src/linkedin-preview/link-preview.tsx
 /**
 * LinkedIn Link Preview Component
 * @param {LinkedInLinkPreviewProps} props - The props for the LinkedIn link preview.
@@ -986,8 +966,7 @@ function LinkedInLinkPreview(props) {
 		title: props.title || getTitleFromDescription(props.description)
 	});
 }
-//#endregion
-//#region src/linkedin-preview/previews.tsx
+// src/linkedin-preview/previews.tsx
 const LinkedInPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...props }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "social-preview linkedin-preview",
@@ -1024,8 +1003,7 @@ const LinkedInPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...p
 		})]
 	});
 };
-//#endregion
-//#region src/tumblr-preview/helpers.ts
+// src/tumblr-preview/helpers.ts
 const TITLE_LENGTH$4 = 1e3;
 const DESCRIPTION_LENGTH$1 = 4096;
 const tumblrTitle = (text) => firstValid(shortEnough(TITLE_LENGTH$4), hardTruncation(TITLE_LENGTH$4))(stripHtmlTags(text)) || "";
@@ -1044,8 +1022,7 @@ const tumblrDescription = (text) => {
 	processedText = processedText.replace(/<\/p>/g, "</p>\n\n");
 	return firstValid(shortEnough(DESCRIPTION_LENGTH$1), hardTruncation(DESCRIPTION_LENGTH$1))(stripHtmlTags(processedText)) || "";
 };
-//#endregion
-//#region src/tumblr-preview/post/icons/index.tsx
+// src/tumblr-preview/post/icons/index.tsx
 const TumblrPostIcon = ({ name }) => {
 	let svg;
 	switch (name) {
@@ -1101,8 +1078,7 @@ const TumblrPostIcon = ({ name }) => {
 		children: svg
 	});
 };
-//#endregion
-//#region src/tumblr-preview/post/actions/index.tsx
+// src/tumblr-preview/post/actions/index.tsx
 const TumblrPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 	className: "tumblr-preview__post-actions",
 	children: [/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1145,8 +1121,7 @@ const TumblrPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div
 		}, icon)) })]
 	})]
 });
-//#endregion
-//#region src/tumblr-preview/post/header/index.tsx
+// src/tumblr-preview/post/header/index.tsx
 const TumblrPostHeader = ({ user }) => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 	className: "tumblr-preview__post-header",
 	children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -1154,8 +1129,7 @@ const TumblrPostHeader = ({ user }) => /* @__PURE__ */ (0, react_jsx_runtime.jsx
 		children: user?.displayName || (0, _wordpress_i18n.__)("anonymous-user", "social-previews")
 	}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)(TumblrPostIcon, { name: "ellipsis" })]
 });
-//#endregion
-//#region src/tumblr-preview/link-preview.tsx
+// src/tumblr-preview/link-preview.tsx
 const TumblrLinkPreview = ({ title, description, image, user, url, imageFocalPoint }) => {
 	const avatarUrl = user?.avatarUrl;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1207,8 +1181,7 @@ const TumblrLinkPreview = ({ title, description, image, user, url, imageFocalPoi
 		})]
 	});
 };
-//#endregion
-//#region src/tumblr-preview/post-preview.tsx
+// src/tumblr-preview/post-preview.tsx
 const TumblrPostPreview = ({ title, description, image, user, url, media, hyperlinks, imageFocalPoint }) => {
 	const avatarUrl = user?.avatarUrl;
 	const mediaItem = media?.[0];
@@ -1272,8 +1245,7 @@ const TumblrPostPreview = ({ title, description, image, user, url, media, hyperl
 		})]
 	});
 };
-//#endregion
-//#region src/tumblr-preview/previews.tsx
+// src/tumblr-preview/previews.tsx
 const TumblrPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...props }) => {
 	const hasMedia = !!props.media?.length;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1310,8 +1282,7 @@ const TumblrPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...pro
 		})]
 	});
 };
-//#endregion
-//#region src/constants.ts
+// src/constants.ts
 const AUTO_SHARED_SOCIAL_POST_PREVIEW = "AUTO_SHARED_SOCIAL_POST_PREVIEW";
 const AUTO_SHARED_LINK_PREVIEW = "AUTO_SHARED_LINK_PREVIEW";
 const DEFAULT_LINK_PREVIEW = "DEFAULT_LINK_PREVIEW";
@@ -1319,15 +1290,13 @@ const TYPE_WEBSITE = "website";
 const TYPE_ARTICLE = "article";
 const LANDSCAPE_MODE = "landscape";
 const PORTRAIT_MODE = "portrait";
-//#endregion
-//#region src/facebook-preview/helpers.ts
+// src/facebook-preview/helpers.ts
 const TITLE_LENGTH$3 = 110;
 const DESCRIPTION_LENGTH = 200;
 const CUSTOM_TEXT_LENGTH = 63206;
 const facebookTitle = (text) => firstValid(shortEnough(TITLE_LENGTH$3), hardTruncation(TITLE_LENGTH$3))(stripHtmlTags(text)) || "";
 const facebookDescription = (text) => firstValid(shortEnough(DESCRIPTION_LENGTH), hardTruncation(DESCRIPTION_LENGTH))(stripHtmlTags(text)) || "";
-//#endregion
-//#region src/facebook-preview/custom-text.tsx
+// src/facebook-preview/custom-text.tsx
 const CustomText = ({ text, url, forceUrlDisplay }) => {
 	let postLink;
 	if (hasTag(text, "a") || forceUrlDisplay && !!url && !text.includes(url)) postLink = /* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
@@ -1348,8 +1317,7 @@ const CustomText = ({ text, url, forceUrlDisplay }) => {
 		}) }), postLink]
 	});
 };
-//#endregion
-//#region src/facebook-preview/hooks/use-image-hook.ts
+// src/facebook-preview/hooks/use-image-hook.ts
 const useImage = ({ mode: initialMode }) => {
 	const [mode, setMode] = (0, react.useState)(initialMode);
 	const [isLoadingImage, setLoadingImage] = (0, react.useState)(true);
@@ -1371,11 +1339,9 @@ const useImage = ({ mode: initialMode }) => {
 		}
 	];
 };
-//#endregion
-//#region src/facebook-preview/post/icons/index.tsx
+// src/facebook-preview/post/icons/index.tsx
 const FacebookPostIcon = ({ name }) => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("i", { className: `facebook-preview__post-icon facebook-preview__post-icon-${name}` });
-//#endregion
-//#region src/facebook-preview/post/actions/index.tsx
+// src/facebook-preview/post/actions/index.tsx
 const FacebookPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("ul", {
 	className: "facebook-preview__post-actions",
 	children: [
@@ -1393,8 +1359,7 @@ const FacebookPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("ul
 		}
 	].map(({ icon, label }) => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)(FacebookPostIcon, { name: icon }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: label })] }, icon))
 });
-//#endregion
-//#region src/facebook-preview/post/header/index.tsx
+// src/facebook-preview/post/header/index.tsx
 const FacebookPostHeader = ({ user, timeElapsed, hideOptions }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "facebook-preview__post-header",
@@ -1424,8 +1389,7 @@ const FacebookPostHeader = ({ user, timeElapsed, hideOptions }) => {
 		}), !hideOptions && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", { className: "facebook-preview__post-header-more" })]
 	});
 };
-//#endregion
-//#region src/facebook-preview/link-preview.tsx
+// src/facebook-preview/link-preview.tsx
 const FacebookLinkPreview = ({ url, title, description, image, imageFocalPoint, user, customText, type, imageMode, compactDescription }) => {
 	const [mode, isLoadingImage, imgProps] = useImage({ mode: imageMode });
 	const isArticle = type === TYPE_ARTICLE;
@@ -1478,8 +1442,7 @@ const FacebookLinkPreview = ({ url, title, description, image, imageFocalPoint, 
 		]
 	});
 };
-//#endregion
-//#region src/facebook-preview/link-preview-details.tsx
+// src/facebook-preview/link-preview-details.tsx
 const LinkPreviewDetails = ({ url, customImage, imageFocalPoint, user, customText, imageMode }) => {
 	const [mode, isLoadingImage, imgProps] = useImage({ mode: imageMode });
 	const modeClass = `is-${mode === "portrait" ? "portrait" : "landscape"}`;
@@ -1517,8 +1480,7 @@ const LinkPreviewDetails = ({ url, customImage, imageFocalPoint, user, customTex
 		]
 	});
 };
-//#endregion
-//#region src/facebook-preview/post-preview.tsx
+// src/facebook-preview/post-preview.tsx
 const FacebookPostPreview = ({ url, user, customText, media, imageMode }) => {
 	const [mode] = useImage({ mode: imageMode });
 	const modeClass = `is-${mode === "portrait" ? "portrait" : "landscape"}`;
@@ -1555,8 +1517,7 @@ const FacebookPostPreview = ({ url, user, customText, media, imageMode }) => {
 		]
 	});
 };
-//#endregion
-//#region src/facebook-preview/previews.tsx
+// src/facebook-preview/previews.tsx
 const FacebookPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...props }) => {
 	const hasMedia = !!props.media?.length;
 	const hasCustomImage = !!props.customImage;
@@ -1596,8 +1557,7 @@ const FacebookPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...p
 		})]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/post/actions/index.tsx
+// src/mastodon-preview/post/actions/index.tsx
 const MastodonPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 	className: "mastodon-preview__post-actions",
 	children: [
@@ -1647,8 +1607,7 @@ const MastodonPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("d
 		}) })
 	]
 });
-//#endregion
-//#region src/mastodon-preview/helpers.ts
+// src/mastodon-preview/helpers.ts
 const TITLE_LENGTH$2 = 200;
 const BODY_LENGTH$1 = 500;
 const ADDRESS_PATTERN = /^@([^@]*)@([^@]*)$/i;
@@ -1668,8 +1627,7 @@ const getMastodonAddressDetails = (address) => {
 		instance: matches?.[2] || "mastodon.social"
 	};
 };
-//#endregion
-//#region src/mastodon-preview/post/card/index.tsx
+// src/mastodon-preview/post/card/index.tsx
 const MastodonPostCard = ({ siteName, title, description, url, image, customImage, imageFocalPoint }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: (0, clsx.default)("mastodon-preview__card", { "has-image": image }),
@@ -1709,8 +1667,7 @@ const MastodonPostCard = ({ siteName, title, description, url, image, customImag
 		})]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/post/icons/index.tsx
+// src/mastodon-preview/post/icons/index.tsx
 /**
 * Globe Icon Component
 *
@@ -1726,8 +1683,7 @@ function GlobeIcon$1() {
 		children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z" })
 	});
 }
-//#endregion
-//#region src/mastodon-preview/post/header/index.tsx
+// src/mastodon-preview/post/header/index.tsx
 const MastodonPostHeader = ({ user }) => {
 	const { displayName, address, avatarUrl } = user || {};
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1750,8 +1706,7 @@ const MastodonPostHeader = ({ user }) => {
 		})]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/link-preview.tsx
+// src/mastodon-preview/link-preview.tsx
 const MastodonLinkPreview = (props) => {
 	const { user } = props;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1766,8 +1721,7 @@ const MastodonLinkPreview = (props) => {
 		]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/post/body/index.tsx
+// src/mastodon-preview/post/body/index.tsx
 const MastonPostBody = (props) => {
 	const { title, description, customText, user, children } = props;
 	const options = {
@@ -1797,8 +1751,7 @@ const MastonPostBody = (props) => {
 		children: [bodyTxt, children]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/post-preview.tsx
+// src/mastodon-preview/post-preview.tsx
 const MastodonPostPreview = (props) => {
 	const { user, media } = props;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -1829,8 +1782,7 @@ const MastodonPostPreview = (props) => {
 		]
 	});
 };
-//#endregion
-//#region src/mastodon-preview/previews.tsx
+// src/mastodon-preview/previews.tsx
 const MastodonPreviews = ({ headingLevel, hidePostPreview, hideLinkPreview, ...props }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "social-preview mastodon-preview",
@@ -1866,11 +1818,9 @@ const MastodonPreviews = ({ headingLevel, hidePostPreview, hideLinkPreview, ...p
 		})]
 	});
 };
-//#endregion
-//#region src/nextdoor-preview/constants.ts
+// src/nextdoor-preview/constants.ts
 const FEED_TEXT_MAX_LENGTH$1 = 65e3;
-//#endregion
-//#region src/nextdoor-preview/icons/comment-icon.tsx
+// src/nextdoor-preview/icons/comment-icon.tsx
 /**
 * Comment Icon Component
 *
@@ -1891,8 +1841,7 @@ function CommentIcon() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/icons/like-icon.tsx
+// src/nextdoor-preview/icons/like-icon.tsx
 /**
 * Like Icon component.
 *
@@ -1913,8 +1862,7 @@ function LikeIcon() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/icons/share-icon.tsx
+// src/nextdoor-preview/icons/share-icon.tsx
 /**
 * Share Icon Component
 *
@@ -1935,8 +1883,7 @@ function ShareIcon() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/footer-actions.tsx
+// src/nextdoor-preview/footer-actions.tsx
 /**
 * Footer Actions Component
 *
@@ -1961,8 +1908,7 @@ function FooterActions() {
 		]
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/icons/chevron-icon.tsx
+// src/nextdoor-preview/icons/chevron-icon.tsx
 /**
 * Chevron Icon Component
 *
@@ -1981,8 +1927,7 @@ function ChevronIcon() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/icons/default-image.tsx
+// src/nextdoor-preview/icons/default-image.tsx
 /**
 * Default Image Icon Component
 *
@@ -2008,8 +1953,7 @@ function DefaultImage() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/icons/globe-icon.tsx
+// src/nextdoor-preview/icons/globe-icon.tsx
 /**
 * Globe Icon Component
 *
@@ -2030,8 +1974,7 @@ function GlobeIcon() {
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/post-preview.tsx
+// src/nextdoor-preview/post-preview.tsx
 /**
 * Nextdoor Post Preview Component.
 *
@@ -2136,8 +2079,7 @@ function NextdoorPostPreview({ image, imageFocalPoint, name, profileImage, descr
 		})
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/link-preview.tsx
+// src/nextdoor-preview/link-preview.tsx
 /**
 * Nextdoor Link Preview Component
 *
@@ -2155,8 +2097,7 @@ function NextdoorLinkPreview(props) {
 		title: props.title || getTitleFromDescription(props.description)
 	});
 }
-//#endregion
-//#region src/nextdoor-preview/previews.tsx
+// src/nextdoor-preview/previews.tsx
 const NextdoorPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...props }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "social-preview nextdoor-preview",
@@ -2193,8 +2134,7 @@ const NextdoorPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, ...p
 		})]
 	});
 };
-//#endregion
-//#region src/bluesky-preview/post/actions/index.tsx
+// src/bluesky-preview/post/actions/index.tsx
 const BlueskyPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 	className: "bluesky-preview__post-actions",
 	children: [
@@ -2255,8 +2195,7 @@ const BlueskyPostActions = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("di
 		}) })
 	]
 });
-//#endregion
-//#region src/bluesky-preview/helpers.ts
+// src/bluesky-preview/helpers.ts
 const TITLE_LENGTH$1 = 200;
 const BODY_LENGTH = 300;
 const URL_LENGTH = 40;
@@ -2270,8 +2209,7 @@ const blueskyBody = (text, options = {}) => {
 	});
 };
 const blueskyUrl = (text) => firstValid(shortEnough(URL_LENGTH), hardTruncation(URL_LENGTH))(stripHtmlTags(text)) || "";
-//#endregion
-//#region src/bluesky-preview/post/body/index.tsx
+// src/bluesky-preview/post/body/index.tsx
 const BlueskyPostBody = ({ customText, url, children, appendUrl, hyperlinks }) => {
 	const showUrl = appendUrl && !!url && !customText?.includes(url);
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -2287,8 +2225,7 @@ const BlueskyPostBody = ({ customText, url, children, appendUrl, hyperlinks }) =
 		})] }) : null] }) : null, children]
 	});
 };
-//#endregion
-//#region src/bluesky-preview/post/card/index.tsx
+// src/bluesky-preview/post/card/index.tsx
 const BlueskyPostCard = ({ title, description, url, image, imageFocalPoint }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "bluesky-preview__card",
@@ -2318,8 +2255,7 @@ const BlueskyPostCard = ({ title, description, url, image, imageFocalPoint }) =>
 		})]
 	});
 };
-//#endregion
-//#region src/bluesky-preview/post/header/index.tsx
+// src/bluesky-preview/post/header/index.tsx
 const BlueskyPostHeader = ({ user }) => {
 	const { displayName, address } = user || {};
 	let handle = address || "username.bsky.social";
@@ -2348,8 +2284,7 @@ const BlueskyPostHeader = ({ user }) => {
 		]
 	});
 };
-//#endregion
-//#region src/bluesky-preview/post/sidebar/index.tsx
+// src/bluesky-preview/post/sidebar/index.tsx
 const BlueskyPostSidebar = ({ user }) => {
 	const { avatarUrl } = user || {};
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -2363,8 +2298,7 @@ const BlueskyPostSidebar = ({ user }) => {
 		})
 	});
 };
-//#endregion
-//#region src/bluesky-preview/post-preview.tsx
+// src/bluesky-preview/post-preview.tsx
 const BlueskyPostPreview = (props) => {
 	const { user, media } = props;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -2395,8 +2329,7 @@ const BlueskyPostPreview = (props) => {
 		] })]
 	});
 };
-//#endregion
-//#region src/bluesky-preview/link-preview.tsx
+// src/bluesky-preview/link-preview.tsx
 const BlueskyLinkPreview = (props) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)(BlueskyPostPreview, {
 		...props,
@@ -2405,8 +2338,7 @@ const BlueskyLinkPreview = (props) => {
 		customText: ""
 	});
 };
-//#endregion
-//#region src/bluesky-preview/previews.tsx
+// src/bluesky-preview/previews.tsx
 const BlueskyPreviews = ({ headingLevel, hidePostPreview, hideLinkPreview, ...props }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "social-preview bluesky-preview",
@@ -2439,12 +2371,10 @@ const BlueskyPreviews = ({ headingLevel, hidePostPreview, hideLinkPreview, ...pr
 		})]
 	});
 };
-//#endregion
-//#region src/threads-preview/helpers.ts
+// src/threads-preview/helpers.ts
 const TITLE_LENGTH = 120;
 const threadsTitle = (text) => firstValid(shortEnough(TITLE_LENGTH), hardTruncation(TITLE_LENGTH))(stripHtmlTags(text)) || "";
-//#endregion
-//#region src/threads-preview/card.tsx
+// src/threads-preview/card.tsx
 const Card = ({ image, imageFocalPoint, title, url }) => {
 	const cardClassNames = (0, clsx.default)({ "threads-preview__card-has-image": !!image });
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -2469,8 +2399,7 @@ const Card = ({ image, imageFocalPoint, title, url }) => {
 		})
 	});
 };
-//#endregion
-//#region src/threads-preview/footer.tsx
+// src/threads-preview/footer.tsx
 const Footer = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "threads-preview__footer",
@@ -2525,8 +2454,7 @@ const Footer = () => {
 		]
 	});
 };
-//#endregion
-//#region src/threads-preview/header.tsx
+// src/threads-preview/header.tsx
 const Header = ({ name, date }) => {
 	const postDate = date || /* @__PURE__ */ new Date();
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -2541,8 +2469,7 @@ const Header = ({ name, date }) => {
 		})]
 	});
 };
-//#endregion
-//#region src/threads-preview/media.tsx
+// src/threads-preview/media.tsx
 const Media = ({ media }) => {
 	const filteredMedia = media.filter((mediaItem) => mediaItem.type.startsWith("image/") || mediaItem.type.startsWith("video/")).filter((mediaItem, idx, array) => {
 		if (0 === idx) return true;
@@ -2567,8 +2494,7 @@ const Media = ({ media }) => {
 		}) }, `threads-preview__media-item-${index}`))
 	});
 };
-//#endregion
-//#region src/threads-preview/sidebar.tsx
+// src/threads-preview/sidebar.tsx
 const Sidebar = ({ profileImage, showThreadConnector }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 		className: "threads-preview__sidebar",
@@ -2581,8 +2507,7 @@ const Sidebar = ({ profileImage, showThreadConnector }) => {
 		}), showThreadConnector && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", { className: "threads-preview__connector" })]
 	});
 };
-//#endregion
-//#region src/threads-preview/post-preview.tsx
+// src/threads-preview/post-preview.tsx
 const ThreadsPostPreview = ({ caption, date, image, imageFocalPoint, media, name, profileImage, showThreadConnector, title, url }) => {
 	const hasMedia = !!media?.length;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
@@ -2627,8 +2552,7 @@ const ThreadsPostPreview = ({ caption, date, image, imageFocalPoint, media, name
 		})
 	});
 };
-//#endregion
-//#region src/threads-preview/link-preview.tsx
+// src/threads-preview/link-preview.tsx
 const ThreadsLinkPreview = (props) => {
 	if (!props.image) return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", {
 		className: "social-preview__section-desc",
@@ -2640,8 +2564,7 @@ const ThreadsLinkPreview = (props) => {
 		media: void 0
 	});
 };
-//#endregion
-//#region src/threads-preview/previews.tsx
+// src/threads-preview/previews.tsx
 const ThreadsPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, posts }) => {
 	if (!posts?.length) return null;
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
@@ -2684,11 +2607,9 @@ const ThreadsPreviews = ({ headingLevel, hideLinkPreview, hidePostPreview, posts
 		}) : null]
 	});
 };
-//#endregion
-//#region src/instagram-preview/constants.tsx
+// src/instagram-preview/constants.tsx
 const FEED_TEXT_MAX_LENGTH = 2200;
-//#endregion
-//#region src/instagram-preview/icons/bookmark.tsx
+// src/instagram-preview/icons/bookmark.tsx
 const Bookmark = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
 		color: "rgb(38, 38, 38)",
@@ -2707,8 +2628,7 @@ const Bookmark = () => {
 		})
 	});
 };
-//#endregion
-//#region src/instagram-preview/icons/comment.tsx
+// src/instagram-preview/icons/comment.tsx
 const Comment = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
 		color: "rgb(38, 38, 38)",
@@ -2726,8 +2646,7 @@ const Comment = () => {
 		})
 	});
 };
-//#endregion
-//#region src/instagram-preview/icons/heart.tsx
+// src/instagram-preview/icons/heart.tsx
 const Heart = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
 		color: "rgb(38, 38, 38)",
@@ -2739,8 +2658,7 @@ const Heart = () => {
 		children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z" })
 	});
 };
-//#endregion
-//#region src/instagram-preview/icons/menu.tsx
+// src/instagram-preview/icons/menu.tsx
 const Menu = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("svg", {
 		width: "17",
@@ -2770,8 +2688,7 @@ const Menu = () => {
 		]
 	});
 };
-//#endregion
-//#region src/instagram-preview/icons/share.tsx
+// src/instagram-preview/icons/share.tsx
 const Share = () => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("svg", {
 		color: "rgb(38, 38, 38)",
@@ -2798,8 +2715,7 @@ const Share = () => {
 		})]
 	});
 };
-//#endregion
-//#region src/instagram-preview/post-preview.tsx
+// src/instagram-preview/post-preview.tsx
 /**
 * Instagram Post Preview Component
 *
@@ -2901,8 +2817,7 @@ function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImag
 		})
 	});
 }
-//#endregion
-//#region src/instagram-preview/previews.tsx
+// src/instagram-preview/previews.tsx
 const InstagramPreviews = ({ headingLevel, hidePostPreview, ...props }) => {
 	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 		className: "social-preview instagram-preview",
@@ -2922,7 +2837,6 @@ const InstagramPreviews = ({ headingLevel, hidePostPreview, ...props }) => {
 		})
 	});
 };
-//#endregion
 exports.AUTO_SHARED_LINK_PREVIEW = AUTO_SHARED_LINK_PREVIEW;
 exports.AUTO_SHARED_SOCIAL_POST_PREVIEW = AUTO_SHARED_SOCIAL_POST_PREVIEW;
 exports.BlueskyLinkPreview = BlueskyLinkPreview;
