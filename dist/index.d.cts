@@ -276,4 +276,3 @@ type InstagramPreviewsProps = InstagramPreviewProps & SocialPreviewsBaseProps;
 export declare function InstagramPostPreview({ image, imageFocalPoint, media, name, profileImage, caption }: InstagramPreviewProps): import("react").JSX.Element;
 export declare const InstagramPreviews: React.FC<InstagramPreviewsProps>;
 export type { Hyperlink };
-//# sourceMappingURL=index.d.cts.map
